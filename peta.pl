@@ -13,6 +13,7 @@ elmtPeta(1,10,'#'). elmtPeta(2,10,'#'). elmtPeta(3,10,'#'). elmtPeta(4,10,'#').
 elmtPeta(3,8,'Q'). elmtPeta(12,3,'Q'). elmtPeta(13,17,'Q'). elmtPeta(2,12,'Q').
 elmtPeta(4,2,'S').
 elmtPeta(3,17,'D').
+elmtPeta(1,4,'1'). elmtPeta(1,5,'2'). elmtPeta(1,6,'3'). elmtPeta(11,2,'1'). elmtPeta(12,17,'2'). elmtPeta(2,13,'3').
 
 /* ukuranPeta(A,B) peta memiliki A baris dan B kolom */
 ukuranPeta(15,20).
@@ -105,4 +106,17 @@ d :-
     assertz(playerPos(A, B1))
     /* random_encounter_enemy, */
     /* another activity, */ .
-
+    
+/* t : teleport */
+t :-
+    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+t  :-
+    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+t :-
+    playerPos(A,B),elmtPeta(A,B,'1'),elmtPeta(A1,B1,'1'), A1 \== A, B1 \== B,!, retract(playerPos(A, B)), assertz(playerPos(A1, B1)).
+t :-
+    playerPos(A,B),elmtPeta(A,B,'2'),elmtPeta(A1,B1,'2'), A1 \== A, B1 \== B,!, retract(playerPos(A, B)), assertz(playerPos(A1, B1)).
+t :-
+    playerPos(A,B),elmtPeta(A,B,'3'),elmtPeta(A1,B1,'3'), A1 \== A, B1 \== B,!, retract(playerPos(A, B)), assertz(playerPos(A1, B1)).
+t :-
+    !, write('You cant teleport here').
