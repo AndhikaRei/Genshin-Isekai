@@ -45,7 +45,7 @@ item('Terror of The Immortal', 37) :- !.
 item('Orb of Destiny', 38) :- !.
 
 /* Potion */
-item('Health Potion', 10) :- !.
+item('Health Potion', 39) :- !.
 
 /* equipment(X, Y, Z, W) berarti X adalah equipment yang hanya dapat digunakan oleh job Y yang menambah stat Z sebesar W */
 equipment('Wooden Sword', swordsman, atk, 10).
