@@ -2,9 +2,9 @@
 :- include('items.pl').
 
 /* Deklarasi predikat inventory() sebagai dynamic */
+/* inventory(X) berarti player memiliki inventory X yang berisi nama dan jumlah item */
 :- dynamic(inventory/1).
 
-/* Data dari inventory player berisi nama dan jumlah item */
 inventory([['Wooden Sword', 1], ['Health Potion', 5]]). /* Buat testing, nanti di assert pas new game */
 
 /* Menuliskan isi inventory pada layar */
@@ -12,7 +12,7 @@ inventory :- inventory(Inv), printInventory(Inv).
 printInventory([]) :- !.
 printInventory([[Name, Count]|T]) :-
     write(Count), write(' '), write(Name),
-    (equipment(Name, Job) -> 
+    (equipment(Name, Job, _, _) -> 
         write(' ('), write(Job), write(')'), nl, printInventory(T)
     ; 
         nl, printInventory(T)
@@ -25,7 +25,8 @@ itemCount([[_, Count]|T], Total) :-
     Total is Count + Temp.
 
 /* drop(X, Y) membuang X sebanyak Y dari inventory jika ada */
-drop(_, Count) :- Count =< 0, !.
+drop(Item) :- drop(Item, 1).
+drop(_, Count) :- Count =< 0, !, write('Item count must be more than 0'), fail.
 drop(Item, Count) :-
     inventory(Inv),
     (member([Item, CountInv], Inv) ->
@@ -47,9 +48,9 @@ drop(Item, Count) :-
     ).
      
 /* addItem(X, Y) menambahkan X sebanyak Y ke dalam inventory */
-addItem(_, Count) :- Count =< 0, !.
+addItem(_, Count) :- Count =< 0, !, write('Item count must be more than 0'), fail.
 addItem(Item, Count) :-
-    item(Item),
+    item(Item, _),
     inventory(Inv),
     itemCount(Inv, IC),
     (Count + IC =< 100 ->
@@ -67,4 +68,3 @@ addItem(Item, Count) :-
     ;
         write('Failed to add item, inventory full')
     ).
-
