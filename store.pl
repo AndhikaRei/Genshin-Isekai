@@ -33,17 +33,17 @@ gacha :-
         assertz(player(Job, Lvl, HP, MaxHP, Att, Def, E, NewG)),
         random(1, 11, Rarity),
         (between(1, 7, Rarity) ->
-            random(1, 3, Id),
+            random(1, 4, Id),
             item(Name, Id),
             addItem(Name, 1),
             write('You get '), write(Name)
         ; between(8, 9, Rarity) ->
-            random(4, 6, Id),
+            random(4, 7, Id),
             item(Name, Id),
             addItem(Name, 1),
             write('You get '), write(Name)
         ;
-            random(7, 9, Id),
+            random(7, 10, Id),
             item(Name, Id),
             addItem(Name, 1),
             write('You get '), write(Name)
