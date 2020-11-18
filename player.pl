@@ -13,9 +13,9 @@ growthRate(sorcerer, 1, 100, 6, 3).
 
 /* Base Stats di Level 1 */
 /* Job, Level, HP, MaxHP, Attack, Defense, Exp, Gold */
-baseStat(swordsman, 1, 500, 500, 30, 25, 1, 0).
-baseStat(archer, 1, 400, 400, 50, 20, 1, 0).
-baseStat(sorcerer, 1, 450, 450, 45, 10, 1, 0).
+baseStat(swordsman, 1, 500, 500, 30, 25, 1, 10000).
+baseStat(archer, 1, 400, 400, 50, 20, 1, 100000).
+baseStat(sorcerer, 1, 450, 450, 45, 10, 1, 100000).
 /* 
 
 /* Pas milih class, assert player dengan BaseStat dari jobnya */

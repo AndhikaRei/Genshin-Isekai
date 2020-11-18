@@ -1,6 +1,8 @@
 :- dynamic(inStore/0).
 
 /* Masuk store jika berada pada petak store di map */
+store :- \+gameStarted,!, write('The game has not started, type "start." to play the game').
+store :- inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
 store :- playerPos(X, Y), \+elmtPeta(X, Y, 'S'), !, write('There is no store here').
 store :-
     (inStore ->
@@ -13,6 +15,8 @@ store :-
     ).
 
 /* Keluar store jika berada di dalam store */
+exitStore :- \+gameStarted,!, write('The game has not started, type "start." to play the game').
+exitStore :- inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
 exitStore :-
     (inStore ->
         retract(inStore),
@@ -23,6 +27,8 @@ exitStore :-
 
 /* Gacha jika berada di store */
 /* 70% Common, 20% Rare, 10% Legendary */
+gacha :- \+gameStarted,!, write('The game has not started, type "start." to play the game').
+gacha :- inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
 gacha :- \+inStore, !, write('You cannot use gacha because you are not in a store').
 gacha :- inventory(Inv), itemCount(Inv, Count), Count =:= 100, !, write('Inventory full, cannot use gacha').
 gacha :-
@@ -33,17 +39,17 @@ gacha :-
         assertz(player(Job, Lvl, HP, MaxHP, Att, Def, E, NewG)),
         random(1, 11, Rarity),
         (between(1, 7, Rarity) ->
-            random(1, 4, Id),
+            random(0, 17, Id),
             item(Name, Id),
             addItem(Name, 1),
             write('You get '), write(Name)
         ; between(8, 9, Rarity) ->
-            random(4, 7, Id),
+            random(18, 31, Id),
             item(Name, Id),
             addItem(Name, 1),
             write('You get '), write(Name)
         ;
-            random(7, 10, Id),
+            random(32, 38, Id),
             item(Name, Id),
             addItem(Name, 1),
             write('You get '), write(Name)
@@ -54,6 +60,8 @@ gacha :-
 
 /* Membeli potion jika berada di store */
 /* Masih cuma 1 potion doang dan belinya cuma bisa satu per command */
+buyPotion :- \+gameStarted,!, write('The game has not started, type "start." to play the game').
+buyPotion :- inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
 buyPotion :- \+inStore, !, write('You cannot buy potion because you are not in a store').
 buyPotion :- inventory(Inv), itemCount(Inv, Count), Count =:= 100, !, write('Inventory full, cannot buy potion').
 buyPotion :-

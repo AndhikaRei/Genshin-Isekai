@@ -49,12 +49,14 @@ map:-
 /* =================================Kelompok Perpindahan============================================*/
 /* w : berjalan keatas */
 w :-
-    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+    \+gameStarted,!, write('The game has not started, type "start." to play the game').
 w :-
-    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+    inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
+w :-
+    inStore,!,write('You are in store, type "help." to see command in store').
 w :-
     playerPos(A,B), A1 is A-1, elmtPeta(A1,B,'#'),!,
-    write('Anda menabrak pagar').
+    write('You hit a fence').
 w:-   
     playerPos(A,B), A1 is A-1,!,
     retract(playerPos(A, B)),
@@ -64,12 +66,14 @@ w:-
 
 /* a : berjalan ke kiri */
 a :-
-    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+    \+gameStarted,!, write('The game has not started, type "start." to play the game').
 a :-
-    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+    inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
+a :-
+    inStore,!,write('You are in store, type "help." to see command in store').
 a :-
     playerPos(A,B), B1 is B-1, elmtPeta(A,B1,'#'),!,
-    write('Anda menabrak pagar').
+    write('You hit a fence').
 a:-   
     playerPos(A,B), B1 is B-1,!,
     retract(playerPos(A, B)),
@@ -79,12 +83,14 @@ a:-
 
 /* s : berjalan kebawah */
 s :-
-    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+    \+gameStarted,!, write('The game has not started, type "start." to play the game').
 s :-
-    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+    inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
+s :-
+    inStore,!,write('You are in store, type "help." to see command in store').
 s :-
     playerPos(A,B), A1 is A+1, elmtPeta(A1,B,'#'),!,
-    write('Anda menabrak pagar').
+    write('You hit a fence').
 s :- 
     playerPos(A,B), A1 is A+1,!,
     retract(playerPos(A, B)),
@@ -94,12 +100,14 @@ s :-
 
 /* d : berjalan kekanan */
 d :-
-    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+    \+gameStarted,!, write('The game has not started, type "start." to play the game').
 d :-
-    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+    inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
+d :-
+    inStore,!,write('You are in store, type "help." to see command in store').
 d :-
     playerPos(A,B), B1 is B+1, elmtPeta(A,B1,'#'),!,
-    write('Anda menabrak pagar').
+    write('You hit a fence').
 d :- 
     playerPos(A,B), B1 is B+1,!,
     retract(playerPos(A, B)),
@@ -109,9 +117,11 @@ d :-
     
 /* t : teleport */
 t :-
-    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+    \+gameStarted,!, write('The game has not started, type "start." to play the game').
 t  :-
-    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+    inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
+t :-
+    inStore,!,write('You are in store, type "help." to see command in store').
 t :-
     playerPos(A,B),elmtPeta(A,B,'1'),elmtPeta(A1,B1,'1'), A1 \== A, B1 \== B,!, retract(playerPos(A, B)), assertz(playerPos(A1, B1)).
 t :-

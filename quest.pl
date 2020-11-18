@@ -3,9 +3,9 @@
 
 /* tq : takeQuest di tempat dimana simbol 'Q' berada, quest tidak bisa dicancel dan setelah quest diambil maka quest hilang */
 tq :-
-    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+    \+gameStarted,!, write('The game has not started, type "start." to play the game').
 tq :-
-    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+    inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
 tq :- 
     quest(_,_,_,_,_,_) ,!, write('You cant take multiple quest at once').
 tq :- 
@@ -18,9 +18,9 @@ tq :-
 
 /* pq : print quest status (remaining enemies to be killed) */
 pq :-
-    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+    \+gameStarted,!, write('The game has not started, type "start." to play the game').
 pq :-
-    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+    inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
 pq :-
     \+ quest(_,_,_,_,_,_) ,!, write('You dont have quest right now!!').
 pq :-
@@ -28,9 +28,9 @@ pq :-
 
 /* fq : finish the quest) */
 fq :-
-    \+gameStarted,!, write('Game belum dimulai, silahkan ketik "start." untuk memulai').
+    \+gameStarted,!, write('The game has not started, type "start." to play the game').
 fq :-
-    inBattle,!, write('Anda sedang dalam pertarungam, silahkan ketik "help." untuk melihat command saat di pertarungan').
+    inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
 fq :-
     \+ quest(_,_,_,_,_,_) ,!, write('You dont have quest right now!!').
 fq :-
