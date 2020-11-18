@@ -2,6 +2,8 @@
 :- include('peta.pl').
 :- include('quest.pl').
 :- include('player.pl').
+:- include('store.pl').
+:- include('inventory.pl').
 :- dynamic(gameStarted/0).
 :- dynamic(inBattle/0).
 
