@@ -3,7 +3,7 @@
 :- include('items.pl').
 */
 
-:- dynamic(exp/2).
+:- dynamic(exp/3).
 :- dynamic(player/8).
 :- dynamic(playerEquipment/3).
 
@@ -21,15 +21,16 @@ baseStat(sorcerer, 1, 450, 450, 45, 10, 0, 100000).
 /* Pas milih class, assert player dengan BaseStat dari jobnya */
 /* Di main pas bagian inisialisasi (atau di init.pl juga boleh kalau mau */
 /* assertz(Player(......)) */
-
-exp(X, Total) :- Total is X*X*X.
+exp(1,0,1).
+/* exp(Lv, _, Total) :- Total is Lv*Lv*lv. */
 status :- player(X, Lvl, HP, MaxHP, Att, Def, E, G),
 		  playerEquipment(Weapon, Armor, Acc),
 		  write('Class : '), write(X), nl,
+		  write('Level : '), write(Lvl), nl,
 		  write('HP : '), write(HP), write('/'), write(MaxHP), nl, /* Untuk accessory nambah Max HP tapi belum dikoding */
           write('Attack : '), write(Att), printEqStat(Weapon), nl,
 		  write('Defense : '), write(Def), printEqStat(Armor), nl,
-		  write('Exp : '), write(E), write('/'), exp(Lvl, Total), write(Total), nl,
+		  write('Exp : '), write(E), write('/'), exp(_,_,Total), write(Total), nl,
 		  write('Gold : '), write(G), nl, nl,
 		  write('Weapon : '), write(Weapon), nl,
 		  write('Armor : '), write(Armor), nl,
@@ -42,11 +43,30 @@ printEqStat(X) :-
 		write('')
 	).
 
-levelUp(X) :- growthRate(X, L, Health, Attack, Defense),
-			  player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-			  retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
-			  NewLvl is Lvl + L, NewHP is HP + Health, NewMax is MaxHP + Health, NewAtt is Att + Attack, NewDeff is Def + Defense,
-			  assertz(player(Job, NewLvl, NewHP, NewMax, NewAtt, NewDeff, E, G)).
+levelUp(X) :- 
+	growthRate(X, L, Health, Attack, Defense),
+	player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
+	retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
+	NewLvl is Lvl + L, NewHP is HP + Health, NewMax is MaxHP + Health, NewAtt is Att + Attack, NewDeff is Def + Defense,
+	assertz(player(Job, NewLvl, NewHP, NewMax, NewAtt, NewDeff, E, G)).
+
+addExp(X) :-
+	exp(Lv,Xbefore,Total), NewExp is Xbefore + X,
+	(NewExp >= Total ->
+		format('Level Up!!! ~n', []),
+		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is NewLvl*NewLvl*NewLvl,
+		retract(exp(Lv,Xbefore,Total)),
+		assertz(exp(NewLvl,NewExp2,NewTotal)),
+		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
+		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
+		assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp2, G)),
+		levelUp(Job)
+	; 
+		Xremain is Total-NewExp,
+		format('You gain ~d exp ~n', [X]), format('You need ~d exp to level uo ~n', [Xremain]),
+		retract(exp(Lv,Xbefore,Total)),
+		assertz(exp(Lv,NewExp,Total))
+	).
 
 /* Memakai equipment dengan nama X */
 equip(X) :- inventory(Inv), \+member([X, _], Inv), !, write('You do not have that item'), fail.
