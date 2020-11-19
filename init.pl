@@ -18,16 +18,34 @@ start :-
 
 /* chooseJob : memilih job */
 chooseJob(A) :-
-    A =:= 1, baseStat('swordsman',X,B,C,D,E,F,G), assertz(player('swordsman',X,B,C,D,E,F,G)),assertz(gameStarted),!,
-    write('You choose swordsman, let’s explore the world').
+    A =:= 1,
+    baseStat('swordsman',X,B,C,D,E,F,G),
+    assertz(player('swordsman',X,B,C,D,E,F,G)),
+    assertz(gameStarted),
+    assertz(playerEquipment(none, none, none)),
+    assertz(inventory([['Wooden Sword', 1], ['Health Potion', 5]])),
+    !,
+    write('You choose swordsman, let\'s explore the world').
 
 chooseJob(A) :-
-    A =:= 2, baseStat('archer',X,B,C,D,E,F,G), assertz(player('archer',X,B,C,D,E,F,G)),assertz(gameStarted),!,
-    write('You choose archer, let’s explore the world').
+    A =:= 2,
+    baseStat('archer',X,B,C,D,E,F,G),
+    assertz(player('archer',X,B,C,D,E,F,G)),
+    assertz(gameStarted),
+    assertz(playerEquipment(none, none, none)),
+    assertz(inventory([['Wooden Bow', 1], ['Health Potion', 5]])),
+    !,
+    write('You choose archer, let\'s explore the world').
 
 chooseJob(A) :-
-    A =:= 3, baseStat('sorcerer',X,B,C,D,E,F,G), assertz(player('sorcerer',X,B,C,D,E,F,G)),assertz(gameStarted),!,
-    write('You choose sorcerer, let’s explore the world').
+    A =:= 3,
+    baseStat('sorcerer',X,B,C,D,E,F,G),
+    assertz(player('sorcerer',X,B,C,D,E,F,G)),
+    assertz(gameStarted),
+    assertz(playerEquipment(none, none, none)),
+    assertz(inventory([['Wooden Staff', 1], ['Health Potion', 5]])),
+    !,
+    write('You choose sorcerer, let\'s explore the world').
 
 chooseJob(A) :-
     A =\= 1, A =\= 2, A =\= 3, !,write('Invalid input, please write start. again ').

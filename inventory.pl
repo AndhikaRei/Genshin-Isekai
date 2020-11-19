@@ -5,8 +5,6 @@
 /* inventory(X) berarti player memiliki inventory X yang berisi nama dan jumlah item */
 :- dynamic(inventory/1).
 
-inventory([['Wooden Sword', 1], ['Health Potion', 5]]). /* Buat testing, nanti di assert pas new game */
-
 /* Menuliskan isi inventory pada layar */
 inventory :- inventory(Inv), printInventory(Inv).
 printInventory([]) :- !.

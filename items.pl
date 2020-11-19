@@ -1,6 +1,6 @@
 /* item(X, Y) berarti item bernama X dengan id Y, id dikelompokkan berdasarkan rarity */
 /* Common */
-item('Neklace', 0) :- !.
+item('Necklace', 0) :- !.
 item('Wooden Sword', 1) :- !.
 item('Wooden Bow', 2) :- !.
 item('Wooden Staff', 3) :- !.
@@ -84,7 +84,7 @@ equipment('Dark Robes', sorcerer, def, 30).
 equipment('Robes of Archfiend', sorcerer, def, 40).
 equipment('Terror of The Immortal', sorcerer, def, 55).
 
-equipment('Neklace', universal, hp, 30).
+equipment('Necklace', universal, hp, 30).
 equipment('Slime Heart', universal, hp, 30).
 equipment('Goblin Heart', universal, hp, 60).
 equipment('Wolf Heart', universal, hp, 120).
