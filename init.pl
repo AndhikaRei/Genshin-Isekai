@@ -7,13 +7,18 @@
 :- include('saveloadtest.pl').
 :- dynamic(gameStarted/0).
 :- dynamic(inBattle/0).
+aku(3).
+aku(2).
 
+test :-
+    (aku(1) ->write('1'); write('')),
+    (aku(2) ->write('2')).
 /* Start Game */
 start :-
     \+ gameStarted,!,
     write('**************************************************************************************************'),nl,
     format('Welcome to Genshin Asik. Choose your job ~n 1. Swordsman ~n 2. Archer ~n 3. Sorcerer ~n > ',[]),
-    read(A),chooseJob(A).
+    read(A),chooseJob(A),replenishQuest,initialExp.
 
 start :-
     !, write('Game sudah dimulai, ketik "help." untuk melihat aksi yang bisa dilakukan').
@@ -21,8 +26,8 @@ start :-
 /* chooseJob : memilih job */
 chooseJob(A) :-
     A =:= 1,
-    baseStat('swordsman',X,B,C,D,E,F,G),
-    assertz(player('swordsman',X,B,C,D,E,F,G)),
+    baseStat('swordsman',C,D,E,F,G),
+    assertz(player('swordsman',1,C,C,D,E,F,G)),
     assertz(gameStarted),
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Sword', 1], ['Health Potion', 5]])),
@@ -32,8 +37,8 @@ chooseJob(A) :-
 
 chooseJob(A) :-
     A =:= 2,
-    baseStat('archer',X,B,C,D,E,F,G),
-    assertz(player('archer',X,B,C,D,E,F,G)),
+    baseStat('archer',C,D,E,F,G),
+    assertz(player('archer',1,C,C,D,E,F,G)),
     assertz(gameStarted),
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Bow', 1], ['Health Potion', 5]])),
@@ -43,8 +48,8 @@ chooseJob(A) :-
 
 chooseJob(A) :-
     A =:= 3,
-    baseStat('sorcerer',X,B,C,D,E,F,G),
-    assertz(player('sorcerer',X,B,C,D,E,F,G)),
+    baseStat('sorcerer',C,D,E,F,G),
+    assertz(player('sorcerer',1,C,C,D,E,F,G)),
     assertz(gameStarted),
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Staff', 1], ['Health Potion', 5]])),
@@ -53,7 +58,7 @@ chooseJob(A) :-
     write('**************************************************************************************************'),nl.
 
 chooseJob(A) :-
-    A =\= 1, A =\= 2, A =\= 3, !,write('Invalid input, please write start. again ').
+    A =\= 1, A =\= 2, A =\= 3, !,write('Invalid input, please write start. again '), fail.
 
 /* help : menampilkan menu bantuan */
 help :-

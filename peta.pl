@@ -10,7 +10,7 @@ playerPos(2,2).
 elmtPeta(0,_,'#'). elmtPeta(_,0,'#'). elmtPeta(_,19,'#'). elmtPeta(14,_,'#').
 elmtPeta(5,1,'#'). elmtPeta(5,2,'#'). elmtPeta(5,3,'#'). elmtPeta(5,7,'#'). elmtPeta(5,8,'#'). elmtPeta(5,9,'#'). elmtPeta(5,10,'#').
 elmtPeta(1,10,'#'). elmtPeta(2,10,'#'). elmtPeta(3,10,'#'). elmtPeta(4,10,'#').
-elmtPeta(3,8,'Q'). elmtPeta(12,3,'Q'). elmtPeta(13,17,'Q'). elmtPeta(2,12,'Q').
+/* elmtPeta(3,8,'Q'). elmtPeta(12,3,'Q'). elmtPeta(13,17,'Q'). elmtPeta(2,12,'Q'). */
 elmtPeta(4,2,'S').
 elmtPeta(3,17,'D').
 elmtPeta(1,4,'1'). elmtPeta(1,5,'2'). elmtPeta(1,6,'3'). elmtPeta(11,2,'1'). elmtPeta(12,17,'2'). elmtPeta(2,13,'3').

@@ -22,7 +22,8 @@ baseStat(sorcerer, 450, 45, 10, 0, 100000).
 /* Di main pas bagian inisialisasi (atau di init.pl juga boleh kalau mau */
 /* assertz(Player(......)) */
 
-exp(1,0,1).
+initialExp :-
+	assertz(exp(1,0,1)).
 /* exp(Lv, _, Total) :- Total is Lv*Lv*lv. */
 status :- player(X, Lvl, HP, MaxHP, Att, Def, E, G),
 		  playerEquipment(Weapon, Armor, Acc),
@@ -51,25 +52,32 @@ levelUp(X) :-
 	NewLvl is Lvl + 1, NewHP is HP + Health, NewMax is MaxHP + Health, NewAtt is Att + Attack, NewDeff is Def + Defense,
 	assertz(player(Job, NewLvl, NewHP, NewMax, NewAtt, NewDeff, E, G)).
 
+/* Menambah gold player */
+addGold(X) :-
+	player(Job, Lvl, HP, MaxHP, Att, Def, E, G), NewGold is G+X,
+	retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), 
+	assertz(player(Job, Lvl, HP, MaxHP, Att, Def, E, NewGold)).
+
+
+/* Menambah exp player sembari level up  */
 addExp(X) :-
 	exp(Lv,Xbefore,Total), NewExp is Xbefore + X,
 	(NewExp >= Total ->
 		format('Level Up!!! ~n', []),
 		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is NewLvl*NewLvl*NewLvl,
-		retract(exp(Lv,Xbefore,Total)),
-		assertz(exp(NewLvl,NewExp2,NewTotal)),
+		retract(exp(Lv,Xbefore,Total)), assertz(exp(NewLvl,NewExp2,NewTotal)),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
-		assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp2, G)),
-		levelUp(Job)
+		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp2, G)),
+		levelUp(Job),
+		(NewExp2 >= NewTotal ->
+			addExp(0)
+		)
 	; 
 		Xremain is Total-NewExp,
 		format('You gain ~d exp ~n', [X]), format('You need ~d exp to level uo ~n', [Xremain]),
-		retract(exp(Lv,Xbefore,Total)),
-		assertz(exp(Lv,NewExp,Total)),
+		retract(exp(Lv,Xbefore,Total)), assertz(exp(Lv,NewExp,Total)),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
-		assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp, G))
+		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp, G))
 	).
 
 /* Memakai equipment dengan nama X */
