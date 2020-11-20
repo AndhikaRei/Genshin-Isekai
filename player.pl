@@ -23,7 +23,9 @@ baseStat(sorcerer, 450, 45, 10, 0, 100000).
 /* assertz(Player(......)) */
 
 initialExp :-
+	retractall(exp(_,_,_)),
 	assertz(exp(1,0,1)).
+
 /* exp(Lv, _, Total) :- Total is Lv*Lv*lv. */
 status :- player(X, Lvl, HP, MaxHP, Att, Def, E, G),
 		  playerEquipment(Weapon, Armor, Acc),

@@ -4,11 +4,19 @@
 /* questRemaining(A,B,C,D) A,B,C,D menyimbolkan 4 quest yang ada di map dan nilainya akan satu jika quest nya masih ada */
 :- dynamic(questRemaining/4).
 
-/* replenishQuest */
+/* replenishQuest : merefresh quest yang ada */
 replenishQuest :-
-    retractall(questRemaining(_,_,_,_)), retractall(elmtPeta(_,_,'Q')),
+    retractall(questRemaining(_,_,_,_)), retractall(elmtPeta(_,_,'Q')), retractall(quest(_,_,_,_,_,_)),
     assertz(elmtPeta(3,8,'Q')),assertz(elmtPeta(12,3,'Q')), assertz(elmtPeta(13,17,'Q')), assertz(elmtPeta(2,12,'Q')),
     assertz(questRemaining(1,1,1,1)).
+
+/* livingBosses(A,B) A menandakan apakah hypostatis masih hidup, B menandakan apakah Adrius masih hidup atau tidak */
+:- dynamic(livingBosses/2).
+
+/* replenishBoss : merefresh boss yang ada */
+replenishBoss :-
+    retractall(livingBosses(_,_)),
+    assertz(elmtPeta(3,17,'H')),assertz(elmtPeta(1,17,'A')), assertz(livingBosses(1,1)).
 
 /* tq : takeQuest di tempat dimana simbol 'Q' berada, quest tidak bisa dicancel dan setelah quest diambil maka quest hilang */
 tq :-

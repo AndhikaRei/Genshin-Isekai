@@ -36,7 +36,5 @@ statsEnemy(X) :-
 	
 /* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */
-boss(regisvine, 10, 2000, 2000, 350, 700, 45).
 boss(hypostasis, 20, 4000, 4000, 600, 1000, 60).
 boss(andrius, 30, 9000, 9000, 900, 1500, 70).
-boss(dvalin, 40, 13000, 13000, 1100, 2000, 80).
