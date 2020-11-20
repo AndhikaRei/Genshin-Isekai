@@ -1,7 +1,8 @@
 :- include('inventory.pl').
 :- include('peta.pl').
+:- include('enemy.pl').
 
-/* Pemain menemukan musuh Enemy dalam perjalanannya */
+/* Pemain 60% menemukan musuh Enemy dalam perjalanannya */
 encounter(Enemy) :- playerPos(A, B), \+elmtPeta(A, B, _),
 				random(1, 11, X),
 				(X < 7 ->
@@ -10,9 +11,20 @@ encounter(Enemy) :- playerPos(A, B), \+elmtPeta(A, B, _),
 					write('Anda menemukan '),
 					write(Enemy),
 					write('!'),
-					/* Tulis Status Musuh */
-					nl;
+					player(_, Lvl, _, _, _, _, _, _),
+					baseEnemy(Enemy, HP, Atk, SAtk, Def),
+					growthEnemy(Enemy, GHP, GAtk, GSAtk, GDef),
+					GLvl is Lvl - 1,
+					/* semua stats adalah base stat + growthrate * pertambahan level */
+					THP is HP + (GHP * GLvl), TMaxHP is THP,
+					TAtk is Atk + (GAtk * GLvl), TSAtk is SAtk + (GSAtk * GLvl),
+					TDef is Def + (GDef * GLvl),
+					assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef)),
 					
+					statsEnemy(Enemy),
+					/* Ngeprint stats musuh */
+					nl
+				;	
 					write('Anda tidak menemukan musuh'),
 					nl
 				).
@@ -76,7 +88,7 @@ randomSlime(Enemy) :- random(1, 3, X),
 
 randomGoblin(Enemy) :- random(1, 3, X),
 					  (X < 2 -> Enemy is recruitGoblin; /* X = 1 */
-						  Enemy is berserkerGoblim
+						  Enemy is berserkerGoblin
 					  ).
 
 randomWolf(Enemy) :- random(1, 3, X),
