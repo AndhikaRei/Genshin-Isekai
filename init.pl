@@ -18,12 +18,15 @@ start :-
     \+ gameStarted,!,
     write('**************************************************************************************************'),nl,
     format('Welcome to Genshin Asik. Choose your job ~n 1. Swordsman ~n 2. Archer ~n 3. Sorcerer ~n > ',[]),
-    read(A),chooseJob(A),replenishQuest,initialExp.
+    read(A), chooseJob(A), replenishQuest, initialExp, initPpos, replenishBoss.
 
 start :-
     !, write('Game sudah dimulai, ketik "help." untuk melihat aksi yang bisa dilakukan').
 
 /* chooseJob : memilih job */
+chooseJob(A) :-
+    A =\= 1, A =\= 2, A =\= 3, !,write('Invalid input, please write start. again '), fail.
+
 chooseJob(A) :-
     A =:= 1,
     baseStat('swordsman',C,D,E,F,G),
@@ -32,7 +35,7 @@ chooseJob(A) :-
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Sword', 1], ['Health Potion', 5]])),
     !,
-    write('You choose swordsman, let\'s explore the world'),
+    write('You choose swordsman, let\'s explore the world'), nl,
     write('**************************************************************************************************'),nl.
 
 chooseJob(A) :-
@@ -56,9 +59,6 @@ chooseJob(A) :-
     !,
     write('You choose sorcerer, let\'s explore the world'),
     write('**************************************************************************************************'),nl.
-
-chooseJob(A) :-
-    A =\= 1, A =\= 2, A =\= 3, !,write('Invalid input, please write start. again '), fail.
 
 /* help : menampilkan menu bantuan */
 help :-
@@ -89,7 +89,30 @@ help :-
 
 /* Pengganti Sementaara Battle */
 battle :-
-    \+ inBattle, ! , assertz(inBattle), write('Anda menenukan slime').
+    \+ inBattle, ! , assertz(inBattle),
+    write('           -dddddd:                               '), nl,
+    write('         :hhmmmmdhhhhhs                           '), nl,
+    write('         ./oNNddhhddddhyyyy.                      '), nl,
+    write('           `++NNddhhhyyddddys-                    '), nl,
+    write('              MMmdddhyyyyyyhdso:                  '), nl,
+    write('              MMmdddhyyyyyysohdy++++              '), nl,
+    write('           `:/NNdddhhyyyyssooooymmmm//`           '), nl,
+    write('         `-/NNdddhyyyyyssooooooooooomm/-`         '), nl,
+    write('       `.oMNddddyyyyyysooooooooooooooomNo.`       '), nl,
+    write('       yMNddddyyyyyysooooooooooooooooooodMy       '), nl,
+    write('       yMNddyyyyyysooooooooooooooooooooodMy       '), nl,
+    write('     dMmdhyyyyyysooooo+..oooooooo+..oooooohMd     '), nl,
+    write('     mMmdhyyyyyysooo/-...--+ooo/-...--+ooohMm     '), nl,
+    write('     mMmdhyyyyyysooo/......+ooo/......+ooohMm     '), nl,
+    write('     mMmdhyyyyyysooo/......+ooo/......+ooohMm     '), nl,
+    write('     mMmdhyyyyyysoooo//..//ooooo//..//oooohMm     '), nl,
+    write('     mMmdhyyyyyysoooooo//ooooooooo//oooooohMm     '), nl,
+    write('     +ohNdhhyyyysssoooooooooooooooooooooydyo+     '), nl,
+    write('       yMNddhhyyyysssooooooooooooooooooodMy       '), nl,
+    write('       +yhmmddhhyyyysssoooooooooooooooyhyy+       '), nl,
+    write('         :hdmmmmhhhhhhhyyyyyyyyyyyyyyyhh:         '), nl,
+    write('           -mmmmmmmmmmmmmmmmmmmmmmmmmm-           '), nl,
+    write('Anda menenukan slime').
 
 battle :-
     !, retract(inBattle), write('Anda menang').
