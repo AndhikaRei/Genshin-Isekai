@@ -21,7 +21,7 @@ encounter(Enemy) :- playerPos(A, B), \+elmtPeta(A, B, _),
 					TDef is Def + (GDef * GLvl),
 					assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef)),
 					
-					statsEnemy(Enemy),
+					battle,
 					/* Ngeprint stats musuh */
 					nl
 				;	
