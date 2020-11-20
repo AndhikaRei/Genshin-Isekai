@@ -89,7 +89,30 @@ help :-
 
 /* Pengganti Sementaara Battle */
 battle :-
-    \+ inBattle, ! , assertz(inBattle), write('Anda menenukan slime').
+    \+ inBattle, ! , assertz(inBattle),
+    write('           -dddddd:                               '), nl,
+    write('         :hhmmmmdhhhhhs                           '), nl,
+    write('         ./oNNddhhddddhyyyy.                      '), nl,
+    write('           `++NNddhhhyyddddys-                    '), nl,
+    write('              MMmdddhyyyyyyhdso:                  '), nl,
+    write('              MMmdddhyyyyyysohdy++++              '), nl,
+    write('           `:/NNdddhhyyyyssooooymmmm//`           '), nl,
+    write('         `-/NNdddhyyyyyssooooooooooomm/-`         '), nl,
+    write('       `.oMNddddyyyyyysooooooooooooooomNo.`       '), nl,
+    write('       yMNddddyyyyyysooooooooooooooooooodMy       '), nl,
+    write('       yMNddyyyyyysooooooooooooooooooooodMy       '), nl,
+    write('     dMmdhyyyyyysooooo+..oooooooo+..oooooohMd     '), nl,
+    write('     mMmdhyyyyyysooo/-...--+ooo/-...--+ooohMm     '), nl,
+    write('     mMmdhyyyyyysooo/......+ooo/......+ooohMm     '), nl,
+    write('     mMmdhyyyyyysooo/......+ooo/......+ooohMm     '), nl,
+    write('     mMmdhyyyyyysoooo//..//ooooo//..//oooohMm     '), nl,
+    write('     mMmdhyyyyyysoooooo//ooooooooo//oooooohMm     '), nl,
+    write('     +ohNdhhyyyysssoooooooooooooooooooooydyo+     '), nl,
+    write('       yMNddhhyyyysssooooooooooooooooooodMy       '), nl,
+    write('       +yhmmddhhyyyysssoooooooooooooooyhyy+       '), nl,
+    write('         :hdmmmmhhhhhhhyyyyyyyyyyyyyyyhh:         '), nl,
+    write('           -mmmmmmmmmmmmmmmmmmmmmmmmmm-           '), nl,
+    write('Anda menenukan slime').
 
 battle :-
     !, retract(inBattle), write('Anda menang').
