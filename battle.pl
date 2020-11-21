@@ -154,7 +154,7 @@ stopBattle:-
     (playerCDSpecial(X) -> retract(playerCDSpecial(X)) ; true),
     (enemyCDSpecial(Y) -> retract(enemyCDSpecial(Y)) ; true),
     retractall(inBattleEnemy(_, _, _, _, _, _, _, _)),
-    retract(inBattle).
+    retract(inBattle), (livingBosses(0,0) -> winTheGame; true).
 
 % Pelarian
 successFlee(X):- X = 1, write('You flee from battle'), nl, stopBattle, !.
@@ -168,10 +168,13 @@ winBattle:-
     addExp(ExpGain),
     (quest(_,_,_,_,_,_) -> progressById(ID); true),
     (ID =:= 7 -> 
-        livingBosses(A,B), retract(livingBosses(A,B)), assertz(livingBosses(0,B)) 
+        livingBosses(A,B), retract(livingBosses(A,B)), assertz(livingBosses(0,B)), 
+        retract(elmtPeta(X, Y,'H')), write('You killed the mighty hypostasis, good luck dude!'), nl 
     ; ID =:= 8 -> 
-        livingBosses(A,B), retract(livingBosses(A,B)), assertz(livingBosses(A,0))
+        livingBosses(A,B), retract(livingBosses(A,B)), assertz(livingBosses(A,0)), 
+        retract(elmtPeta(X, Y,'A')), write('You killed the mighty adrius, good luck dude!'), nl 
     ; true 
     ),
     stopBattle, !.
-loseBattle:- write('Despite your best efforts, it was all in vain as you were defeated by the enemy. Keep your heads up, Traveler!'), nl, stopBattle, !.
+loseBattle :- write('Despite your best efforts, it was all in vain as you were defeated by the enemy. Keep your heads up, Traveler!'), nl, finish, !.
+winTheGame :- write('You are the savior of this realm, I will move you back to your own world, see you yuusha-sama!!'), nl, finish, !.

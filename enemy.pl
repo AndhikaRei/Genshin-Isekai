@@ -35,10 +35,10 @@ growthEnemy(berserkerGoblin, 20, 13, 15, 4, 1).
 growthEnemy(standardWolf, 20, 12, 14, 3, 1).
 growthEnemy(direWolf, 30, 15, 19, 5, 1).
 	
-/* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF) */
+/* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */
-boss(hypostasis, 20, 4000, 4000, 600, 1000, 60).
-boss(andrius, 30, 9000, 9000, 900, 1500, 70).
+boss(hypostasis, 20, 4000, 4000, 600, 1000, 60, 16000).
+boss(andrius, 30, 9000, 9000, 900, 1500, 70, 35000).
 
 printGBEnemy(IdEnemy) :-
 	(IdEnemy =:= 1 -> printSlime

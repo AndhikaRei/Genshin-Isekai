@@ -71,7 +71,10 @@ w:-
     playerPos(A,B), A1 is A-1,!,
     retract(playerPos(A, B)),
     assertz(playerPos(A1, B)),
-    encounter
+    ( elmtPeta(A1,B,'A') -> bossEncounter
+    ; elmtPeta(A1,B,'H') -> bossEncounter
+    ; encounter
+    )
     /* another activity, */ .
 
 /* a : berjalan ke kiri */
@@ -88,7 +91,10 @@ a:-
     playerPos(A,B), B1 is B-1,!,
     retract(playerPos(A, B)),
     assertz(playerPos(A, B1)),
-    encounter
+    ( elmtPeta(A,B1,'A') -> bossEncounter
+    ; elmtPeta(A,B1,'H') -> bossEncounter
+    ; encounter
+    )
     /* another activity, */ .
 
 /* s : berjalan kebawah */
@@ -105,7 +111,10 @@ s :-
     playerPos(A,B), A1 is A+1,!,
     retract(playerPos(A, B)),
     assertz(playerPos(A1, B)),
-    encounter
+    ( elmtPeta(A1,B,'A') -> bossEncounter
+    ; elmtPeta(A1,B,'H') -> bossEncounter
+    ; encounter
+    )
     /* another activity, */ .
 
 /* d : berjalan kekanan */
@@ -122,7 +131,10 @@ d :-
     playerPos(A,B), B1 is B+1,!,
     retract(playerPos(A, B)),
     assertz(playerPos(A, B1)),
-    encounter
+    ( elmtPeta(A,B1,'A') -> bossEncounter
+    ; elmtPeta(A,B1,'H') -> bossEncounter
+    ; encounter
+    )
     /* another activity, */ .
     
 /* t : teleport */
@@ -143,7 +155,18 @@ t :-
 
 
 /******************** TAKEN FROM SPECIALACTION.PL ***************************/
-
+/* bossEncounter apabila pemain menginajak lantai boss maka dia akan langsung melawan boss */
+bossEncounter :- playerPos(A,B), elmtPeta(A,B,C),
+    ( C == 'A' -> idEnemy(8,Enemy),
+        write('You found the legendary wolf , Andrius, prepare yourself to face the Death!'),nl,
+        assertz(inBattle), boss(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp),
+        assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp)),battle,nl
+    ; C == 'H' -> idEnemy(7,Enemy),
+        write('You found the cubic of Madness , Hipostasis, prepare yourself to face the Death!'),nl,
+        assertz(inBattle), boss(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp),
+        assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp)),battle,nl
+    ; true
+    ).
 /* Pemain 60% menemukan musuh Enemy dalam perjalanannya */
 encounter   :- playerPos(A, B), \+elmtPeta(A, B, _), \+habitat(A,B,_),!.
 encounter   :- playerPos(A, B), \+elmtPeta(A, B, _),
@@ -224,5 +247,3 @@ randomWolf(IdEnemy) :- random(1, 3, X),!,
 					  (X < 2 -> IdEnemy is 5; /* X = 1 */
 						  IdEnemy is 6
 					  ).
-keikai(X) :-
-    X is "slime".

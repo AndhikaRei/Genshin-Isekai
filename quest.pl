@@ -39,7 +39,7 @@ tq :-
     ; (A=:=2,B=:=12)->
         retract(questRemaining(W,X,Y,Z)), assertz(questRemaining(W,X,Y,0))
     ),
-    retract(elmtPeta(A, B,'Q')), assertz(elmtPeta(A, B,'-')).
+    retract(elmtPeta(A, B,'Q')).
 tq :-
     !,write('You cant take quest here ').
 
@@ -103,6 +103,6 @@ progressQuest(X) :-
             ;
             C2 is C1-1,
             retract(quest(A,A1,B,B1,C,C1)),
-            assertz(quest(A,A1,B,B2,C,C2))
+            assertz(quest(A,A1,B,B1,C,C2))
         )
     ).

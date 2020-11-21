@@ -14,7 +14,7 @@ growthRate(sorcerer, 100, 6, 3).
 
 /* Base Stats di Level 1 */
 /* Job, MaxHP, Attack, Defense, Exp, Gold */
-baseStat(swordsman, 500, 30, 25, 0, 100000).
+baseStat(swordsman, 500, 10000000, 25, 0, 100000).
 baseStat(archer, 400, 50, 20, 0, 100000).
 baseStat(sorcerer, 450, 45, 10, 0, 100000).
 
@@ -64,7 +64,9 @@ addGold(X) :-
 /* Menambah exp player sembari level up  */
 addExp(X) :-
 	exp(Lv,Xbefore,Total), NewExp is Xbefore + X,
-	format('You gain ~d exp ~n', [X]),
+	( X =:= 0 -> write('You level up again'), nl
+	; 
+		format('You gain ~d exp ~n', [X])),
 	(NewExp >= Total ->
 		format('Level Up!!! ~n', []),
 		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is NewLvl*NewLvl*NewLvl,

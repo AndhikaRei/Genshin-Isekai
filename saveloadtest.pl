@@ -46,7 +46,13 @@ deleteData :-
     retractall(playerPos(_,_)),
     retractall(questRemaining(_,_,_,_)), 
     retractall(elmtPeta(_,_,'Q')), 
+    retractall(elmtPeta(_,_,'A')),
+    retractall(elmtPeta(_,_,'H')),
     retractall(quest(_,_,_,_,_,_)),
+    retractall(playerCDSpecial(_)),
+    retractall(enemyCDSpecial(_)),
+    retractall(inBattleEnemy(_, _, _, _, _, _, _, _)),
+    retractall(inBattle),
     retractall(livingBosses(_,_)).
     
 /*load() = Me load data berupa fakta fakta khusus */

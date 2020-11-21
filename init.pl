@@ -11,18 +11,13 @@
 
 :- dynamic(gameStarted/0).
 :- dynamic(inBattle/0).
-aku(3).
-aku(2).
 
-test :-
-    (aku(1) ->write('1'); write('')),
-    (aku(2) ->write('2')).
 /* Start Game */
 start :-
     \+ gameStarted,!,
     write('**************************************************************************************************'),nl,
     format('Welcome to Genshin Asik. Choose your job ~n 1. Swordsman ~n 2. Archer ~n 3. Sorcerer ~n > ',[]),
-    read(A), chooseJob(A), replenishQuest, initialExp, initPpos, replenishBoss.
+    replenishQuest, initialExp, initPpos, replenishBoss, read(A), chooseJob(A).
 
 start :-
     !, write('Game sudah dimulai, ketik "help." untuk melihat aksi yang bisa dilakukan').
