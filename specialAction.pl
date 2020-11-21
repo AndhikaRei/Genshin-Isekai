@@ -74,7 +74,7 @@ encounterHabitat(goblin, Enemy) :- random(1, 21, X),
 /* 70% ? wolf */
 /* 15% ? slime */
 /* 15% ? goblin */
-encounterHabitat(slime, Enemy) :- random(1, 21, X),
+encounterHabitat(wolf, Enemy) :- random(1, 21, X),
 					(X < 15 -> randomWolf(Enemy);
 						(X < 18 -> randomGoblin(Enemy);
 							randomSlime(Enemy)
