@@ -18,8 +18,8 @@ save :-
     
 playerFact :-
     playerPos(X,Y), write(playerPos(X,Y)),write('.'),nl,
-	inventory(Inv), write(inventory(Inv)),write('.'), nl,
-    playerEquipment(Weap, Armor, Acc), write(playerEquipment(Weap, Armor, Acc)),write('.'), nl,
+	inventory(Inv), write_term(inventory(Inv), [quoted(true)]),write('.'), nl,
+    playerEquipment(Weap, Armor, Acc), write_term(playerEquipment(Weap, Armor, Acc), [quoted(true)]), write('.'), nl,
     player(Class, Lvl, HP, MaxHP, Att, Def, Exp, Gold), write(player(Class, Lvl, HP, MaxHP, Att, Def, Exp, Gold)),write('.'), nl,
     exp(G,H,I), write(exp(G,H,I)),write('.'),nl.
 
@@ -28,15 +28,15 @@ questFact :-
 
 mapFact :-
     questRemaining(A,B,C,D), write(questRemaining(A,B,C,D)),write('.'),nl,
-    ( A=:=1 -> (write(elmtPeta(3,8,'Q')),write('.'),nl); write('')),
-    ( B=:=1 -> (write(elmtPeta(12,3,'Q')),write('.'),nl); write('')),
-    ( C=:=1 -> (write(elmtPeta(13,17,'Q')),write('.'),nl); write('')),
-    ( D=:=1 -> (write(elmtPeta(2,12,'Q')),write('.'),nl); write('')).
+    ( A=:=1 -> (write_term(elmtPeta(3,8,'Q'), [quoted(true)]),write('.'),nl); write('')),
+    ( B=:=1 -> (write_term(elmtPeta(12,3,'Q'), [quoted(true)]),write('.'),nl); write('')),
+    ( C=:=1 -> (write_term(elmtPeta(13,17,'Q'), [quoted(true)]),write('.'),nl); write('')),
+    ( D=:=1 -> (write_term(elmtPeta(2,12,'Q'), [quoted(true)]),write('.'),nl); write('')).
 
 killedBossFact :-
     livingBosses(A,B), write(livingBosses(A,B)),write('.'),nl,
-    ( A=:=1 -> (write(elmtPeta(3,17,'H')),write('.'),nl); write('')),
-    ( B=:=1 -> (write(elmtPeta(3,19,'A')),write('.'),nl); write('')).
+    ( A=:=1 -> (write_term(elmtPeta(3,17,'H'), [quoted(true)]),write('.'),nl); write('')),
+    ( B=:=1 -> (write_term(elmtPeta(3,19,'A'), [quoted(true)]),write('.'),nl); write('')).
 
 deleteData :-
     retractall(inventory(_)), 
