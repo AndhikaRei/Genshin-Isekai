@@ -2,7 +2,7 @@
 :- dynamic(enemyCDSpecial/1).
 
 battle:- 
-    inBattleEnemy(Enemy, Lvl, _, TMaxHP, TAtk, TSAtk, TDef, TExp),
+    inBattleEnemy(Enemy, Lvl, _, TMaxHP, TAtk, TSAtk, TDef, _),
     write('You found a '), write(Enemy), nl,
     write('Level: '), write(Lvl), nl,
     write('Health: '), write(TMaxHP), nl,
@@ -93,7 +93,7 @@ enemyAttack:-
     inBattleEnemy(Enemy, _, _, _, TAtk, _, _, _),
     DMG is TAtk - Def,
     HPNew is HP - DMG,
-    write(write(' deal '), write(DMG), write(' damage'), nl,
+    write(Enemy), write(' deal '), write(DMG), write(' damage'), nl,
     (HPNew =< 0 ->
         loseBattle /* player kalah */
     ;
@@ -104,11 +104,14 @@ enemyAttack:-
             retract(enemyCDSpecial(X)),
             (XNew \== 0 ->
                 assertz(enemyCDSpecial(XNew))
+            ;
+                true
             )
         ;
             true
         )
     ).
+
 enemySpecialAttack:- 
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
     inBattleEnemy(_, _, _, _, _, TSAtk, _, _),
