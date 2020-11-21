@@ -33,22 +33,6 @@ growthEnemy(berserkerGoblin, 20, 13, 15, 4, 1).
 growthEnemy(standardWolf, 20, 12, 14, 3, 1).
 growthEnemy(direWolf, 30, 15, 19, 5, 1).
 
-% statsEnemy(X) :-
-% 		  inBattleEnemy(X, Level, HP, MaxHP, Atk, SAtk, Def, Exp),
-% 		  write('Enemy : '), write(X), nl,
-% 		  write('Level : '), write(Level), nl,
-% 		  write('HP : '), write(HP), write('/'), write(MaxHP), nl,
-%           write('Attack : '), write(Atk), nl,
-% 		  write('Special Attack : '), write(SAtk), nl,
-% 		  write('Defense : '), write(Def), nl.
-
-% growthEnemy(smallSlime, 5, 7, 2, 1, 1).
-% growthEnemy(bigSlime, 10, 12, 3, 1, 2).
-% growthEnemy(recruitGoblin, 8, 10, 2, 1, 3).
-% growthEnemy(berserkerGoblin, 13, 15, 4, 1, 4).
-% growthEnemy(standardWolf, 12, 14, 3, 1, 5).
-% growthEnemy(direWolf, 15, 19, 5, 1, 6).
-
 statsEnemy(X) :-
 		  inBattleEnemy(X, Level, HP, MaxHP, Atk, SAtk, Def, _),
 		  write('Enemy : '), write(X), nl,

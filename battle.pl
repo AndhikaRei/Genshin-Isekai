@@ -27,8 +27,10 @@ attack :-
         (playerCDSpecial(X) ->
             XNew is X - 1,
             retract(playerCDSpecial(X)),
-            (XNew \== 0 ->
+            (XNew =\= 0 ->
                 assertz(playerCDSpecial(XNew))
+            ;
+                true
             )
         ;
             true
@@ -44,6 +46,7 @@ specialAttack :-
         inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp),
         DMG is Att * Lvl,
         THPNew is THP - DMG,
+        write('You used your special attack'), nl,
         write('You deal '), write(DMG), write(' damage'), nl,
         (THPNew =< 0 ->
             winBattle /* dapet XP & gold */
@@ -102,7 +105,7 @@ enemyAttack:-
         (enemyCDSpecial(X) ->
             XNew is X - 1,
             retract(enemyCDSpecial(X)),
-            (XNew \== 0 ->
+            (XNew =\= 0 ->
                 assertz(enemyCDSpecial(XNew))
             ;
                 true
@@ -114,17 +117,24 @@ enemyAttack:-
 
 enemySpecialAttack:- 
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-    inBattleEnemy(_, _, _, _, _, TSAtk, _, _),
+    inBattleEnemy(Enemy, _, _, _, _, TSAtk, _, _),
     DMG is TSAtk - Def,
     HPNew is HP - DMG,
+    write(Enemy), write(' used their special attack'), nl,
+    write(Enemy), write(' deal '), write(DMG), write(' damage'), nl,
     (HPNew =< 0 ->
         loseBattle /* player kalah */
     ;
         retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
-        assertz(player(Job, Lvl, HPNew, MaxHP, Att, Def, E, G))
+        assertz(player(Job, Lvl, HPNew, MaxHP, Att, Def, E, G)),
+        assertz(enemyCDSpecial(3))
     ).
 
-stopBattle:- retract(inBattleEnemy(_, _, _, _, _, _, _, _)), retract(inBattle).
+stopBattle:- 
+    (playerCDSpecial(X) -> retract(playerCDSpecial(X)) ; true),
+    (retract(enemyCDSpecial(Y)) -> retract(enemyCDSpecial(Y)) ; true),
+    retract(inBattleEnemy(_, _, _, _, _, _, _, _)),
+    retract(inBattle).
 
 % Pelarian
 successFlee(X):- X = 1, write('You flee from battle'), nl, stopBattle, !.
