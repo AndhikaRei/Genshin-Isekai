@@ -64,6 +64,7 @@ addGold(X) :-
 /* Menambah exp player sembari level up  */
 addExp(X) :-
 	exp(Lv,Xbefore,Total), NewExp is Xbefore + X,
+	format('You gain ~d exp ~n', [X]),
 	(NewExp >= Total ->
 		format('Level Up!!! ~n', []),
 		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is NewLvl*NewLvl*NewLvl,
@@ -73,10 +74,12 @@ addExp(X) :-
 		levelUp(Job),
 		(NewExp2 >= NewTotal ->
 			addExp(0)
+		;
+			true
 		)
 	; 
 		Xremain is Total-NewExp,
-		format('You gain ~d exp ~n', [X]), format('You need ~d exp to level up ~n', [Xremain]),
+		format('You need ~d exp to level up ~n', [Xremain]),
 		retract(exp(Lv,Xbefore,Total)), assertz(exp(Lv,NewExp,Total)),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
 		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp, G))
