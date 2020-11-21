@@ -152,8 +152,8 @@ enemyStatus :-
 
 stopBattle:- 
     (playerCDSpecial(X) -> retract(playerCDSpecial(X)) ; true),
-    (retract(enemyCDSpecial(Y)) -> retract(enemyCDSpecial(Y)) ; true),
-    retract(inBattleEnemy(_, _, _, _, _, _, _, _)),
+    (enemyCDSpecial(Y) -> retract(enemyCDSpecial(Y)) ; true),
+    retractall(inBattleEnemy(_, _, _, _, _, _, _, _)),
     retract(inBattle).
 
 % Pelarian
