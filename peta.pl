@@ -164,21 +164,20 @@ encounter(Enemy) :- playerPos(A, B), \+elmtPeta(A, B, _),
 					/* BAGIAN BATTLE DI INIT.PL DI SINI */
 					randomEnemy(Enemy),
 					assertz(inBattle),
-					write('Anda menemukan '),
-					write(Enemy),
-					write('!'),
+					% write('Anda menemukan '),
+					% write(Enemy),
+					% write('!'),
 					/* BAGIAN BATTLE DI INIT.PL DI SINI */
 					
 					player(_, Lvl, _, _, _, _, _, _),
-					baseEnemy(Enemy, HP, Atk, SAtk, Def),
-					growthEnemy(Enemy, GHP, GAtk, GSAtk, GDef),
+					baseEnemy(Enemy, HP, Atk, SAtk, Def, Exp),
+					growthEnemy(Enemy, GHP, GAtk, GSAtk, GDef, GExp),
 					GLvl is Lvl - 1,
 					/* semua stats adalah base stat + growthrate * pertambahan level */
 					THP is HP + (GHP * GLvl), TMaxHP is THP,
 					TAtk is Atk + (GAtk * GLvl), TSAtk is SAtk + (GSAtk * GLvl),
-					TDef is Def + (GDef * GLvl),
-					assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef)),
-					statsEnemy(Enemy),
+					TDef is Def + (GDef * GLvl), TExp is Exp + (GExp * GLvl),
+					assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp)),
 					battle,
 					/* Ngeprint stats musuh */
 					nl
@@ -240,16 +239,16 @@ encounterHabitat(wolf, Enemy) :- random(1, 21, X),
 					).
 
 randomSlime(Enemy) :- random(1, 3, X),
-					  (X < 2 -> Enemy is smallSlime; /* X = 1 */
-						  Enemy is bigSlime
+					  (X < 2 -> Enemy = smallSlime; /* X = 1 */
+						  Enemy = bigSlime
 					  ).
 
 randomGoblin(Enemy) :- random(1, 3, X),
-					  (X < 2 -> Enemy is recruitGoblin; /* X = 1 */
-						  Enemy is berserkerGoblin
+					  (X < 2 -> Enemy = recruitGoblin; /* X = 1 */
+						  Enemy = berserkerGoblin
 					  ).
 
 randomWolf(Enemy) :- random(1, 3, X),
-					  (X < 2 -> Enemy is standardWolf; /* X = 1 */
-						  Enemy is direWolf
+					  (X < 2 -> Enemy = standardWolf; /* X = 1 */
+						  Enemy = direWolf
 					  ).
