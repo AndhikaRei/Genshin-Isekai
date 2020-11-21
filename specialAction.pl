@@ -1,7 +1,3 @@
-:- include('inventory.pl').
-:- include('peta.pl').
-:- include('enemy.pl').
-
 /* Pemain 60% menemukan musuh Enemy dalam perjalanannya */
 encounter(Enemy) :- playerPos(A, B), \+elmtPeta(A, B, _),
 				random(1, 11, X),
