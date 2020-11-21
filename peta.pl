@@ -44,6 +44,29 @@ map:-
     /* gameStarted(_),  (somebody start the game) */
     printPeta(0,0),!.
 
+/* habitat slime di daerah nomor 1, baris ke 9-13 kolom 1-5 */
+habitat(9, 1, slime). habitat(9, 2, slime). habitat(9, 3, slime). habitat(9, 4, slime). habitat(9, 5, slime).
+habitat(10, 1, slime). habitat(10, 2, slime). habitat(10, 3, slime). habitat(10, 4, slime). habitat(10, 5, slime).
+habitat(11, 1, slime). habitat(11, 2, slime). habitat(11, 3, slime). habitat(11, 4, slime). habitat(11, 5, slime).
+habitat(12, 1, slime). habitat(12, 2, slime). habitat(12, 3, slime). habitat(12, 4, slime). habitat(12, 5, slime).
+habitat(13, 1, slime). habitat(13, 2, slime). habitat(13, 3, slime). habitat(13, 4, slime). habitat(13, 5, slime).
+
+/* habitat goblin di daerah nomor 2, baris ke 9-13 kolom 15-19 */
+habitat(9, 15, goblin). habitat(9, 16, goblin). habitat(9, 17, goblin). habitat(9, 18, goblin). habitat(9, 19, goblin).
+habitat(10, 15, goblin). habitat(10, 16, goblin). habitat(10, 17, goblin). habitat(10, 18, goblin). habitat(10, 19, goblin).
+habitat(11, 15, goblin). habitat(11, 16, goblin). habitat(11, 17, goblin). habitat(11, 18, goblin). habitat(11, 19, goblin).
+habitat(12, 15, goblin). habitat(12, 16, goblin). habitat(12, 17, goblin). habitat(12, 18, goblin). habitat(12, 19, goblin).
+habitat(13, 15, goblin). habitat(13, 16, goblin). habitat(13, 17, goblin). habitat(13, 18, goblin). habitat(13, 19, goblin).
+
+/* habitat wolf di daerah nomor 3, baris ke 1-5, kolom 11-15 */
+habitat(1, 11, wolf). habitat(1, 12, wolf). habitat(1, 13, wolf). habitat(1, 14, wolf). habitat(1, 15, wolf).
+habitat(2, 11, wolf). habitat(2, 12, wolf). habitat(2, 13, wolf). habitat(2, 14, wolf). habitat(2, 15, wolf).
+habitat(3, 11, wolf). habitat(3, 12, wolf). habitat(3, 13, wolf). habitat(3, 14, wolf). habitat(3, 15, wolf).
+habitat(4, 11, wolf). habitat(4, 12, wolf). habitat(4, 13, wolf). habitat(4, 14, wolf). habitat(4, 15, wolf).
+habitat(5, 11, wolf). habitat(5, 12, wolf). habitat(5, 13, wolf). habitat(5, 14, wolf). habitat(5, 15, wolf).
+
+
+
 /* =================================================================================================*/
 
 /* =================================Kelompok Perpindahan============================================*/
@@ -60,8 +83,8 @@ w :-
 w:-   
     playerPos(A,B), A1 is A-1,!,
     retract(playerPos(A, B)),
-    assertz(playerPos(A1, B))
-    /* random_encounter_enemy, */
+    assertz(playerPos(A1, B)),
+    encounter(Enemy)
     /* another activity, */ .
 
 /* a : berjalan ke kiri */
@@ -77,8 +100,8 @@ a :-
 a:-   
     playerPos(A,B), B1 is B-1,!,
     retract(playerPos(A, B)),
-    assertz(playerPos(A, B1))
-    /* random_encounter_enemy, */
+    assertz(playerPos(A, B1)),
+    encounter(Enemy)
     /* another activity, */ .
 
 /* s : berjalan kebawah */
@@ -94,8 +117,8 @@ s :-
 s :- 
     playerPos(A,B), A1 is A+1,!,
     retract(playerPos(A, B)),
-    assertz(playerPos(A1, B))
-    /* random_encounter_enemy, */
+    assertz(playerPos(A1, B)),
+    encounter(Enemy)
     /* another activity, */ .
 
 /* d : berjalan kekanan */
@@ -111,8 +134,8 @@ d :-
 d :- 
     playerPos(A,B), B1 is B+1,!,
     retract(playerPos(A, B)),
-    assertz(playerPos(A, B1))
-    /* random_encounter_enemy, */
+    assertz(playerPos(A, B1)),
+    encounter(Enemy)
     /* another activity, */ .
     
 /* t : teleport */
@@ -130,3 +153,103 @@ t :-
     playerPos(A,B),elmtPeta(A,B,'3'),elmtPeta(A1,B1,'3'), A1 \== A, B1 \== B,!, retract(playerPos(A, B)), assertz(playerPos(A1, B1)).
 t :-
     !, write('You cant teleport here').
+
+
+/******************** TAKEN FROM SPECIALACTION.PL ***************************/
+
+/* Pemain 60% menemukan musuh Enemy dalam perjalanannya */
+encounter(Enemy) :- playerPos(A, B), \+elmtPeta(A, B, _),
+				random(1, 11, X),
+				(X < 7 ->
+					/* BAGIAN BATTLE DI INIT.PL DI SINI */
+					randomEnemy(Enemy),
+					assertz(inBattle),
+					write('Anda menemukan '),
+					write(Enemy),
+					write('!'),
+					/* BAGIAN BATTLE DI INIT.PL DI SINI */
+					
+					player(_, Lvl, _, _, _, _, _, _),
+					baseEnemy(Enemy, HP, Atk, SAtk, Def),
+					growthEnemy(Enemy, GHP, GAtk, GSAtk, GDef),
+					GLvl is Lvl - 1,
+					/* semua stats adalah base stat + growthrate * pertambahan level */
+					THP is HP + (GHP * GLvl), TMaxHP is THP,
+					TAtk is Atk + (GAtk * GLvl), TSAtk is SAtk + (GSAtk * GLvl),
+					TDef is Def + (GDef * GLvl),
+					assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef)),
+					statsEnemy(Enemy),
+					battle,
+					/* Ngeprint stats musuh */
+					nl
+				;	
+					write('Anda tidak menemukan musuh'),
+					nl
+				).
+
+/* merandom musuh yang ditemukan berdasarkan habitat */				
+randomEnemy(Enemy) :- playerPos(A, B),
+					  habitat(A, B, Musuh),
+					  encounterHabitat(Musuh, Enemy).
+					  
+/* posisi pemain bukanlah habitat musuh siapapun */
+/* 50% ? slime */
+/* 30% ? goblin */
+/* 20% ? wolf */
+randomEnemy(Enemy) :- playerPos(A, B),
+					  \+ habitat(A, B, _),
+					  random(1, 11, X),
+					  (X < 6 ->
+						  randomSlime(Enemy);
+						  (X < 9 -> randomGoblin(Enemy);
+							randomWolf(Enemy)
+						  )
+					  ).
+
+/* encounter di habitat slime akan memiliki persentase encounter dengan */
+/* 70% ? slime */
+/* 15% ? wolf */
+/* 15% ? goblin */
+encounterHabitat(slime, Enemy) :- random(1, 21, X),
+					(X < 15 -> randomSlime(Enemy);
+						(X < 18 -> randomGoblin(Enemy);
+							randomWolf(Enemy)
+						)
+					).
+
+/* encounter di habitat goblin akan memiliki persentase encounter dengan */
+/* 70% ? goblin */
+/* 15% ? wolf */
+/* 15% ? slime */
+encounterHabitat(goblin, Enemy) :- random(1, 21, X),
+					(X < 15 -> randomGoblin(Enemy);
+						(X < 18 -> randomSlime(Enemy);
+							randomWolf(Enemy)
+						)
+					).
+					
+/* encounter di habitat wolf akan memiliki persentase encounter dengan */
+/* 70% ? wolf */
+/* 15% ? slime */
+/* 15% ? goblin */
+encounterHabitat(wolf, Enemy) :- random(1, 21, X),
+					(X < 15 -> randomWolf(Enemy);
+						(X < 18 -> randomGoblin(Enemy);
+							randomSlime(Enemy)
+						)
+					).
+
+randomSlime(Enemy) :- random(1, 3, X),
+					  (X < 2 -> Enemy is smallSlime; /* X = 1 */
+						  Enemy is bigSlime
+					  ).
+
+randomGoblin(Enemy) :- random(1, 3, X),
+					  (X < 2 -> Enemy is recruitGoblin; /* X = 1 */
+						  Enemy is berserkerGoblin
+					  ).
+
+randomWolf(Enemy) :- random(1, 3, X),
+					  (X < 2 -> Enemy is standardWolf; /* X = 1 */
+						  Enemy is direWolf
+					  ).

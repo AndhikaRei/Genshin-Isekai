@@ -5,6 +5,11 @@
 :- include('store.pl').
 :- include('inventory.pl').
 :- include('saveloadtest.pl').
+
+:- include('inventory.pl').
+:- include('enemy.pl').
+
+
 :- dynamic(gameStarted/0).
 :- dynamic(inBattle/0).
 aku(3).
