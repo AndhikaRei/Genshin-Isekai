@@ -76,7 +76,7 @@ addExp(X) :-
 		)
 	; 
 		Xremain is Total-NewExp,
-		format('You gain ~d exp ~n', [X]), format('You need ~d exp to level uo ~n', [Xremain]),
+		format('You gain ~d exp ~n', [X]), format('You need ~d exp to level up ~n', [Xremain]),
 		retract(exp(Lv,Xbefore,Total)), assertz(exp(Lv,NewExp,Total)),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
 		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp, G))

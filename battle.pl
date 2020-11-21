@@ -44,7 +44,7 @@ specialAttack :-
     ;
         player(_, Lvl, _, _, Att, _, _, _),
         inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp),
-        DMG is Att * Lvl,
+        DMG is (Att * Lvl) - TDef,
         THPNew is THP - DMG,
         write('You used your special attack'), nl,
         write('You deal '), write(DMG), write(' damage'), nl,
@@ -64,20 +64,25 @@ usePotion :-
     inventory(Inv),
     (member(['Health Potion', _], Inv) ->
         player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-        potion('Health Potion', HPInc),
-        HPNew is HP + HPInc,
-        (HPNew >= MaxHP ->
-            HPNew is MaxHP
+        (HP =:= MaxHP ->
+            write('You are already at full health')
         ;
-            true
-        ),
-        retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
-        assertz(player(Job, Lvl, HPNew, MaxHP, Att, Def, E, G)),
-        drop('Health Potion')
+            potion('Health Potion', HPInc),
+            HPTemp is HP + HPInc,
+            (HPTemp >= MaxHP ->
+                HPNew is MaxHP
+            ;
+                HPNew is HPTemp
+            ),
+            HPAdd is HPNew - HP,
+            write('You heal '), write(HPAdd), write(' HP'), nl,
+            retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
+            assertz(player(Job, Lvl, HPNew, MaxHP, Att, Def, E, G)),
+            drop('Health Potion')
+        )
     ;
         write('You do not have any potion')
     ).
-usePotion   .
 
 % bagian enemy
 enemyTurn :- 
@@ -130,6 +135,21 @@ enemySpecialAttack:-
         assertz(enemyCDSpecial(3))
     ).
 
+enemyStatus :-
+    (inBattle ->
+        inBattleEnemy(Enemy, Level, HP, MaxHP, Atk, SAtk, Def, _),
+        idEnemy(Id, Enemy),
+        printGBEnemy(Id),
+        write('Enemy : '), write(Enemy), nl,
+        write('Level : '), write(Level), nl,
+        write('HP : '), write(HP), write('/'), write(MaxHP), nl,
+        write('Attack : '), write(Atk), nl,
+        write('Special Attack : '), write(SAtk), nl,
+        write('Defense : '), write(Def), nl
+    ;
+        write('You are not in a battle')
+    ).
+
 stopBattle:- 
     (playerCDSpecial(X) -> retract(playerCDSpecial(X)) ; true),
     (retract(enemyCDSpecial(Y)) -> retract(enemyCDSpecial(Y)) ; true),
@@ -142,5 +162,9 @@ successFlee(X):- X = 2, write('Uh oh, your attempt to run was unsuccessful!'), n
 flee:- \+inBattle, write('This command is only available in battle'), nl, !.
 flee:- random(1,3,X), successFlee(X).
 
-winBattle:- write('You have slain your enemy. Proceed with your journey, Traveler!'), nl, stopBattle, !.
+winBattle:-
+    write('You have slain your enemy. Proceed with your journey, Traveler!'), nl,
+    inBattleEnemy(_, _, _, _, _, _, _, ExpGain),
+    addExp(ExpGain),
+    stopBattle, !.
 loseBattle:- write('Despite your best efforts, it was all in vain as you were defeated by the enemy. Keep your heads up, Traveler!'), nl, stopBattle, !.

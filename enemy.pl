@@ -8,12 +8,12 @@
 /* Jadi kayaknya itu diperlukan juga */
 
 /* id unik enemy */
-idEnemy(1,smallSlime).
-idEnemy(2,bigSlime).
-idEnemy(3,recruitGoblin).
-idEnemy(4,berserkerGoblin).
-idEnemy(5,standardWolf).
-idEnemy(6,direWolf).
+idEnemy(1,smallSlime) :- !.
+idEnemy(2,bigSlime) :- !.
+idEnemy(3,recruitGoblin) :- !.
+idEnemy(4,berserkerGoblin) :- !.
+idEnemy(5,standardWolf) :- !.
+idEnemy(6,direWolf) :- !.
 
 /* baseEnemy(X, HP, ATK, Special ATK, DEF, exp given) */
 /* base stats enemy di level 1 */
@@ -32,16 +32,6 @@ growthEnemy(recruitGoblin, 15, 8, 10, 2, 1).
 growthEnemy(berserkerGoblin, 20, 13, 15, 4, 1).
 growthEnemy(standardWolf, 20, 12, 14, 3, 1).
 growthEnemy(direWolf, 30, 15, 19, 5, 1).
-
-statsEnemy(X) :-
-		  inBattleEnemy(X, Level, HP, MaxHP, Atk, SAtk, Def, _),
-		  write('Enemy : '), write(X), nl,
-		  write('Level : '), write(Level), nl,
-		  write('HP : '), write(HP), write('/'), write(MaxHP), nl,
-          write('Attack : '), write(Atk), nl,
-		  write('Special Attack : '), write(SAtk), nl,
-		  write('Defense : '), write(Def), nl.
-
 	
 /* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */

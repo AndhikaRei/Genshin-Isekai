@@ -45,26 +45,13 @@ map:-
     printPeta(0,0),!.
 
 /* habitat slime di daerah nomor 1, baris ke 9-13 kolom 1-8 */
-habitat(9, 1, slime). habitat(9, 2, slime). habitat(9, 3, slime). habitat(9, 4, slime). habitat(9, 5, slime). habitat(9, 7, slime). habitat(9, 6, slime). habitat(9, 8, slime).
-habitat(10, 1, slime). habitat(10, 2, slime). habitat(10, 3, slime). habitat(10, 4, slime). habitat(10, 5, slime). habitat(10, 7, slime). habitat(10, 6, slime). habitat(10, 8, slime).
-habitat(11, 1, slime). habitat(11, 2, slime). habitat(11, 3, slime). habitat(11, 4, slime). habitat(11, 5, slime). habitat(11, 7, slime). habitat(11, 6, slime). habitat(11, 8, slime).
-habitat(12, 1, slime). habitat(12, 2, slime). habitat(12, 3, slime). habitat(12, 4, slime). habitat(12, 5, slime). habitat(12, 7, slime). habitat(12, 6, slime). habitat(12, 8, slime). 
-habitat(13, 1, slime). habitat(13, 2, slime). habitat(13, 3, slime). habitat(13, 4, slime). habitat(13, 5, slime). habitat(13, 7, slime). habitat(13, 6, slime). habitat(13, 8, slime). 
+habitat(X, Y, slime) :- between(9,13,X), between(1,8,Y).
 
 /* habitat goblin di daerah nomor 2, baris ke 9-13 kolom 12-19 */
-habitat(9, 12, goblin). habitat(9, 13, goblin). habitat(9, 14, goblin). habitat(9, 15, goblin). habitat(9, 15, goblin). habitat(9, 16, goblin). habitat(9, 17, goblin). habitat(9, 18, goblin). habitat(9, 19, goblin).
-habitat(10, 12, goblin). habitat(10, 13, goblin). habitat(10, 14, goblin). habitat(10, 15, goblin). habitat(10, 15, goblin). habitat(10, 16, goblin). habitat(10, 17, goblin). habitat(10, 18, goblin). habitat(10, 19, goblin).
-habitat(11, 12, goblin). habitat(11, 13, goblin). habitat(11, 14, goblin). habitat(11, 15, goblin). habitat(11, 15, goblin). habitat(11, 16, goblin). habitat(11, 17, goblin). habitat(11, 18, goblin). habitat(11, 19, goblin).
-habitat(12, 12, goblin). habitat(12, 13, goblin). habitat(12, 14, goblin). habitat(12, 15, goblin). habitat(12, 15, goblin). habitat(12, 16, goblin). habitat(12, 17, goblin). habitat(12, 18, goblin). habitat(12, 19, goblin).
-habitat(13, 12, goblin). habitat(13, 13, goblin). habitat(13, 14, goblin). habitat(13, 15, goblin). habitat(13, 15, goblin). habitat(13, 16, goblin). habitat(13, 17, goblin). habitat(13, 18, goblin). habitat(13, 19, goblin).
+habitat(X, Y, goblin) :- between(9,13,X), between(12,19,Y).
 
 /* habitat wolf di daerah nomor 3, baris ke 1-5, kolom 11-17 */
-habitat(1, 11, wolf). habitat(1, 12, wolf). habitat(1, 13, wolf). habitat(1, 14, wolf). habitat(1, 15, wolf). habitat(1, 16, wolf). habitat(1, 17, wolf). 
-habitat(2, 11, wolf). habitat(2, 12, wolf). habitat(2, 13, wolf). habitat(2, 14, wolf). habitat(2, 15, wolf). habitat(2, 16, wolf). habitat(2, 17, wolf). 
-habitat(3, 11, wolf). habitat(3, 12, wolf). habitat(3, 13, wolf). habitat(3, 14, wolf). habitat(3, 15, wolf). habitat(3, 16, wolf). habitat(3, 17, wolf). 
-habitat(4, 11, wolf). habitat(4, 12, wolf). habitat(4, 13, wolf). habitat(4, 14, wolf). habitat(4, 15, wolf). habitat(4, 16, wolf). habitat(4, 17, wolf). 
-habitat(5, 11, wolf). habitat(5, 12, wolf). habitat(5, 13, wolf). habitat(5, 14, wolf). habitat(5, 15, wolf). habitat(5, 16, wolf). habitat(5, 17, wolf). 
-
+habitat(X, Y, wolf) :- between(1,5,X), between(11,17,Y).
 
 
 /* =================================================================================================*/
@@ -166,9 +153,6 @@ encounter   :- playerPos(A, B), \+elmtPeta(A, B, _),
 					randomEnemy(IdEnemy),!,
                     idEnemy(IdEnemy,Enemy),
 					assertz(inBattle),
-					% write('Anda menemukan '),
-					% write(Enemy),
-					% write('!'),
                     printGBEnemy(IdEnemy),
 					/* BAGIAN BATTLE DI INIT.PL DI SINI */
 					
@@ -185,8 +169,7 @@ encounter   :- playerPos(A, B), \+elmtPeta(A, B, _),
 					/* Ngeprint stats musuh */
 					nl
 				;	
-					write(''),
-					nl
+					true
 				).
 
 /* merandom musuh yang ditemukan berdasarkan habitat */				
@@ -226,22 +209,6 @@ encounterHabitat(wolf, IdEnemy) :- random(1, 21, X),
 							randomSlime(IdEnemy)
 						)
 					).
-
-
-% randomSlime(Enemy) :- random(1, 3, X),
-% 					  (X < 2 -> Enemy = smallSlime; /* X = 1 */
-% 						  Enemy = bigSlime
-% 					  ).
-
-% randomGoblin(Enemy) :- random(1, 3, X),
-% 					  (X < 2 -> Enemy = recruitGoblin; /* X = 1 */
-% 						  Enemy = berserkerGoblin
-% 					  ).
-
-% randomWolf(Enemy) :- random(1, 3, X),
-% 					  (X < 2 -> Enemy = standardWolf; /* X = 1 */
-% 						  Enemy = direWolf
-% 					  ).
 
 randomSlime(IdEnemy) :- random(1, 3, X),!,
 					  (X < 2 -> IdEnemy is 1; /* X = 1 */
