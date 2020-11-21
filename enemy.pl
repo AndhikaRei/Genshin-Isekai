@@ -14,6 +14,8 @@ idEnemy(3,recruitGoblin) :- !.
 idEnemy(4,berserkerGoblin) :- !.
 idEnemy(5,standardWolf) :- !.
 idEnemy(6,direWolf) :- !.
+idEnemy(7,hypostasis) :- !.
+idEnemy(8,andrius) :- !.
 
 /* baseEnemy(X, HP, ATK, Special ATK, DEF, exp given) */
 /* base stats enemy di level 1 */

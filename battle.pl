@@ -164,7 +164,14 @@ flee:- random(1,3,X), successFlee(X).
 
 winBattle:-
     write('You have slain your enemy. Proceed with your journey, Traveler!'), nl,
-    inBattleEnemy(_, _, _, _, _, _, _, ExpGain),
+    inBattleEnemy(Enemy, _, _, _, _, _, _, ExpGain), idEnemy(ID,Enemy),
     addExp(ExpGain),
+    (quest(_,_,_,_,_,_) -> progressById(ID); true),
+    (ID =:= 7 -> 
+        livingBosses(A,B), retract(livingBosses(A,B)), assertz(livingBosses(0,B)) 
+    ; ID =:= 8 -> 
+        livingBosses(A,B), retract(livingBosses(A,B)), assertz(livingBosses(A,0))
+    ; true 
+    ),
     stopBattle, !.
 loseBattle:- write('Despite your best efforts, it was all in vain as you were defeated by the enemy. Keep your heads up, Traveler!'), nl, stopBattle, !.

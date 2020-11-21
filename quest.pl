@@ -69,6 +69,16 @@ fq :-
     write('Congratulation for finishing the quest').
 
 /* Fungsi untuk ngeprogress quest nya (kalau kill suatu monster maka fungsi ini dijalakan dan menambah progress dengan mengurangi jumlah monster yang dibunuh(+penanganan kasus negatif)), nunggu battle */
+progressById(IdEnemy):-
+	(IdEnemy =:= 1 -> progressQuest(slime)
+	;IdEnemy =:= 2 -> progressQuest(slime)
+	;IdEnemy =:= 3 -> progressQuest(goblin)
+	;IdEnemy =:= 4 -> progressQuest(goblin)
+	;IdEnemy =:= 5 -> progressQuest(wolf)
+	;IdEnemy =:= 6 -> progressQuest(wolf)
+    ; true
+	).
+
 progressQuest(X) :-
     quest(A,A1,B,B1,C,C1),
     (X == slime ->
