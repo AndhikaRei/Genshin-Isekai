@@ -51,7 +51,7 @@ chooseJob(A) :-
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Bow', 1], ['Health Potion', 5]])),
     !,
-    write('You choose archer, let\'s explore the world'),
+    write('You choose archer, let\'s explore the world'), nl,
     write('**************************************************************************************************'),nl.
 
 chooseJob(A) :-
@@ -62,7 +62,7 @@ chooseJob(A) :-
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Staff', 1], ['Health Potion', 5]])),
     !,
-    write('You choose sorcerer, let\'s explore the world'),
+    write('You choose sorcerer, let\'s explore the world'), nl,
     write('**************************************************************************************************'),nl.
 
 /* help : menampilkan menu bantuan */
