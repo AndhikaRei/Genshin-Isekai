@@ -207,3 +207,7 @@ help :-
 %     write('Anda menenukan goblin').  
 % battle :-
 %     !, retract(inBattle), write('Anda menang').
+% battle :-
+%     \+ inBattle, ! , assertz(inBattle).  
+% battle :-
+%     !, retract(inBattle), write('Anda menang').
