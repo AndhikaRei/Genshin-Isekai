@@ -13,7 +13,7 @@ save :-
         questFact,
         mapFact,
         killedBossFact,
-	told, !
+	    told, !
     ).
     
 playerFact :-
