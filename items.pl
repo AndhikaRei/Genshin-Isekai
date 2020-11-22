@@ -46,6 +46,8 @@ item('Orb of Destiny', 38) :- !.
 
 /* Potion */
 item('Health Potion', 39) :- !.
+item('Attack Potion', 40) :- !.
+item('Defense Potion', 41) :- !.
 
 /* equipment(X, Y, Z, W) berarti X adalah equipment yang hanya dapat digunakan oleh job Y yang menambah stat Z sebesar W */
 equipment('Wooden Sword', swordsman, atk, 10).
@@ -91,5 +93,7 @@ equipment('Wolf Heart', universal, hp, 120).
 equipment('Dragonic Core', universal, hp, 240).
 equipment('Orb of Destiny', universal, hp, 480).
 
-/* potion(X, Y) berarti X adalah potion yang menambah HP sebesar Y */
-potion('Health Potion', 100).
+/* potion(X, Y, Z) berarti X adalah potion yang menambah stats Y sebesar Z */
+potion('Health Potion', hp,  100).
+potion('Attack Potion', atk, 20).
+potion('Defense Potion', def, 20).
