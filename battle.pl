@@ -15,7 +15,18 @@ battle:-
 attack :- 
     player(_, _, _, _, Att, _, _, _),
     inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp),
-    DMG is Att - TDef,
+    playerEquipment(Weap, _, _),
+    (Weap == none ->
+        EqAtk is 0
+    ;
+        equipment(Weap, _, _, EqAtk)
+    ),
+    DMGTemp is Att + EqAtk - TDef,
+    (DMGTemp < 0 ->
+        DMG is 0
+    ; 
+        DMG is DMGTemp
+    ),
     THPNew is THP - DMG,
     write('You deal '), write(DMG), write(' damage'), nl,
     (THPNew =< 0 ->
@@ -44,7 +55,18 @@ specialAttack :-
     ;
         player(_, Lvl, _, _, Att, _, _, _),
         inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp),
-        DMG is (Att * Lvl) - TDef,
+        playerEquipment(Weap, _, _),
+        (Weap == none ->
+            EqAtk is 0
+        ;
+            equipment(Weap, _, _, EqAtk)
+        ),
+        DMGTemp is (Att * Lvl) + EqAtk - TDef,
+        (DMGTemp < 0 ->
+            DMG is 0
+        ; 
+            DMG is DMGTemp
+        ),
         THPNew is THP - DMG,
         write('You used your special attack'), nl,
         write('You deal '), write(DMG), write(' damage'), nl,
@@ -99,7 +121,12 @@ enemyTurn :-
 enemyAttack:- 
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
     inBattleEnemy(Enemy, _, _, _, TAtk, _, _, _),
-    DMG is TAtk - Def,
+    DMGTemp is TAtk - Def,
+    (DMGTemp < 0 ->
+        DMG is 0
+    ; 
+        DMG is DMGTemp
+    ),
     HPNew is HP - DMG,
     write(Enemy), write(' deal '), write(DMG), write(' damage'), nl,
     (HPNew =< 0 ->
@@ -123,7 +150,12 @@ enemyAttack:-
 enemySpecialAttack:- 
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
     inBattleEnemy(Enemy, _, _, _, _, TSAtk, _, _),
-    DMG is TSAtk - Def,
+    DMGTemp is TSAtk - Def,
+    (DMGTemp < 0 ->
+        DMG is 0
+    ; 
+        DMG is DMGTemp
+    ),
     HPNew is HP - DMG,
     write(Enemy), write(' used their special attack'), nl,
     write(Enemy), write(' deal '), write(DMG), write(' damage'), nl,

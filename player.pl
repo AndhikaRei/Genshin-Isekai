@@ -1,8 +1,3 @@
-/* include modul eksternal
-:- include('inventory.pl').
-:- include('items.pl').
-*/
-
 :- dynamic(exp/3).
 :- dynamic(player/8).
 :- dynamic(playerEquipment/3).
@@ -64,9 +59,11 @@ addGold(X) :-
 /* Menambah exp player sembari level up  */
 addExp(X) :-
 	exp(Lv,Xbefore,Total), NewExp is Xbefore + X,
-	( X =:= 0 -> write('You level up again'), nl
+	(X =:= 0 -> 
+		write('You level up again'), nl
 	; 
-		format('You gain ~d exp ~n', [X])),
+		format('You gain ~d exp ~n', [X])
+	),
 	(NewExp >= Total ->
 		format('Level Up!!! ~n', []),
 		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is NewLvl*NewLvl*NewLvl,
@@ -88,6 +85,7 @@ addExp(X) :-
 	).
 
 /* Memakai equipment dengan nama X */
+equip(_) :- inBattle, !, write('Cannot equip item, you are in a battle'), fail.
 equip(X) :- inventory(Inv), \+member([X, _], Inv), !, write('You do not have that item'), fail.
 equip(X) :- equipment(X, Job, _, _), player(PlayerJob, _, _, _, _, _, _, _), Job \== universal, Job \== PlayerJob, !, write('You are not a/an '), write(Job), fail.
 equip(X) :-
@@ -136,6 +134,7 @@ equip(X) :-
 	).
 
 /* Melepas equipment di slot X */
+unequip(_) :- inBattle, !, write('Cannot unequip item, you are in a battle'), fail.
 unequip(_) :- inventory(Inv), itemCount(Inv, Count), Count =:= 100, !, write('Inventory full, cannot unequip item').
 unequip(X) :-
 	playerEquipment(Weap, Armor, Acc),
