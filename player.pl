@@ -92,33 +92,26 @@ equip(X) :-
 	equipment(X, _, Stat, StatInc),
 	playerEquipment(Weap, Armor, Acc),
 	(Stat == atk ->
-		(Weap \== none -> addItem(Weap, 1) ; true),
+		(Weap \== none -> unequip(weapon), nl ; true),
 		drop(X),
-		retract(playerEquipment(Weap, Armor, Acc)),
+		retract(playerEquipment(none, Armor, Acc)),
 		assertz(playerEquipment(X, Armor, Acc)),
 		write('You equipped '), write(X)
 	; Stat == def ->
-		(Armor \== none -> addItem(Armor, 1) ; true),
+		(Armor \== none -> unequip(armor), nl ; true),
 		drop(X),
-		retract(playerEquipment(Weap, Armor, Acc)),
+		retract(playerEquipment(Weap, none, Acc)),
 		assertz(playerEquipment(Weap, X, Acc)),
 		write('You equipped '), write(X)
 	;
-		/* Untuk accessory nambah Max HP tapi belum dikoding */
+		(Acc \== none -> unequip(accessory), nl ; true),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-		(Acc \== none -> 
-			addItem(Acc, 1),
-			equipment(Acc, _, _, OldStatInc),
-			NewMaxHP is MaxHP + StatInc - OldStatInc,
-			(HP > NewMaxHP -> NewHP is NewMaxHP ; NewHP is HP + StatInc)
-		;
-			NewHP is HP + StatInc,
-			NewMaxHP is MaxHP + StatInc
-		),
+		NewHP is HP + StatInc,
+		NewMaxHP is MaxHP + StatInc,
 		drop(X),
 		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
 		assertz(player(Job, Lvl, NewHP, NewMaxHP, Att, Def, E, G)),
-		retract(playerEquipment(Weap, Armor, Acc)),
+		retract(playerEquipment(Weap, Armor, none)),
 		assertz(playerEquipment(Weap, Armor, X)),
 		write('You equipped '), write(X)
 	).
@@ -153,7 +146,8 @@ unequip(X) :-
 			player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
 			equipment(Acc, _, _, StatInc),
 			NewMaxHP is MaxHP - StatInc,
-			(HP > NewMaxHP -> NewHP is NewMaxHP ; NewHP is HP),
+			NewHPTemp is HP - StatInc,
+			(NewHPTemp =< 0 -> NewHP is 1 ; NewHP is NewHPTemp),
 			addItem(Acc, 1),
 			retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
 			assertz(player(Job, Lvl, NewHP, NewMaxHP, Att, Def, E, G)),
