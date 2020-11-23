@@ -23,6 +23,8 @@ tq :-
     \+gameStarted,!, write('The game has not started, type "start." to play the game').
 tq :-
     inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
+tq :-
+    inStore,!,write('You are in store, type "help." to see command in store').
 tq :- 
     quest(_,_,_,_,_,_) ,!, write('You cant take multiple quest at once').
 tq :- 
@@ -51,6 +53,8 @@ pq :-
 pq :-
     \+ quest(_,_,_,_,_,_) ,!, write('You dont have quest right now!!').
 pq :-
+    inStore,!,write('You are in store, type "help." to see command in store').
+pq :-
     quest(A,A1,B,B1,C,C1) ,!, format('Quest status  slime: ~d/~d, goblin : ~d/~d, wolf : ~d/~d',[A1,A,B1,B,C1,C]).
 
 /* fq : finish the quest) */
@@ -58,6 +62,8 @@ fq :-
     \+gameStarted,!, write('The game has not started, type "start." to play the game').
 fq :-
     inBattle,!, write('You are currently in battle, please type "help." to see the command while in battle').
+fq :-
+    inStore,!,write('You are in store, type "help." to see command in store').
 fq :-
     \+ quest(_,_,_,_,_,_) ,!, write('You dont have quest right now!!').
 fq :-
@@ -69,6 +75,7 @@ fq :-
     write('Congratulation for finishing the quest').
 
 /* Fungsi untuk ngeprogress quest nya (kalau kill suatu monster maka fungsi ini dijalakan dan menambah progress dengan mengurangi jumlah monster yang dibunuh(+penanganan kasus negatif)), nunggu battle */
+
 progressById(IdEnemy):-
 	(IdEnemy =:= 1 -> progressQuest(slime)
 	;IdEnemy =:= 2 -> progressQuest(slime)
