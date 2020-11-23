@@ -1,4 +1,4 @@
-:- dynamic(inBattleEnemy/8).
+:- dynamic(inBattleEnemy/9).
 /* diassert pas encounter */
 /* pas diserang, dia diretract & diassert */
 /* kalau udah selesai battle, di retract lagi */
@@ -17,16 +17,16 @@ idEnemy(6,direWolf) :- !.
 idEnemy(7,hypostasis) :- !.
 idEnemy(8,andrius) :- !.
 
-/* baseEnemy(X, HP, ATK, Special ATK, DEF, exp given) */
+/* baseEnemy(X, HP, ATK, Special ATK, DEF, exp given, gold given) */
 /* base stats enemy di level 1 */
-baseEnemy(smallSlime, 75, 30, 50, 5, 1).
-baseEnemy(bigSlime, 100, 40, 70, 10, 2).
-baseEnemy(recruitGoblin, 125, 50, 80, 10, 3).
-baseEnemy(berserkerGoblin, 200, 75, 120, 15, 4).
-baseEnemy(standardWolf, 180, 70, 130, 20, 5).
-baseEnemy(direWolf, 260, 100, 200, 25, 6).
+baseEnemy(smallSlime, 75, 30, 50, 5, 1, 50).
+baseEnemy(bigSlime, 100, 40, 70, 10, 2, 150).
+baseEnemy(recruitGoblin, 125, 50, 80, 10, 3, 100).
+baseEnemy(berserkerGoblin, 200, 75, 120, 15, 4, 250).
+baseEnemy(standardWolf, 180, 70, 130, 20, 5, 150).
+baseEnemy(direWolf, 260, 100, 200, 25, 6, 300).
 
-/* growthRate(X, Max HP, ATK, Special ATK, DEF, exp given) */
+/* growthRate(X, Max HP, ATK, Special ATK, DEF, exp given*/
 /* enemy naik level tiap player naik level */
 growthEnemy(smallSlime, 10, 5, 7, 2, 4).
 growthEnemy(bigSlime, 15, 10, 12, 3, 6).
@@ -35,10 +35,10 @@ growthEnemy(berserkerGoblin, 20, 13, 15, 4, 7).
 growthEnemy(standardWolf, 20, 12, 14, 3, 4).
 growthEnemy(direWolf, 30, 15, 19, 5, 8).
 	
-/* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN) */
+/* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN, GOLDGAIN) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */
-boss(hypostasis, 20, 4000, 4000, 600, 1000, 60, 16000).
-boss(andrius, 30, 9000, 9000, 900, 1500, 70, 35000).
+boss(hypostasis, 20, 4000, 4000, 600, 1000, 60, 16000, 50000).
+boss(andrius, 30, 9000, 9000, 900, 1500, 70, 35000, 100000).
 
 printGBEnemy(IdEnemy) :-
 	(IdEnemy =:= 1 -> printSlime
