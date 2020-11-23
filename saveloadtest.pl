@@ -51,18 +51,18 @@ deleteData :-
     retractall(quest(_,_,_,_,_,_)),
     retractall(playerCDSpecial(_)),
     retractall(enemyCDSpecial(_)),
-    retractall(inBattleEnemy(_, _, _, _, _, _, _, _, _)),
+    retractall(inBattleEnemy(_, _, _, _, _, _, _, _, _, _)),
     retractall(inBattle),
     retractall(livingBosses(_,_)).
     
 /*load() = Me load data berupa fakta fakta khusus */
 load:-
     ( gameStarted -> 
-        write('You can only load game data before the gamse started')
+        write('You can only load game data before the game started')
     ; inBattle -> 
-        write('You can only load game data before the gamse started')
+        write('You can only load game data before the game started')
     ; inStore -> 
-        write('You can only load game data before the gamse started')
+        write('You can only load game data before the game started')
     ;   
         ((\+file_exists(savefile)) ->
         write('File tersebut tidak ada.'), nl, ! ;
