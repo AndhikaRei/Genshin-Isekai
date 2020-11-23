@@ -33,9 +33,9 @@ chooseJob(A) :-
     assertz(gameStarted),
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Sword', 1], ['Health Potion', 5]])),
-	equip('Wooden Sword'),
     !,
     write('You choose swordsman, let\'s explore the world'), nl,
+	equip('Wooden Sword'), nl,
     write('**************************************************************************************************'),nl.
 
 chooseJob(A) :-
@@ -45,9 +45,9 @@ chooseJob(A) :-
     assertz(gameStarted),
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Bow', 1], ['Health Potion', 5]])),
-	equip('Wooden Bow').
     !,
     write('You choose archer, let\'s explore the world'), nl,
+	equip('Wooden Bow'), nl,
     write('**************************************************************************************************'),nl.
 
 chooseJob(A) :-
@@ -57,9 +57,9 @@ chooseJob(A) :-
     assertz(gameStarted),
     assertz(playerEquipment(none, none, none)),
     assertz(inventory([['Wooden Staff', 1], ['Health Potion', 5]])),
-	equip('Wooden Staff'),
     !,
     write('You choose sorcerer, let\'s explore the world'), nl,
+	equip('Wooden Staff'), nl,
     write('**************************************************************************************************'),nl.
 
 /* help : menampilkan menu bantuan */
