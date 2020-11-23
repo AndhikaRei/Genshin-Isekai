@@ -21,7 +21,7 @@ initialExp :-
 	retractall(exp(_,_,_)),
 	assertz(exp(1,0,1)).
 
-/* exp(Lv, _, Total) :- Total is Lv*Lv*lv. */
+/* exp(Lv, _, Total) :- Total is 2*Lv*Lv - 1. */
 status :- player(X, Lvl, HP, MaxHP, Att, Def, E, G),
 		  playerEquipment(Weapon, Armor, Acc),
 		  write('Class : '), write(X), nl,
