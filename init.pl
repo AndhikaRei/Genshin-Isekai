@@ -15,8 +15,20 @@
 /* Start Game */
 start :-
     \+ gameStarted,!,
-    write('**************************************************************************************************'),nl,
-    format('Welcome to Genshin Asik. Choose your job ~n 1. Swordsman ~n 2. Archer ~n 3. Sorcerer ~n > ',[]),
+    write('**************************************************************************************************'), nl,
+	write('Selamat datang di Genshin Asik. Anda barusan saja ditabrak oleh truk.'), nl,
+	write('Apa yang ada harapkan?'), nl,
+	write('Masuk ke isekai?'), nl,
+	write('Truknya yang hancur karena kamu terlalu kuat?'), nl, 
+	write('Mendapat seorang istri yang sangat uwu?'), nl,
+	write('atau dijadikan tubes untuk IF\'19?'), nl,
+	write('Kenyataannya adalah kamu dijadikan tubes untuk IF\'19. Walaupun sebenarnya masuk isekai juga tidak salah.'), nl,
+	write('Kamu mau jadi apa? Pilih dan pikirkan baik-baik. Pilihanmu akan memengaruhi kehidupanmu di dunia ini.'), nl,
+	write('1. Swordsman'), nl,
+	write('2. Archer'), nl,
+	write('3. Sorcerer'), nl,
+	write(' > '),
+/*    format('Welcome to Genshin Asik. Choose your job ~n 1. Swordsman ~n 2. Archer ~n 3. Sorcerer ~n > ',[]), */
     replenishQuest, initialExp, initPpos, replenishBoss, read(A), chooseJob(A).
 
 start :-
@@ -98,11 +110,12 @@ help :-
     write('*                                 Welcome to Adventure Menu                                      *'),nl,
     write('**************************************************************************************************'),nl,
     write('*    1. Movement =                                                                               *'),nl,
-	write('*                   w. -> Move up                                                                *'),nl,
-	write('*                   a. -> Move left                                                              *'),nl,
-	write('*                   s. -> Move down                                                              *'),nl,
-	write('*                   d. -> Move right                                                             *'),nl,	
-	write('*                   t. -> Teleport                                                               *'),nl,
+	write('*                   w.   -> Move up                                                              *'),nl,
+	write('*                   a.   -> Move left                                                            *'),nl,
+	write('*                   s.   -> Move down                                                            *'),nl,
+	write('*                   d.   -> Move right                                                           *'),nl,	
+	write('*                   t.   -> Teleport                                                             *'),nl,
+    write('*                   map. -> View map                                                             *'),nl,
     write('*    2. Quest =                                                                                  *'),nl,
 	write('*                   tq. -> Take a quest                                                          *'),nl,
 	write('*                   pq. -> Print quest status                                                    *'),nl,

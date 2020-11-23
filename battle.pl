@@ -2,8 +2,7 @@
 :- dynamic(enemyCDSpecial/1).
 
 battle:- 
-    inBattleEnemy(Enemy, Lvl, _, TMaxHP, TAtk, TSAtk, TDef, _, _, _),
-    write('You found a '), write(Enemy), nl,
+    inBattleEnemy(_, Lvl, _, TMaxHP, TAtk, TSAtk, TDef, _, _, _),
     write('Level: '), write(Lvl), nl,
     write('Health: '), write(TMaxHP), nl,
     write('Attack: '), write(TAtk), nl,
