@@ -42,12 +42,12 @@ boss(andrius, 30, 9000, 9000, 900, 1500, 70, 12000, 100000, 100000).
 
 printGBEnemy(IdEnemy) :-
     !,
-	(IdEnemy =:= 1 -> printSlime
-	;IdEnemy =:= 2 -> printSlime
-	;IdEnemy =:= 3 -> printGoblin
-	;IdEnemy =:= 4 -> printGoblin
-	;IdEnemy =:= 5 -> printWolf
-	;IdEnemy =:= 6 -> printWolf
+	(IdEnemy =:= 1 -> printSlime, write('You found a small slime'), nl
+	;IdEnemy =:= 2 -> printSlime, write('You found a big slime'), nl
+	;IdEnemy =:= 3 -> printGoblin, write('You found a recruit goblin'), nl
+	;IdEnemy =:= 4 -> printGoblin, write('You found a berserker goblin'), nl
+	;IdEnemy =:= 5 -> printWolf, write('You found a standard wolf'), nl
+	;IdEnemy =:= 6 -> printWolf, write('You found a dire wolf'), nl
     ;true
 	).
 
@@ -127,4 +127,77 @@ printGoblin :-
     write('   `sNMmho-                :yhhmMMMMMm                 `NMMMMd+` '), nl,
     write('                          :ddmdhss+/:`                  :NMNNNm/ '), nl,
     write('                                                          ``     '), nl.
-    
+
+printHipostasis :-
+write('    `+.      /:                          '), nl,
+write('    .sy+.//-ohs`                         '), nl,
+write('     +dNdddhNNm/                         '), nl,
+write('      .hddddmmmh`                        '), nl,
+write('       yhmdmhdmmo                        '), nl,
+write('       :hdmdhhdmy                        '), nl,
+write('       -shdmysyyh`                       '), nl,
+write('      -ys+yyoosyyy+:.                    '), nl,
+write('     /o//+ooosysooosyo                   '), nl,
+write('    `oyso+///+ooo++ssh.                  '), nl,
+write('    ++o+/:::/+yhhhsyydo                  '), nl,
+write('    -ysoooosshyhyd+yyyy`                 '), nl,
+write('   `osssssssssyhd/ :ooso`-               '), nl,
+write('   :++yso+oooshdo   +ysssy++/++:.`       '), nl,
+write('  `sss/ss+/+oydd/--.:osshsyyhyhdhs.      '), nl,
+write(' `osh-.oo//+syhdddddhyyshsyyhyhmNdy/.    '), nl,
+write(' oyhh`.s+:/oyhhdhddddhyyyshdhhysooooh`   '), nl,
+write(' -//- -hssyyhhhmmmdddysosoyyyyyoooohh    '), nl,
+write('      :yssyyhyhdmddddhssyosyyhhyhhmdo    '), nl,
+write('      yhyshyyhhhddddmmdysohdd/sdddmdo    '), nl,
+write('      +dhhhhhhhhyyhmmmdysyddh:shdmmms.   '), nl,
+write('       shhhyyyhhddmmdmdhhyhNs-/`.:omh+   '), nl,
+write('       `:yhyyyyhmmdmNNh/. mm-      hNo   '), nl,
+write('         `+oddddNmmmNN:  -ds       :ms   '), nl,
+write('           :mNmmNmmmm:   odd       `dh/  '), nl,
+write('           omNdmNmdm+   -sho       `ydo  '), nl,
+write('           `yNyyNmmh    yhh:       +yh/  '), nl,
+write('            /md/mmm-    `.`        -:-   '), nl,
+write('            .mmyNmy                      '), nl,
+write('           `odm:mdy                      '), nl,
+write('           ymmdommd                      '), nl,
+write('           ..` `mmm                      '), nl,
+write('               `hdh                      '), nl,
+write('              -ddmmo                     '), nl,
+write('              :sdy/                      '), nl.
+
+printAndrius :-
+write('          .h//sh/.///-``                          '), nl,
+write('        -sNMMMMMNMMMMMNdo.                        '), nl,
+write('      `dMMMMMMMMMMMMMMMMMmdy/                     '), nl,
+write('    ./hMMMMMMMMMMMMMMMMMMMMMMm+`                  '), nl,
+write('  :dNMMMMMMMMMMMMMMMMMMMMMMMMMMh                  '), nl,
+write('   +hhsssNMMMMMMMMMMMMMMMMMMMMMM+`                '), nl,
+write('     ./smhhNMMMMMMMMMMMMMMMMMMMMMms-   -          '), nl,
+write('     `/-```.+MMMMMMMMMMMMMMMMMMMMMMNd+-o-         '), nl,
+write('            hMMMMMMMMMMMMMMMMMMhhdmmmMNMh         '), nl,
+write('            hMMMMMMMMMMMMMMMMMs` ````dMMM/        '), nl,
+write('            `hMMMMMMMMMMMMMMMy`      dMMMN`       '), nl,
+write('         `-:+hMMhhMMMMMMMMMMM.       dMMMMy       '), nl,
+write('      ./smNMMMMMm++NMMMMMMMMN        -hNMMm`      '), nl,
+write('    .ymNMMMMNh/-.` :NMMMMMMMM:         /MMM/      '), nl,
+write('   /mMMNmhy+-       hMMMMMMMMm/     ..:/NMMs      '), nl,
+write(' -yNMMMm.          `+MMMMMMMMMN+  `:s+yMMMN:      '), nl,
+write('/NNMMs:d+        -odNMMMMMMMMMMN- ` `:yMMMo       '), nl,
+write('syN+M- -o      `oNMMMMMMMMMMMMMMo`-+yydNMm`       '), nl,
+write('.`m.h: `      /mMMMMMMMMMMMMMMMMm. `ossdm-        '), nl,
+write('  . ``      `oNMMMMMMMNNMMMNMMMMMm+.` ..`         '), nl,
+write('           `yMMMMMMMmh/:mNm+dMMMMMMd-             '), nl,
+write('           oMMMMMNmo`   .-.``hMMMMMMN:            '), nl,
+write('           sMMMMN+`          `+mMMMMMd`           '), nl,
+write('           `+dMMNs.`           `:smMMMs`          '), nl,
+write('             `sNMMNds:`           `sNMMms-`       '), nl,
+write('               -dMMMMMs             -dMMMMmy`     '), nl,
+write('                `NMMMMs              `hMMMMM:     '), nl,
+write('                 oMMM+.               .yNMMMs     '), nl,
+write('                 dMMM.                  -hMMN:    '), nl,
+write('                 MMMM:                    sMMMo`  '), nl,
+write('                /MMMMo                     yMMMm: '), nl,
+write('             `ymMMMMM+                     +MMMMM/'), nl,
+write('             +dMMMNMh-                   `mMMMMMMd'), nl,
+write('             `.-.-``                     -+dhdhho`'), nl,
+write('The Died ALPHA WOLF that received mighty powers from Merlin.'), nl.

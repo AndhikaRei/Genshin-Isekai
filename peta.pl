@@ -158,11 +158,13 @@ t :-
 /* bossEncounter apabila pemain menginajak lantai boss maka dia akan langsung melawan boss */
 bossEncounter :- playerPos(A,B), elmtPeta(A,B,C),
     ( C == 'A' -> idEnemy(8,Enemy),
-        write('You found the legendary wolf , Andrius, prepare yourself to face the Death!'),nl,
+		printAndrius,
+        write('You found the legendary werewolf , Andrius, prepare yourself to face the Death!'),nl,
         assertz(inBattle), boss(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold),
         assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold)),battle,nl
     ; C == 'H' -> idEnemy(7,Enemy),
-        write('You found the cubic of Madness , Hipostasis, prepare yourself to face the Death!'),nl,
+		printHipostasis,
+        write('You found the centaur of Madness , Hipostasis, prepare yourself to face the Death!'),nl,
         assertz(inBattle), boss(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold),
         assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold)),battle,nl
     ; true

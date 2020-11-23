@@ -24,9 +24,9 @@ start :-
 	write('atau dijadikan tubes untuk IF\'19?'), nl,
 	write('Kenyataannya adalah kamu dijadikan tubes untuk IF\'19. Walaupun sebenarnya masuk isekai juga tidak salah.'), nl,
 	write('Kamu mau jadi apa? Pilih dan pikirkan baik-baik. Pilihanmu akan memengaruhi kehidupanmu di dunia ini.'), nl,
-	write('1. Swordsman : seorang ahli pedang yang bertarung di sisi depan demi melindungi masyarakat dari bahaya.'), nl,
-	write('2. Archer    : seorang ahli panah yang bertarung di jarak menengah dan memiliki kekuatan serang yang tinggi.'), nl,
-	write('3. Sorcerer  : seorang ahli sihir yang bertarung di belakang, dengan kekuatan serang yang sangat dahsyat.'), nl,
+	write('1. Swordsman'), nl,
+	write('2. Archer'), nl,
+	write('3. Sorcerer'), nl,
 	write(' > '),
 /*    format('Welcome to Genshin Asik. Choose your job ~n 1. Swordsman ~n 2. Archer ~n 3. Sorcerer ~n > ',[]), */
     replenishQuest, initialExp, initPpos, replenishBoss, read(A), chooseJob(A).
