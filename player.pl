@@ -21,18 +21,18 @@ initialExp :-
 	retractall(exp(_,_,_)),
 	assertz(exp(1,0,1)).
 
-/* exp(Lv, _, Total) :- Total is 2*Lv*Lv - 1. */
+/* exp(Lv, _, Total) :- Total is Lv*Lv. */
 status :- player(X, Lvl, HP, MaxHP, Att, Def, E, G),
 		  playerEquipment(Weapon, Armor, Acc),
-		  write('Class : '), write(X), nl,
-		  write('Level : '), write(Lvl), nl,
-		  write('HP : '), write(HP), write('/'), write(MaxHP), nl, /* Untuk accessory nambah Max HP tapi belum dikoding */
-          write('Attack : '), write(Att), printEqStat(Weapon), nl,
-		  write('Defense : '), write(Def), printEqStat(Armor), nl,
-		  write('Exp : '), write(E), write('/'), exp(_,_,Total), write(Total), nl,
-		  write('Gold : '), write(G), nl, nl,
-		  write('Weapon : '), write(Weapon), nl,
-		  write('Armor : '), write(Armor), nl,
+		  write('Class     : '), write(X), nl,
+		  write('Level     : '), write(Lvl), nl,
+		  write('HP        : '), write(HP), write('/'), write(MaxHP), nl, /* Untuk accessory nambah Max HP tapi belum dikoding */
+          write('Attack    : '), write(Att), printEqStat(Weapon), nl,
+		  write('Defense   : '), write(Def), printEqStat(Armor), nl,
+		  write('Exp       : '), write(E), write('/'), exp(_,_,Total), write(Total), nl,
+		  write('Gold      : '), write(G), nl, nl,
+		  write('Weapon    : '), write(Weapon), nl,
+		  write('Armor     : '), write(Armor), nl,
 		  write('Accessory : '), write(Acc), nl.
 
 printEqStat(X) :-
@@ -66,7 +66,7 @@ addExp(X) :-
 	),
 	(NewExp >= Total ->
 		format('Level Up!!! ~n', []),
-		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is NewLvl*NewLvl*NewLvl,
+		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is NewLvl*NewLvl,
 		retract(exp(Lv,Xbefore,Total)), assertz(exp(NewLvl,NewExp2,NewTotal)),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
 		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp2, G)),
