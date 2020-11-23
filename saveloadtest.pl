@@ -17,10 +17,10 @@ save :-
     ).
     
 playerFact :-
-    playerPos(X,Y), write(playerPos(X,Y)),write('.'),nl,
-	inventory(Inv), write_term(inventory(Inv), [quoted(true)]),write('.'), nl,
     playerEquipment(Weap, Armor, Acc), write_term(playerEquipment(Weap, Armor, Acc), [quoted(true)]), write('.'), nl,
+    playerPos(X,Y), write(playerPos(X,Y)),write('.'),nl,
     player(Class, Lvl, HP, MaxHP, Att, Def, Exp, Gold), write(player(Class, Lvl, HP, MaxHP, Att, Def, Exp, Gold)),write('.'), nl,
+    inventory(Inv), write_term(inventory(Inv), [quoted(true)]),write('.'), nl,
     exp(G,H,I), write(exp(G,H,I)),write('.'),nl.
 
 questFact :-
@@ -36,7 +36,7 @@ mapFact :-
 killedBossFact :-
     livingBosses(A,B), write(livingBosses(A,B)),write('.'),nl,
     ( A=:=1 -> (write_term(elmtPeta(3,17,'H'), [quoted(true)]),write('.'),nl); write('')),
-    ( B=:=1 -> (write_term(elmtPeta(3,19,'A'), [quoted(true)]),write('.'),nl); write('')).
+    ( B=:=1 -> (write_term(elmtPeta(1,17,'A'), [quoted(true)]),write('.'),nl); write('')).
 
 deleteData :-
     retractall(inventory(_)), 
@@ -65,25 +65,27 @@ load:-
         write('You can only load game data before the game started')
     ;   
         ((\+file_exists(savefile)) ->
-        write('File tersebut tidak ada.'), nl, ! ;
-        open('savefile', read, Str),
-        read_file(Str,Lines),
-        close(Str), assertz(gameStarted), assertFakta(Lines), !)
+            write('File tersebut tidak ada.'), nl, ! 
+        ;
+            open('savefile', read, Str),
+            readFile(Str,Lines),
+            close(Str), assertz(gameStarted), assertFakta(Lines), !)
     ).
 
 /* Membaca file data per line */
-read_file(Stream,[]) :-
+readFile(Stream,[]) :-
     at_end_of_stream(Stream).
 
-read_file(Stream,[X|L]) :-
+readFile(Stream,[X|L]) :-
     \+ at_end_of_stream(Stream),
     read(Stream,X),
-    read_file(Stream,L).
+    readFile(Stream,L).
 
 /* 	assertaFakta(Kumpulan Fakta) = meng-asserta semua fakta  */
-    assertFakta([]) :- !.
-    assertFakta([X|L]):- assertz(X),
-	                     assertFakta(L), !.
+assertFakta([]) :- !.
+assertFakta([X|L]):- 
+    assertz(X),
+	assertFakta(L), !.
 
 /* 	Exit  */
 finish :-
