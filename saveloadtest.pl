@@ -16,6 +16,7 @@ save :-
 	    told, !
     ).
     
+    
 playerFact :-
     playerEquipment(Weap, Armor, Acc), write_term(playerEquipment(Weap, Armor, Acc), [quoted(true)]), write('.'), nl,
     playerPos(X,Y), write(playerPos(X,Y)),write('.'),nl,
@@ -89,4 +90,4 @@ assertFakta([X|L]):-
 
 /* 	Exit  */
 finish :-
-    !, deleteData, retractall(gameStarted).
+    !, deleteData, retractall(gameStarted),retractall(inStore),retractall(inBattle).

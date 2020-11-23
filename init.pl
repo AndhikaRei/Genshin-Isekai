@@ -130,4 +130,9 @@ help :-
 	write('*                   unequip(accessory). -> Unequip your accessory                                *'),nl,
     write('*    5. Your Status =                                                                            *'),nl,
 	write('*                   status. -> Print your status                                                 *'),nl,
+    write('*    6. Store =                                                                                  *'),nl,
+    write('*                   store. -> enter store                                                        *'),nl,
+    write('*    6. Option =                                                                                 *'),nl,
+    write('*                   save. -> save data                                                           *'),nl,
+    write('*                   finish. -> exit game                                                         *'),nl,
     write('**************************************************************************************************'),nl.
