@@ -126,7 +126,7 @@ usePotion :-
         drop('Defense Potion')
     ;
         write('You do not have any Defense Potion')
-    ),
+    ).
 
 
 % bagian enemy

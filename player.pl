@@ -26,7 +26,7 @@ status :- player(X, Lvl, HP, MaxHP, Att, Def, E, G),
 		  playerEquipment(Weapon, Armor, Acc),
 		  write('Class     : '), write(X), nl,
 		  write('Level     : '), write(Lvl), nl,
-		  write('HP        : '), write(HP), write('/'), write(MaxHP), nl, /* Untuk accessory nambah Max HP tapi belum dikoding */
+		  write('HP        : '), write(HP), write('/'), write(MaxHP), nl,
           write('Attack    : '), write(Att), printEqStat(Weapon), nl,
 		  write('Defense   : '), write(Def), printEqStat(Armor), nl,
 		  write('Exp       : '), write(E), write('/'), exp(_,_,Total), write(Total), nl,
@@ -139,7 +139,7 @@ unequip(X) :-
 			assertz(playerEquipment(Weap, none, Acc)),
 			write('You unequipped '), write(Armor)
 		)
-	; X == accessory -> /* Untuk accessory nambah Max HP tapi belum dikoding */
+	; X == accessory ->
 		(Acc == none ->
 			write('You do not have any accessory equipped')
 		;
