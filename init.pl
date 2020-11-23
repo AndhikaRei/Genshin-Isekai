@@ -77,6 +77,7 @@ help :-
     write('*    2. specialAttack. : Use special attack on your enemy                                        *'),nl,
     write('*    3. usePotion.     : Use a potion                                                            *'),nl,
     write('*    4. flee.          : Run away from battle                                                    *'),nl,
+    write('*    5. enemyStatus.   : Display current enemy status                                            *'),nl,
     write('**************************************************************************************************'),nl.
 help :-
     inStore,!,
