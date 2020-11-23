@@ -53,7 +53,8 @@ levelUp(X) :-
 addGold(X) :-
 	player(Job, Lvl, HP, MaxHP, Att, Def, E, G), NewGold is G+X,
 	retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), 
-	assertz(player(Job, Lvl, HP, MaxHP, Att, Def, E, NewGold)).
+	assertz(player(Job, Lvl, HP, MaxHP, Att, Def, E, NewGold)),
+	format('You gain ~d gold ~n', [X]).
 
 
 /* Menambah exp player sembari level up  */

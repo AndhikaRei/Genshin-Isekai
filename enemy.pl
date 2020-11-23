@@ -1,4 +1,4 @@
-:- dynamic(inBattleEnemy/9).
+:- dynamic(inBattleEnemy/10).
 /* diassert pas encounter */
 /* pas diserang, dia diretract & diassert */
 /* kalau udah selesai battle, di retract lagi */
@@ -8,23 +8,23 @@
 /* Jadi kayaknya itu diperlukan juga */
 
 /* id unik enemy */
-idEnemy(1,smallSlime) :- !.
-idEnemy(2,bigSlime) :- !.
-idEnemy(3,recruitGoblin) :- !.
-idEnemy(4,berserkerGoblin) :- !.
-idEnemy(5,standardWolf) :- !.
-idEnemy(6,direWolf) :- !.
-idEnemy(7,hypostasis) :- !.
-idEnemy(8,andrius) :- !.
+idEnemy(1, smallSlime) :- !.
+idEnemy(2, bigSlime) :- !.
+idEnemy(3, recruitGoblin) :- !.
+idEnemy(4, berserkerGoblin) :- !.
+idEnemy(5, standardWolf) :- !.
+idEnemy(6, direWolf) :- !.
+idEnemy(7, hypostasis) :- !.
+idEnemy(8, andrius) :- !.
 
-/* baseEnemy(X, HP, ATK, Special ATK, DEF, exp given, gold given) */
+/* baseEnemy(X, HP, ATK, Special ATK, DEF, exp given, MinGoldGiven, MaxGoldGiven) */
 /* base stats enemy di level 1 */
-baseEnemy(smallSlime, 75, 30, 50, 5, 1, 50).
-baseEnemy(bigSlime, 100, 40, 70, 10, 2, 150).
-baseEnemy(recruitGoblin, 125, 50, 80, 10, 3, 100).
-baseEnemy(berserkerGoblin, 200, 75, 120, 15, 4, 250).
-baseEnemy(standardWolf, 180, 70, 130, 20, 5, 150).
-baseEnemy(direWolf, 260, 100, 200, 25, 6, 300).
+baseEnemy(smallSlime, 75, 30, 50, 5, 1, 50, 150).
+baseEnemy(bigSlime, 100, 40, 70, 10, 2, 100, 200).
+baseEnemy(recruitGoblin, 125, 50, 80, 10, 3, 200, 300).
+baseEnemy(berserkerGoblin, 200, 75, 120, 15, 4, 200, 400).
+baseEnemy(standardWolf, 180, 70, 130, 20, 5, 300, 500).
+baseEnemy(direWolf, 260, 100, 200, 25, 6, 300, 600).
 
 /* growthRate(X, Max HP, ATK, Special ATK, DEF, exp given*/
 /* enemy naik level tiap player naik level */
@@ -37,16 +37,18 @@ growthEnemy(direWolf, 30, 15, 19, 5, 8).
 	
 /* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN, GOLDGAIN) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */
-boss(hypostasis, 20, 4000, 4000, 600, 1000, 60, 5000, 50000).
-boss(andrius, 30, 9000, 9000, 900, 1500, 70, 12000, 100000).
+boss(hypostasis, 20, 4000, 4000, 600, 1000, 60, 5000, 50000, 50000).
+boss(andrius, 30, 9000, 9000, 900, 1500, 70, 12000, 100000, 100000).
 
 printGBEnemy(IdEnemy) :-
+    !,
 	(IdEnemy =:= 1 -> printSlime
 	;IdEnemy =:= 2 -> printSlime
 	;IdEnemy =:= 3 -> printGoblin
 	;IdEnemy =:= 4 -> printGoblin
 	;IdEnemy =:= 5 -> printWolf
 	;IdEnemy =:= 6 -> printWolf
+    ;true
 	).
 
 printSlime :-

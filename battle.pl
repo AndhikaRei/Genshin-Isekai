@@ -2,7 +2,7 @@
 :- dynamic(enemyCDSpecial/1).
 
 battle:- 
-    inBattleEnemy(Enemy, Lvl, _, TMaxHP, TAtk, TSAtk, TDef, _, _),
+    inBattleEnemy(Enemy, Lvl, _, TMaxHP, TAtk, TSAtk, TDef, _, _, _),
     write('You found a '), write(Enemy), nl,
     write('Level: '), write(Lvl), nl,
     write('Health: '), write(TMaxHP), nl,
@@ -14,7 +14,7 @@ battle:-
 % bagian player
 attack :- 
     player(_, _, _, _, Att, _, _, _),
-    inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven),
+    inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold),
     playerEquipment(Weap, _, _),
     (Weap == none ->
         EqAtk is 0
@@ -32,8 +32,8 @@ attack :-
     (THPNew =< 0 ->
         winBattle /* dapet XP & gold */
     ;
-        retract(inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven)),
-        assertz(inBattleEnemy(Enemy, TLvl, THPNew, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven)),
+        retract(inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold)),
+        assertz(inBattleEnemy(Enemy, TLvl, THPNew, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold)),
         write(Enemy), write(' has '), write(THPNew), write(' HP left'), nl,
         (playerCDSpecial(X) ->
             XNew is X - 1,
@@ -54,7 +54,7 @@ specialAttack :-
         write('Your special is still on cooldown')
     ;
         player(_, Lvl, _, _, Att, _, _, _),
-        inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven),
+        inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold),
         playerEquipment(Weap, _, _),
         (Weap == none ->
             EqAtk is 0
@@ -73,8 +73,8 @@ specialAttack :-
         (THPNew =< 0 ->
             winBattle /* dapet XP & gold */
         ;
-            retract(inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven)),
-            assertz(inBattleEnemy(Enemy, TLvl, THPNew, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven)),
+            retract(inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold)),
+            assertz(inBattleEnemy(Enemy, TLvl, THPNew, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold)),
             assertz(playerCDSpecial(3)),
             write(Enemy), write(' has '), write(THPNew), write(' HP left'), nl,
             enemyTurn
@@ -143,7 +143,7 @@ enemyTurn :-
     ).
 enemyAttack:- 
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-    inBattleEnemy(Enemy, _, _, _, TAtk, _, _, _, _),
+    inBattleEnemy(Enemy, _, _, _, TAtk, _, _, _, _, _),
     DMGTemp is TAtk - Def,
     (DMGTemp < 0 ->
         DMG is 0
@@ -172,7 +172,7 @@ enemyAttack:-
 
 enemySpecialAttack:- 
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-    inBattleEnemy(Enemy, _, _, _, _, TSAtk, _, _, _),
+    inBattleEnemy(Enemy, _, _, _, _, TSAtk, _, _, _, _),
     DMGTemp is TSAtk - Def,
     (DMGTemp < 0 ->
         DMG is 0
@@ -192,7 +192,7 @@ enemySpecialAttack:-
 
 enemyStatus :-
     (inBattle ->
-        inBattleEnemy(Enemy, Level, HP, MaxHP, Atk, SAtk, Def, _, _),
+        inBattleEnemy(Enemy, Level, HP, MaxHP, Atk, SAtk, Def, _, _, _),
         idEnemy(Id, Enemy),
         printGBEnemy(Id),
         write('Enemy : '), write(Enemy), nl,
@@ -208,7 +208,7 @@ enemyStatus :-
 stopBattle:- 
     (playerCDSpecial(X) -> retract(playerCDSpecial(X)) ; true),
     (enemyCDSpecial(Y) -> retract(enemyCDSpecial(Y)) ; true),
-    retractall(inBattleEnemy(_, _, _, _, _, _, _, _, _)),
+    retractall(inBattleEnemy(_, _, _, _, _, _, _, _, _, _)),
     retract(inBattle), (livingBosses(0,0) -> winTheGame; true).
 
 % Pelarian
@@ -219,9 +219,11 @@ flee:- random(1,3,X), successFlee(X).
 
 winBattle:-
     write('You have slain your enemy. Proceed with your journey, Traveler!'), nl,
-    inBattleEnemy(Enemy, _, _, _, _, _, _, ExpGain, GoldGiven), idEnemy(ID,Enemy),
+    inBattleEnemy(Enemy, _, _, _, _, _, _, ExpGain, MinGold, MaxGold), idEnemy(ID,Enemy),
     addExp(ExpGain),
-	addGold(GoldGiven),
+	MaxGoldPoss is MaxGold + 1,
+	random(MinGold, MaxGoldPoss, GoldGain),
+	addGold(GoldGain),
     (quest(_,_,_,_,_,_) -> progressById(ID); true),
     (ID =:= 7 -> 
         livingBosses(A,B), retract(livingBosses(A,B)), assertz(livingBosses(0,B)), 
