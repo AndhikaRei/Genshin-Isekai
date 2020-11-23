@@ -89,48 +89,31 @@ equip(_) :- inBattle, !, write('Cannot equip item, you are in a battle'), fail.
 equip(X) :- inventory(Inv), \+member([X, _], Inv), !, write('You do not have that item'), fail.
 equip(X) :- equipment(X, Job, _, _), player(PlayerJob, _, _, _, _, _, _, _), Job \== universal, Job \== PlayerJob, !, write('You are not a/an '), write(Job), fail.
 equip(X) :-
-	equipment(X, _, Stat, _),
+	equipment(X, _, Stat, StatInc),
 	playerEquipment(Weap, Armor, Acc),
 	(Stat == atk ->
-		(Weap \== none ->
-			addItem(Weap, 1),
-			drop(X),
-			retract(playerEquipment(Weap, Armor, Acc)),
-			assertz(playerEquipment(X, Armor, Acc)),
-			write('You equipped '), write(X)
-		;
-			drop(X),
-			retract(playerEquipment(Weap, Armor, Acc)),
-			assertz(playerEquipment(X, Armor, Acc)),
-			write('You equipped '), write(X)
-		)
+		(Weap \== none -> unequip(weapon), nl ; true),
+		drop(X),
+		retract(playerEquipment(none, Armor, Acc)),
+		assertz(playerEquipment(X, Armor, Acc)),
+		write('You equipped '), write(X)
 	; Stat == def ->
-		(Armor \== none ->
-			addItem(Armor, 1),
-			drop(X),
-			retract(playerEquipment(Weap, Armor, Acc)),
-			assertz(playerEquipment(Weap, X, Acc)),
-			write('You equipped '), write(X)
-		;
-			drop(X),
-			retract(playerEquipment(Weap, Armor, Acc)),
-			assertz(playerEquipment(Weap, X, Acc)),
-			write('You equipped '), write(X)
-		)
+		(Armor \== none -> unequip(armor), nl ; true),
+		drop(X),
+		retract(playerEquipment(Weap, none, Acc)),
+		assertz(playerEquipment(Weap, X, Acc)),
+		write('You equipped '), write(X)
 	;
-		/* Untuk accessory nambah Max HP tapi belum dikoding */
-		(Acc \== none ->
-			addItem(Acc, 1),
-			drop(X),
-			retract(playerEquipment(Weap, Armor, Acc)),
-			assertz(playerEquipment(Weap, Armor, X)),
-			write('You equipped '), write(X)
-		;
-			drop(X),
-			retract(playerEquipment(Weap, Armor, Acc)),
-			assertz(playerEquipment(Weap, Armor, X)),
-			write('You equipped '), write(X)
-		)
+		(Acc \== none -> unequip(accessory), nl ; true),
+		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
+		NewHP is HP + StatInc,
+		NewMaxHP is MaxHP + StatInc,
+		drop(X),
+		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
+		assertz(player(Job, Lvl, NewHP, NewMaxHP, Att, Def, E, G)),
+		retract(playerEquipment(Weap, Armor, none)),
+		assertz(playerEquipment(Weap, Armor, X)),
+		write('You equipped '), write(X)
 	).
 
 /* Melepas equipment di slot X */
@@ -160,7 +143,14 @@ unequip(X) :-
 		(Acc == none ->
 			write('You do not have any accessory equipped')
 		;
+			player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
+			equipment(Acc, _, _, StatInc),
+			NewMaxHP is MaxHP - StatInc,
+			NewHPTemp is HP - StatInc,
+			(NewHPTemp =< 0 -> NewHP is 1 ; NewHP is NewHPTemp),
 			addItem(Acc, 1),
+			retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
+			assertz(player(Job, Lvl, NewHP, NewMaxHP, Att, Def, E, G)),
 			retract(playerEquipment(Weap, Armor, Acc)),
 			assertz(playerEquipment(Weap, Armor, none)),
 			write('You unequipped '), write(Acc)
