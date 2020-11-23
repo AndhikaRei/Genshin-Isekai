@@ -51,7 +51,7 @@ deleteData :-
     retractall(quest(_,_,_,_,_,_)),
     retractall(playerCDSpecial(_)),
     retractall(enemyCDSpecial(_)),
-    retractall(inBattleEnemy(_, _, _, _, _, _, _, _)),
+    retractall(inBattleEnemy(_, _, _, _, _, _, _, _, _)),
     retractall(inBattle),
     retractall(livingBosses(_,_)).
     

@@ -41,12 +41,14 @@ boss(hypostasis, 20, 4000, 4000, 600, 1000, 60, 5000, 50000).
 boss(andrius, 30, 9000, 9000, 900, 1500, 70, 12000, 100000).
 
 printGBEnemy(IdEnemy) :-
+    !,
 	(IdEnemy =:= 1 -> printSlime
 	;IdEnemy =:= 2 -> printSlime
 	;IdEnemy =:= 3 -> printGoblin
 	;IdEnemy =:= 4 -> printGoblin
 	;IdEnemy =:= 5 -> printWolf
 	;IdEnemy =:= 6 -> printWolf
+    ;true
 	).
 
 printSlime :-
