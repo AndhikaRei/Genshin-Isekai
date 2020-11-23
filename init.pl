@@ -112,5 +112,5 @@ help :-
 	write('*                   unequip(armor).     -> Unequip your armor                                    *'),nl,
 	write('*                   unequip(accessory). -> Unequip your accessory                                *'),nl,
     write('*    5. Your Status =                                                                            *'),nl,
-	write('*                   status. -> Print your status                                                                *'),nl,
+	write('*                   status. -> Print your status                                                 *'),nl,
     write('**************************************************************************************************'),nl.
