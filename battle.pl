@@ -103,8 +103,31 @@ usePotion :-
             drop('Health Potion')
         )
     ;
-        write('You do not have any potion')
-    ).
+        write('You do not have any Health Potion')
+    ),
+    (member(['Attack Potion', _], Inv) ->
+        player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
+        potion('Attack Potion', AttInc),
+        AttNew is Att + AttInc,
+        write('Your attack will now deal '), write(AttNew), write(' damage'), nl,
+        retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
+        assertz(player(Job, Lvl, HP, MaxHP, AttNew, Def, E, G)),
+        drop('Attack Potion')
+    ;
+        write('You do not have any Attack Potion')
+    ),
+    (member(['Defense Potion', _], Inv) ->
+        player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
+        potion('Defense Potion Potion', DefInc),
+        DefNew is Def + DefInc,
+        write('You increased your defence to '), write(DefNew), nl,
+        retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
+        assertz(player(Job, Lvl, HP, MaxHP, Att, DefNew, E, G)),
+        drop('Defense Potion')
+    ;
+        write('You do not have any Defense Potion')
+    ),
+
 
 % bagian enemy
 enemyTurn :- 
