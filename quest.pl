@@ -60,7 +60,7 @@ tq :-
 	   format('* ~d Gold                                                                                      *', [GoldGain]), nl
 		;
 	   format('* ~d Gold                                                                                     *', [GoldGain]), nl),
-	    write('* Call me when you have finished the quest by entering \'tq.\'. Thank you so much.                 *'),nl,
+	    write('* Call me when you have finished the quest by entering \'fq.\'. Thank you so much.                 *'),nl,
 		write('**************************************************************************************************'),nl,
     
 		assertz(questRemaining(0,X,Y,Z))
@@ -81,7 +81,12 @@ tq :-
 		write('You are inspired by the story and the character.'), nl,
 		write('You want to become stronger and richer.'), nl,
 		write('He give you a paper believed to be the adventurer\'s training montage.'), nl,
-		write('You believed and accepted the offer.'), nl,
+		write('He told you to contact him if you finish your training by coming to the abyss.'), nl,
+		write('You come to abyss by invoking a magic that he gives you. However...'), nl,
+		write('He also said "The next time you come to abyss, it will be the last, and you can no longer return to abyss".'), nl,
+		write('You can go cast the magic to go to the abyss by entering \'fq.\'. '), nl,
+		write('But the magic won\'t be activated if you haven\'t finished your training montage.'), nl,
+		write('You put your faith in him and accepted the offer with a happy smile.'), nl,
 		write('**************************************************************************************************'),nl,
 		write('*                                             Quest                                              *'),nl,
 		write('**************************************************************************************************'),nl,
@@ -105,9 +110,108 @@ tq :-
 		write('**************************************************************************************************'),nl,
 		assertz(questRemaining(W,0,Y,Z))
     ; (A=:=13,B=:=17)->
-        retract(questRemaining(W,X,Y,Z)), assertz(questRemaining(W,X,0,Z))
+        retract(questRemaining(W,X,Y,Z)),
+		ExpGain is (A1*15 + B1*25 +C1*40), GoldGain is (A1*200 + B1*300 + C1*500),
+		write('There is a mysterious goblin here.'), nl,
+		write('The goblin is neither recruitGoblin nor berserkerGoblin.'), nl,
+		write('The goblin can probably be called queenGoblin.'), nl,
+		write('She gave birth to almost all goblin existed in monster habitats.'), nl,
+		write('She find out that some goblins that she gave birth to is not on the goblin habitat.'), nl,
+		write('She wants you to find the goblins.'), nl,
+		write('But you were interrupted by a report from recruitGoblin.'), nl,
+		write('The report is that some goblin has been found lifeless in monster habitats, including goblin habitats.'), nl,
+		write('It was identified that their lives are taken by the slimes and wolves.'), nl,
+		write('The queen ask you to find the lifeless bodies and take revenge.'), nl,
+		write('She doesn\'t know what adventurers do, so she just assumed that you are friendly to them.'), nl,
+		write('She doesn\'t know the soul of an impostor inside you.'), nl,
+		write('In your heart, you laughed so hard.'), nl,
+		write('Well, no. The last three lines are only a reference to a trending game. They have no meaning.'), nl,
+		write('Anyway, here\'s what the queen asked you to do.'), nl,
+		write('Find the lifeless goblin bodies and avenge the goblins.'), nl,
+		write('In your mind, you realize that the queen is not smart.'), nl,
+		write('You have a thought.'), nl,
+		write('If I don\'t find the lifeless bodies, then I can make some lifeless bodies.'), nl,
+		write('So, you change the quest to look like the one below.'), nl,
+		write('**************************************************************************************************'),nl,
+		write('*                                             Quest                                              *'),nl,
+		write('**************************************************************************************************'),nl,
+	    write('* Slay :                                                                                         *'),nl,
+	    (A1 < 10 ->
+	   format('* ~d Slime                                                                                        *', [A1]),nl
+	    ;
+	   format('* ~d Slime                                                                                       *', [A1]),nl),
+	    (B1 < 10 ->
+	   format('* ~d Goblin                                                                                       *', [B1]),nl	
+	    ;
+	   format('* ~d Goblin                                                                                      *', [B1]),nl),
+	   format('* ~d Wolf                                                                                         *', [C1]),nl,
+	    write('**************************************************************************************************'),nl,
+		write('* The reward is :                                                                                *'),nl,
+	   format('* ~d Exp                                                                                        *', [ExpGain]), nl,
+	    ((GoldGain < 10000) ->
+	   format('* ~d Gold                                                                                      *', [GoldGain]), nl
+		;
+	   format('* ~d Gold                                                                                     *', [GoldGain]), nl),
+		write('**************************************************************************************************'),nl,
+		assertz(questRemaining(W,X,0,Z))
     ; (A=:=2,B=:=12)->
-        retract(questRemaining(W,X,Y,Z)), assertz(questRemaining(W,X,Y,0))
+        retract(questRemaining(W,X,Y,Z)),
+		ExpGain is (A1*15 + B1*25 +C1*40), GoldGain is (A1*200 + B1*300 + C1*500),
+		write('Wolves have a legend that has been passed from generation to generation.'), nl,
+		write('            The ALPHA WOLF'), nl,
+		write('The ALPHA WOLF is the strongest wolf existed.'), nl,
+		write('The ALPHA WOLF is considered adult once it reaches 900 years old.'), nl,
+		write('It is said that The ALPHA WOLF is stronger than even Hypostasis and Andrius.'), nl,
+		write('There are two reasons.'), nl, nl,
+		write('The first reason is simple, The ALPHA WOLF have a complete advantage in numbers.'), nl,
+		write('Why is that?'), nl,
+		write('The ALPHA WOLF work together to defeat a common enemy.'), nl,
+		write('Moreover, The ALPHA WOLF has a special ability to turn any corpse it has bitten to another ALPHA WOLF, but so much younger.'), nl,
+		write('In example, if a 15 years old direWolf is bitten by ALPHA WOLF, it turns into a 1 year old ALPHA WOLF.'), nl,
+		write('It can even turn the corpses of slimes, goblins, and even humans into ALPHA WOLVES.'), nl,
+		write('But it cannot turn the corpses of The ALPHA WOLF into another The ALPHA WOLF.'), nl,
+		write('"WHAT A MAGIC!", you thought.'), nl,
+		write('Continuing the story,'), nl,
+		write('The number of ALPHA WOLVES is declining. Why is that?'), nl,
+		write('They live in peace, so they have no common enemy.'), nl,
+		write('It causes them to be bored and caused internal disputes in them.'), nl,
+		write('The dispute causes war between The ALPHA WOLF. Until only one was left.'), nl,
+		write('That is why there is no ALPHA WOLF found in the wild.'), nl,
+		nl,
+		write('The second reason is that The ALPHA WOLF is "immortal".'), nl,
+		write('At least, according to what other monsters said.'), nl,
+		write('The truth is that they have a body core.'), nl,
+		write('The core is why they can turn another monster into An ALPHA WOLF.'), nl,
+		write('If its core is destroyed, it will die.'), nl,
+		write('Only The ALPHA WOLVES knows about the core. No one else knows.'), nl,
+		write('Except you, the adventurer who just read the story, and the story creator, of course. :)'), nl,
+		write('You somehow went to the temple hidden in wolf habitat to know the story.'), nl,
+		write('And you meet the remaining ALPHA WOLF.'), nl,
+		write('Because you doesn\'t want to be dead and turn into ALPHA WOLF,'), nl,
+		write('You negotiate with The ALPHA WOLF, and it accepts your negotiation.'), nl,
+		write('The negotiation is given below as a quest.'), nl,
+		write('**************************************************************************************************'),nl,
+		write('*                                             Quest                                              *'),nl,
+		write('**************************************************************************************************'),nl,
+	    write('* Slay :                                                                                         *'),nl,
+	    (A1 < 10 ->
+	   format('* ~d Slime                                                                                        *', [A1]),nl
+	    ;
+	   format('* ~d Slime                                                                                       *', [A1]),nl),
+	    (B1 < 10 ->
+	   format('* ~d Goblin                                                                                       *', [B1]),nl	
+	    ;
+	   format('* ~d Goblin                                                                                      *', [B1]),nl),
+	   format('* ~d Wolf                                                                                         *', [C1]),nl,
+	    write('**************************************************************************************************'),nl,
+		write('* The reward is :                                                                                *'),nl,
+	   format('* ~d Exp                                                                                        *', [ExpGain]), nl,
+	    ((GoldGain < 10000) ->
+	   format('* ~d Gold                                                                                      *', [GoldGain]), nl
+		;
+	   format('* ~d Gold                                                                                     *', [GoldGain]), nl),
+		write('**************************************************************************************************'),nl,
+		assertz(questRemaining(W,X,Y,0))
     ),
     retract(elmtPeta(A, B,'Q')).
 tq :-
