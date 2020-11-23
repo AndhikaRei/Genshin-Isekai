@@ -159,14 +159,15 @@ t :-
 bossEncounter :- playerPos(A,B), elmtPeta(A,B,C),
     ( C == 'A' -> idEnemy(8,Enemy),
         write('You found the legendary wolf , Andrius, prepare yourself to face the Death!'),nl,
-        assertz(inBattle), boss(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp),
-        assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp)),battle,nl
+        assertz(inBattle), boss(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven),
+        assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven)),battle,nl
     ; C == 'H' -> idEnemy(7,Enemy),
         write('You found the cubic of Madness , Hipostasis, prepare yourself to face the Death!'),nl,
-        assertz(inBattle), boss(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp),
-        assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp)),battle,nl
+        assertz(inBattle), boss(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven),
+        assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven)),battle,nl
     ; true
     ).
+	
 /* Pemain 60% menemukan musuh Enemy dalam perjalanannya */
 encounter   :- playerPos(A, B), \+elmtPeta(A, B, _), \+habitat(A,B,_),!.
 encounter   :- playerPos(A, B), \+elmtPeta(A, B, _),
@@ -180,14 +181,15 @@ encounter   :- playerPos(A, B), \+elmtPeta(A, B, _),
 					/* BAGIAN BATTLE DI INIT.PL DI SINI */
 					
 					player(_, Lvl, _, _, _, _, _, _),
-					baseEnemy(Enemy, HP, Atk, SAtk, Def, Exp),
+					baseEnemy(Enemy, HP, Atk, SAtk, Def, Exp, GoldGiven),
 					growthEnemy(Enemy, GHP, GAtk, GSAtk, GDef, GExp),
 					GLvl is Lvl - 1,
 					/* semua stats adalah base stat + growthrate * pertambahan level */
+					/* Terkecuali gold given */
 					THP is HP + (GHP * GLvl), TMaxHP is THP,
 					TAtk is Atk + (GAtk * GLvl), TSAtk is SAtk + (GSAtk * GLvl),
 					TDef is Def + (GDef * GLvl), TExp is Exp + (GExp * GLvl),
-					assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp)),
+					assertz(inBattleEnemy(Enemy, Lvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, GoldGiven)),
 					battle,
 					/* Ngeprint stats musuh */
 					nl

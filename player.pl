@@ -9,9 +9,9 @@ growthRate(sorcerer, 100, 6, 3).
 
 /* Base Stats di Level 1 */
 /* Job, MaxHP, Attack, Defense, Exp, Gold */
-baseStat(swordsman, 500, 10000000, 25, 0, 100000).
-baseStat(archer, 400, 50, 20, 0, 100000).
-baseStat(sorcerer, 450, 45, 10, 0, 100000).
+baseStat(swordsman, 500, 10000000, 25, 0, 10000).
+baseStat(archer, 400, 50, 20, 0, 10000).
+baseStat(sorcerer, 450, 45, 10, 0, 10000).
 
 /* Pas milih class, assert player dengan BaseStat dari jobnya */
 /* Di main pas bagian inisialisasi (atau di init.pl juga boleh kalau mau */
@@ -21,7 +21,7 @@ initialExp :-
 	retractall(exp(_,_,_)),
 	assertz(exp(1,0,1)).
 
-/* exp(Lv, _, Total) :- Total is Lv*Lv. */
+/* exp(Lv, _, Total) :- Total is 2*Lv*Lv - 1. */
 status :- player(X, Lvl, HP, MaxHP, Att, Def, E, G),
 		  playerEquipment(Weapon, Armor, Acc),
 		  write('Class     : '), write(X), nl,
@@ -66,7 +66,7 @@ addExp(X) :-
 	),
 	(NewExp >= Total ->
 		format('Level Up!!! ~n', []),
-		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is NewLvl*NewLvl,
+		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is 2*NewLvl*NewLvl - 1,
 		retract(exp(Lv,Xbefore,Total)), assertz(exp(NewLvl,NewExp2,NewTotal)),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
 		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp2, G)),
