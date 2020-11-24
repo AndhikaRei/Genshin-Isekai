@@ -52,52 +52,52 @@ item('Attack Potion', 42) :- !.
 item('Defense Potion', 43) :- !.
 
 /* equipment(X, Y, Z, W) berarti X adalah equipment yang hanya dapat digunakan oleh job Y yang menambah stat Z sebesar W */
-equipment('Wooden Sword', swordsman, atk, 10).
-equipment('Knight Sword', swordsman, atk, 20).
-equipment('Metal Splitter', swordsman, atk, 40).
-equipment('Holy Edge', swordsman, atk, 70).
-equipment('Dragon Slayer', swordsman, atk, 100).
-equipment('Excalibur', swordsman, atk, 140).
-equipment('Wooden Armor', swordsman, def, 30).
-equipment('Knight Breastplate', swordsman, def, 50).
-equipment('Paladin Breastplate', swordsman, def, 70).
-equipment('Dragonic Breastplate', swordsman, def, 100).
-equipment('Legendary Warrior Plating', swordsman, def, 130).
+equipment('Wooden Sword', swordsman, atk, 20).
+equipment('Knight Sword', swordsman, atk, 40).
+equipment('Metal Splitter', swordsman, atk, 80).
+equipment('Holy Edge', swordsman, atk, 140).
+equipment('Dragon Slayer', swordsman, atk, 200).
+equipment('Excalibur', swordsman, atk, 280).
+equipment('Wooden Armor', swordsman, def, 60).
+equipment('Knight Breastplate', swordsman, def, 100).
+equipment('Paladin Breastplate', swordsman, def, 140).
+equipment('Dragonic Breastplate', swordsman, def, 200).
+equipment('Legendary Warrior Plating', swordsman, def, 260).
 
-equipment('Wooden Bow', archer, atk, 15).
-equipment('Hunter Bow', archer, atk, 35).
-equipment('Gaea Bow', archer, atk, 55).
-equipment('Bow of Tempest', archer, atk, 90).
-equipment('Sacred Wind', archer, atk, 130).
-equipment('Star Crosser', archer, atk, 160).
-equipment('Windy Cape', archer, def, 10).
-equipment('Nature Cape', archer, def, 25).
-equipment('Typhoon Cape', archer, def, 40).
-equipment('Guardian of Nature', archer, def, 50).
-equipment('Interstellar Cape', archer, def, 80).
+equipment('Wooden Bow', archer, atk, 30).
+equipment('Hunter Bow', archer, atk, 70).
+equipment('Gaea Bow', archer, atk, 110).
+equipment('Bow of Tempest', archer, atk, 180).
+equipment('Sacred Wind', archer, atk, 260).
+equipment('Star Crosser', archer, atk, 320).
+equipment('Windy Cape', archer, def, 20).
+equipment('Nature Cape', archer, def, 50).
+equipment('Typhoon Cape', archer, def, 90).
+equipment('Guardian of Nature', archer, def, 100).
+equipment('Interstellar Cape', archer, def, 160).
 
-equipment('Wooden Staff', sorcerer, atk, 20).
-equipment('Sorcerer Staff', sorcerer, atk, 50).
-equipment('Ember Staff', sorcerer, atk, 80).
-equipment('Dark Magus Staff', sorcerer, atk, 120).
-equipment('Phantom Seeker', sorcerer, atk, 160).
-equipment('Cursed Lucifer Staff', sorcerer, atk, 210).
-equipment('Silk Robe', sorcerer, def, 5).
-equipment('Magus Robe', sorcerer, def, 20).
-equipment('Dark Robes', sorcerer, def, 30).
-equipment('Robes of Archfiend', sorcerer, def, 40).
-equipment('Terror of The Immortal', sorcerer, def, 55).
+equipment('Wooden Staff', sorcerer, atk, 40).
+equipment('Sorcerer Staff', sorcerer, atk, 100).
+equipment('Ember Staff', sorcerer, atk, 160).
+equipment('Dark Magus Staff', sorcerer, atk, 240).
+equipment('Phantom Seeker', sorcerer, atk, 320).
+equipment('Cursed Lucifer Staff', sorcerer, atk, 420).
+equipment('Silk Robe', sorcerer, def, 10).
+equipment('Magus Robe', sorcerer, def, 40).
+equipment('Dark Robes', sorcerer, def, 60).
+equipment('Robes of Archfiend', sorcerer, def, 80).
+equipment('Terror of The Immortal', sorcerer, def, 110).
 
-equipment('Necklace', universal, hp, 30).
-equipment('Slime Heart', universal, hp, 30).
-equipment('Goblin Heart', universal, hp, 60).
-equipment('Wolf Heart', universal, hp, 120).
-equipment('Dragonic Core', universal, hp, 240).
-equipment('Orb of Destiny', universal, hp, 480).
+equipment('Necklace', universal, hp, 100).
+equipment('Slime Heart', universal, hp, 300).
+equipment('Goblin Heart', universal, hp, 600).
+equipment('Wolf Heart', universal, hp, 900).
+equipment('Dragonic Core', universal, hp, 1200).
+equipment('Orb of Destiny', universal, hp, 1500).
 
 /* potion(X, Y) berarti X adalah potion yang menambah stats sebesar Z */
-potion('Health Potion (S)', 100).
-potion('Health Potion (M)', 250).
-potion('Health Potion (L)', 500).
-potion('Attack Potion', 50).
-potion('Defense Potion', 50).
+potion('Health Potion (S)', 500).
+potion('Health Potion (M)', 1000).
+potion('Health Potion (L)', 2000).
+potion('Attack Potion', 400).
+potion('Defense Potion', 200).
