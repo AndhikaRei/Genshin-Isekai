@@ -11,7 +11,7 @@ store :-
         assertz(inStore),
         write('What do you want to buy?'), nl,
         write('1. Gacha (1000 Gold)'), nl,
-        write('2. Health Potion (100 Gold)')
+        write('2. Potions')
     ).
 
 /* Keluar store jika berada di dalam store */
@@ -67,13 +67,32 @@ buyPotion :- inBattle,!, write('You are currently in battle, please type "help."
 buyPotion :- \+inStore, !, write('You cannot buy potion because you are not in a store').
 buyPotion :- inventory(Inv), itemCount(Inv, Count), Count =:= 100, !, write('Inventory full, cannot buy potion').
 buyPotion :-
+    write('What potion do you want to buy?'), nl,
+    write('1. Health Potion (S) (100 Gold)'), nl,
+    write('2. Health Potion (M) (300 Gold)'), nl,
+    write('3. Health Potion (L) (500 Gold)'), nl,
+    write('4. Attack Potion (200 Gold)'), nl,
+    write('5. Defense Potion (200 Gold)'), nl,
+    write(' > '), read(X),
+    (X == 1 -> pot('Health Potion (S)', 100)
+    ; X == 2 -> pot('Health Potion (M)', 300)
+    ; X == 3 -> pot('Health Potion (L)', 500)
+    ; X == 4 -> pot('Attack Potion', 200)
+    ; X == 5 -> pot('Defense Potion', 200)
+    ; 
+        write('What do you want to buy?'), nl,
+        write('1. Gacha (1000 Gold)'), nl,
+        write('2. Potions')
+    ).
+
+pot(Pot, Price) :-
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-    (G >= 100 ->
-        NewG is G - 100,
+    (G >= Price ->
+        NewG is G - Price,
         retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
         assertz(player(Job, Lvl, HP, MaxHP, Att, Def, E, NewG)),
-        addItem('Health Potion', 1),
-        write('You bought 1 Health Potion')
+        addItem(Pot, 1),
+        write('You bought 1 '), write(Pot)
     ;
         write('You do not have enough gold')
     ).

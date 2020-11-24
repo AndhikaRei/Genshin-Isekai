@@ -1,5 +1,7 @@
 :- dynamic(playerCDSpecial/1).
 :- dynamic(enemyCDSpecial/1).
+:- dynamic(atkPotion/1).
+:- dynamic(defPotion/1).
 
 battle:- 
     inBattleEnemy(_, Lvl, _, TMaxHP, TAtk, TSAtk, TDef, _, _, _),
@@ -20,7 +22,8 @@ attack :-
     ;
         equipment(Weap, _, _, EqAtk)
     ),
-    DMGTemp is Att + EqAtk - TDef,
+    (atkPotion(Pot) -> PotAtk is Pot ; PotAtk is 0),
+    DMGTemp is Att + PotAtk + EqAtk - TDef,
     (DMGTemp < 0 ->
         DMG is 0
     ; 
@@ -60,7 +63,9 @@ specialAttack :-
         ;
             equipment(Weap, _, _, EqAtk)
         ),
-        DMGTemp is (Att * Lvl) + EqAtk - TDef,
+        (atkPotion(Pot) -> PotAtk is Pot ; PotAtk is 0),
+        random(10, 16, Sp),
+        DMGTemp is Att + PotAtk + (Sp * Lvl) + EqAtk - TDef,
         (DMGTemp < 0 ->
             DMG is 0
         ; 
@@ -81,14 +86,61 @@ specialAttack :-
     ).
 
 % potion
-usePotion :- 
+usePotion(Type) :-
     inventory(Inv),
-    (member(['Health Potion', _], Inv) ->
+    (Type == hps ->
+        hPPot('Health Potion (S)')
+    ;Type == hpm ->
+        hPPot('Health Potion (M)')
+    ;Type == hpl ->
+        hPPot('Health Potion (L)')
+    ;Type == atk ->
+        (\+inBattle -> 
+            write('Cannot use Attack Potion outside of battle')
+        ;
+            (member(['Attack Potion', _], Inv) ->
+                potion('Attack Potion', AttInc),
+                write('Your attack will increase by '), write(AttInc), write(' for the duration of this battle'), nl,
+                assertz(atkPotion(AttInc)),
+                drop('Attack Potion')
+            ;
+                write('You do not have any Attack Potion')
+            )
+        )
+    ;Type == def ->
+        (\+inBattle -> 
+            write('Cannot use Defense Potion outside of battle')
+        ;
+            (member(['Defense Potion', _], Inv) ->
+                (\+defPotion(_) ->
+                    potion('Defense Potion', DefInc),
+                    write('Your defense will increase by '), write(DefInc), write(' for the duration of this battle'), nl,
+                    assertz(defPotion(DefInc)),
+                    drop('Defense Potion')
+                ;
+                    write('You already used a Defense Potion this battle')
+                )
+            ;
+                write('You do not have any Defense Potion')
+            )
+        )
+    ;
+        write('Invalid input, use:'), nl,
+        write('usePotion(hps). : Health Potion (S)'), nl,
+        write('usePotion(hpm). : Health Potion (M)'), nl,
+        write('usePotion(hpl). : Health Potion (L)'), nl,
+        write('usePotion(atk). : Attack Potion'), nl,
+        write('usePotion(def). : Defense Potion'), nl
+    ).
+
+hPPot(Name) :-
+    inventory(Inv),
+    (member([Name, _], Inv) ->
         player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
         (HP =:= MaxHP ->
             write('You are already at full health')
         ;
-            potion('Health Potion', HPInc),
+            potion(Name, HPInc),
             HPTemp is HP + HPInc,
             (HPTemp >= MaxHP ->
                 HPNew is MaxHP
@@ -99,34 +151,11 @@ usePotion :-
             write('You heal '), write(HPAdd), write(' HP'), nl,
             retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
             assertz(player(Job, Lvl, HPNew, MaxHP, Att, Def, E, G)),
-            drop('Health Potion')
+            drop(Name)
         )
     ;
-        write('You do not have any Health Potion')
-    ),
-    (member(['Attack Potion', _], Inv) ->
-        player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-        potion('Attack Potion', AttInc),
-        AttNew is Att + AttInc,
-        write('Your attack will now deal '), write(AttNew), write(' damage'), nl,
-        retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
-        assertz(player(Job, Lvl, HP, MaxHP, AttNew, Def, E, G)),
-        drop('Attack Potion')
-    ;
-        write('You do not have any Attack Potion')
-    ),
-    (member(['Defense Potion', _], Inv) ->
-        player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-        potion('Defense Potion Potion', DefInc),
-        DefNew is Def + DefInc,
-        write('You increased your defence to '), write(DefNew), nl,
-        retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
-        assertz(player(Job, Lvl, HP, MaxHP, Att, DefNew, E, G)),
-        drop('Defense Potion')
-    ;
-        write('You do not have any Defense Potion')
+        write('You do not have any '), write(Name)
     ).
-
 
 % bagian enemy
 enemyTurn :- 
@@ -143,7 +172,8 @@ enemyTurn :-
 enemyAttack:- 
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
     inBattleEnemy(Enemy, _, _, _, TAtk, _, _, _, _, _),
-    DMGTemp is TAtk - Def,
+    (defPotion(Pot) -> PotDef is Pot ; PotDef is 0),
+    DMGTemp is TAtk - Def - PotDef,
     (DMGTemp < 0 ->
         DMG is 0
     ; 
@@ -172,7 +202,8 @@ enemyAttack:-
 enemySpecialAttack:- 
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
     inBattleEnemy(Enemy, _, _, _, _, TSAtk, _, _, _, _),
-    DMGTemp is TSAtk - Def,
+    (defPotion(Pot) -> PotDef is Pot ; PotDef is 0),
+    DMGTemp is TSAtk - Def - PotDef,
     (DMGTemp < 0 ->
         DMG is 0
     ; 
@@ -207,6 +238,8 @@ enemyStatus :-
 stopBattle:- 
     (playerCDSpecial(X) -> retract(playerCDSpecial(X)) ; true),
     (enemyCDSpecial(Y) -> retract(enemyCDSpecial(Y)) ; true),
+    (atkPotion(Z) -> retract(atkPotion(Z)) ; true),
+    (defPotion(W) -> retract(defPotion(W)) ; true),
     retractall(inBattleEnemy(_, _, _, _, _, _, _, _, _, _)),
     retract(inBattle), (livingBosses(0,0) -> winTheGame; true).
 
