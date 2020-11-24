@@ -1,12 +1,13 @@
-playerEquipment(none,none,none).
-playerPos(12,15).
-player(swordsman,20,3350,3350,10000095,82,474,62821).
-inventory([['Health Potion',5],['Wooden Sword',1]]).
-exp(20,474,799).
-quest(3,1,6,5,5,0).
-questRemaining(0,1,1,1).
+playerEquipment('Wooden Staff',none,none).
+playerPos(4,2).
+player(sorcerer,5,616,850,69,22,2,10754).
+inventory([['Attack Potion',4],['Defense Potion',4],['Health Potion (S)',4]]).
+exp(5,2,49).
+questRemaining(1,1,1,1).
+elmtPeta(3,8,'Q').
 elmtPeta(12,3,'Q').
 elmtPeta(13,17,'Q').
 elmtPeta(2,12,'Q').
-livingBosses(0,1).
+livingBosses(1,1).
+elmtPeta(3,17,'H').
 elmtPeta(1,17,'A').

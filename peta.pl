@@ -156,7 +156,7 @@ t :-
 
 /******************** TAKEN FROM SPECIALACTION.PL ***************************/
 /* bossEncounter apabila pemain menginajak lantai boss maka dia akan langsung melawan boss */
-bossEncounter :- playerPos(A,B), elmtPeta(A,B,C),
+bossEncounter :- playerPos(A,B), elmtPeta(A,B,C), !,
     ( C == 'A' -> idEnemy(8,Enemy),
 		printAndrius,
         write('You found the legendary werewolf , Andrius, prepare yourself to face the Death!'),nl,

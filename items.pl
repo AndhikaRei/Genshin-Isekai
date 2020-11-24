@@ -45,9 +45,11 @@ item('Terror of The Immortal', 37) :- !.
 item('Orb of Destiny', 38) :- !.
 
 /* Potion */
-item('Health Potion', 39) :- !.
-item('Attack Potion', 40) :- !.
-item('Defense Potion', 41) :- !.
+item('Health Potion (S)', 39) :- !.
+item('Health Potion (M)', 40) :- !.
+item('Health Potion (L)', 41) :- !.
+item('Attack Potion', 42) :- !.
+item('Defense Potion', 43) :- !.
 
 /* equipment(X, Y, Z, W) berarti X adalah equipment yang hanya dapat digunakan oleh job Y yang menambah stat Z sebesar W */
 equipment('Wooden Sword', swordsman, atk, 10).
@@ -94,6 +96,8 @@ equipment('Dragonic Core', universal, hp, 240).
 equipment('Orb of Destiny', universal, hp, 480).
 
 /* potion(X, Y) berarti X adalah potion yang menambah stats sebesar Z */
-potion('Health Potion', 100).
-potion('Attack Potion', 20).
-potion('Defense Potion', 20).
+potion('Health Potion (S)', 100).
+potion('Health Potion (M)', 250).
+potion('Health Potion (L)', 500).
+potion('Attack Potion', 50).
+potion('Defense Potion', 50).
