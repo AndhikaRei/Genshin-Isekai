@@ -66,3 +66,28 @@ addItem(Item, Count) :-
     ;
         write('Failed to add item, inventory full')
     ).
+
+eqStatus(Item) :- equipmentStatus(Item).
+equipmentStatus(Item) :-
+	item(Item, IDItem),
+	equipment(Item, Job, Stats, _),
+	write('Rarity : '),
+	(
+	IDItem < 18 -> write('Common')
+	;
+	IDItem < 32 -> write('Rare')
+	;
+	IDItem < 39 -> write('Legendary')
+	),
+	nl,
+	write('Class  : '), write(Job), nl,
+	write('Slot   : '),
+	(
+	Stats == atk -> write('Weapon')
+	;
+	Stats == def -> write('Armor')
+	;
+	Stats == hp -> write('Accessory')
+	),
+	nl,
+	!.

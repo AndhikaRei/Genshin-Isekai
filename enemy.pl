@@ -17,28 +17,28 @@ idEnemy(6, direWolf) :- !.
 idEnemy(7, hypostasis) :- !.
 idEnemy(8, andrius) :- !.
 
-/* baseEnemy(X, HP, ATK, Special ATK, DEF, exp given, MinGoldGiven, MaxGoldGiven) */
 /* base stats enemy di level 1 */
-baseEnemy(smallSlime, 75, 30, 50, 5, 1, 50, 150).
-baseEnemy(bigSlime, 100, 40, 70, 10, 2, 100, 200).
-baseEnemy(recruitGoblin, 125, 50, 80, 10, 3, 200, 300).
-baseEnemy(berserkerGoblin, 200, 75, 120, 15, 4, 200, 400).
-baseEnemy(standardWolf, 180, 70, 130, 20, 5, 300, 500).
-baseEnemy(direWolf, 260, 100, 200, 25, 6, 300, 600).
+/* baseEnemy(X,             HP, ATK, SAtk, DEF, exp, MinGoldGiven, MaxGoldGiven) */
+baseEnemy(smallSlime,       80,  30,   50,   5,   2,  50, 150).
+baseEnemy(bigSlime,        120,  40,   70,  10,   2, 100, 200).
+baseEnemy(recruitGoblin,   160,  50,   80,  10,   4, 200, 300).
+baseEnemy(berserkerGoblin, 220,  75,  120,  15,   4, 200, 400).
+baseEnemy(standardWolf,    245,  70,  130,  20,   6, 300, 500).
+baseEnemy(direWolf,        300, 100,  200,  25,   6, 300, 600).
 
-/* growthRate(X, Max HP, ATK, Special ATK, DEF, exp given*/
 /* enemy naik level tiap player naik level */
-growthEnemy(smallSlime, 10, 5, 7, 2, 4).
-growthEnemy(bigSlime, 15, 10, 12, 3, 6).
-growthEnemy(recruitGoblin, 15, 8, 10, 2, 4).
-growthEnemy(berserkerGoblin, 20, 13, 15, 4, 7).
-growthEnemy(standardWolf, 20, 12, 14, 3, 4).
-growthEnemy(direWolf, 30, 15, 19, 5, 8).
+/* growthRate(X,             HP, ATK, SAtk, DEF, exp given*/
+growthEnemy(smallSlime,      25,   5,    7,   8,  7).
+growthEnemy(bigSlime,        35,  10,   12,  12,  9).
+growthEnemy(recruitGoblin,   40,  11,   12,   8,  7).
+growthEnemy(berserkerGoblin, 40,  25,   15,  14, 10).
+growthEnemy(standardWolf,    40,  12,   14,   9,  7).
+growthEnemy(direWolf,        50,  25,   20,  17, 11).
 	
-/* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN, GOLDGAIN) */
+/* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN, MINGOLDGAIN, MAXGOLDGAIN) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */
-boss(hypostasis, 20, 4000, 4000, 600, 1000, 60, 5000, 50000, 50000).
-boss(andrius, 30, 9000, 9000, 900, 1500, 70, 12000, 100000, 100000).
+boss(hypostasis, 20, 10000, 10000, 1000, 1300, 200, 5000, 50000, 50000).
+boss(andrius, 30, 22800, 22800, 1500, 2000, 300, 12000, 100000, 100000).
 
 printGBEnemy(IdEnemy) :-
     !,

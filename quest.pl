@@ -1,4 +1,4 @@
-/* quest(A,A1,B,B1,C,C1) membunuh slime sejumlah A, goblin sejumlah B, dan wolf sejumlah C1, tanpa mempedulikan jenisnya (?) */
+/* quest(A,A1,B,B1,C,C1) membunuh slime sejumlah A, goblin sejumlah B, dan wolf sejumlah C, tanpa mempedulikan jenisnya (?) */
 :- dynamic(quest/6).
 
 /* questRemaining(A,B,C,D) A,B,C,D menyimbolkan 4 quest yang ada di map dan nilainya akan satu jika quest nya masih ada */
@@ -33,7 +33,7 @@ tq :-
     questRemaining(W,X,Y,Z),
     ( (A=:=3,B=:=8)->
         retract(questRemaining(W,X,Y,Z)),
-		ExpGain is (A1*15 + B1*25 +C1*40), GoldGain is (A1*200 + B1*300 + C1*500),
+		ExpGain is (A1*25 + B1*40 +C1*55), GoldGain is (A1*400 + B1*700 + C1*1000),
 		write('You\'ve come to a house in the village'), nl,
 		write('It was heard that the owner is not that brave to go outside the village'), nl,
 		write('You went inside'), nl,
@@ -55,7 +55,11 @@ tq :-
 	   format('* ~d Wolf                                                                                         *', [C1]),nl,
 	    write('**************************************************************************************************'),nl,
 		write('* The reward is :                                                                                *'),nl,
-	   format('* ~d Exp                                                                                        *', [ExpGain]), nl,
+		((ExpGain < 1000) ->
+	   format('* ~d Exp                                                                                        *', [ExpGain]), nl
+	    ;
+	   format('* ~d Exp                                                                                       *', [ExpGain]), nl
+	   ),
 	    ((GoldGain < 10000) ->
 	   format('* ~d Gold                                                                                      *', [GoldGain]), nl
 		;
@@ -66,7 +70,7 @@ tq :-
 		assertz(questRemaining(0,X,Y,Z))
     ; (A=:=12,B=:=3)->
         retract(questRemaining(W,X,Y,Z)),
-		ExpGain is (A1*15 + B1*25 +C1*40), GoldGain is (A1*200 + B1*300 + C1*500),
+		ExpGain is (A1*25 + B1*40 +C1*55), GoldGain is (A1*400 + B1*700 + C1*1000),
 		write('When you first became an adventurer, someone told you to look for the wizard in a monster habitat.'), nl,
 		write('And now....'), nl,
 		write('You are in front of a house in the woods, believed to be the home of the wizard.'), nl,
@@ -102,7 +106,11 @@ tq :-
 	   format('* ~d Wolf                                                                                         *', [C1]),nl,
 	    write('**************************************************************************************************'),nl,
 		write('* What you get :                                                                                 *'),nl,
-	   format('* ~d Exp                                                                                        *', [ExpGain]), nl,
+	   ((ExpGain < 1000) ->
+	   format('* ~d Exp                                                                                        *', [ExpGain]), nl
+	    ;
+	   format('* ~d Exp                                                                                       *', [ExpGain]), nl
+	   ),
 	    ((GoldGain < 10000) ->
 	   format('* ~d Gold                                                                                      *', [GoldGain]), nl
 		;
@@ -111,7 +119,7 @@ tq :-
 		assertz(questRemaining(W,0,Y,Z))
     ; (A=:=13,B=:=17)->
         retract(questRemaining(W,X,Y,Z)),
-		ExpGain is (A1*15 + B1*25 +C1*40), GoldGain is (A1*200 + B1*300 + C1*500),
+		ExpGain is (A1*25 + B1*40 +C1*55), GoldGain is (A1*400 + B1*700 + C1*1000),
 		write('There is a mysterious goblin here.'), nl,
 		write('The goblin is neither recruitGoblin nor berserkerGoblin.'), nl,
 		write('The goblin can probably be called queenGoblin.'), nl,
@@ -147,7 +155,11 @@ tq :-
 	   format('* ~d Wolf                                                                                         *', [C1]),nl,
 	    write('**************************************************************************************************'),nl,
 		write('* The reward is :                                                                                *'),nl,
-	   format('* ~d Exp                                                                                        *', [ExpGain]), nl,
+	   ((ExpGain < 1000) ->
+	   format('* ~d Exp                                                                                        *', [ExpGain]), nl
+	    ;
+	   format('* ~d Exp                                                                                       *', [ExpGain]), nl
+	   ),
 	    ((GoldGain < 10000) ->
 	   format('* ~d Gold                                                                                      *', [GoldGain]), nl
 		;
@@ -156,7 +168,7 @@ tq :-
 		assertz(questRemaining(W,X,0,Z))
     ; (A=:=2,B=:=12)->
         retract(questRemaining(W,X,Y,Z)),
-		ExpGain is (A1*15 + B1*25 +C1*40), GoldGain is (A1*200 + B1*300 + C1*500),
+		ExpGain is (A1*25 + B1*40 +C1*55), GoldGain is (A1*400 + B1*700 + C1*1000),
 		write('Wolves have a legend that has been passed from generation to generation.'), nl,
 		write('            The ALPHA WOLF'), nl,
 		write('The ALPHA WOLF is the strongest wolf existed.'), nl,
@@ -208,7 +220,11 @@ tq :-
 	   format('* ~d Wolf                                                                                         *', [C1]),nl,
 	    write('**************************************************************************************************'),nl,
 		write('* The reward is :                                                                                *'),nl,
-	   format('* ~d Exp                                                                                        *', [ExpGain]), nl,
+	   ((ExpGain < 1000) ->
+	   format('* ~d Exp                                                                                        *', [ExpGain]), nl
+	    ;
+	   format('* ~d Exp                                                                                       *', [ExpGain]), nl
+	   ),
 	    ((GoldGain < 10000) ->
 	   format('* ~d Gold                                                                                      *', [GoldGain]), nl
 		;
@@ -230,7 +246,22 @@ pq :-
 pq :-
     inStore,!,write('You are in store, type "help." to see command in store').
 pq :-
-    quest(A,A1,B,B1,C,C1) ,!, format('Quest status  slime: ~d/~d, goblin : ~d/~d, wolf : ~d/~d',[A1,A,B1,B,C1,C]).
+    quest(_,A1,_,B1,_,C1) ,!, 
+	write('**************************************************************************************************'),nl,
+	write('*                                       Quest Status                                             *'),nl,
+	write('**************************************************************************************************'),nl,
+	write('* Slay :                                                                                         *'),nl,
+	    (A1 < 10 ->
+	format('* ~d more Slime                                                                                   *', [A1]),nl
+	    ;
+	format('* ~d more Slime                                                                                  *', [A1]),nl),
+	    (B1 < 10 ->
+	format('* ~d more Goblin                                                                                  *', [B1]),nl	
+	    ;
+	format('* ~d more Goblin                                                                                 *', [B1]),nl),
+	format('* ~d more Wolf                                                                                    *', [C1]),nl,
+	write('**************************************************************************************************'),nl,
+	!.
 
 /* fq : finish the quest) */
 fq :-
@@ -246,12 +277,12 @@ fq :-
     write('You cannot finish your quest right now').
 fq :-
     quest(A,0,B,0,C,0) ,!, retract(quest(A,0,B,0,C,0)), 
-    ExpGain is (A*15 + B*25 +C*40), addExp(ExpGain), GoldGain is (A*200 + B*300 + C*500), addGold(GoldGain),
+    ExpGain is (A*25 + B*40 +C*55), addExp(ExpGain), GoldGain is (A*400 + B*700 + C*1000), addGold(GoldGain),
     write('Congratulation for finishing the quest').
 
 /* Fungsi untuk ngeprogress quest nya (kalau kill suatu monster maka fungsi ini dijalakan dan menambah progress dengan mengurangi jumlah monster yang dibunuh(+penanganan kasus negatif)), nunggu battle */
 
-progressById(IdEnemy):-
+progressById(IdEnemy):- 
 	(IdEnemy =:= 1 -> progressQuest(slime)
 	;IdEnemy =:= 2 -> progressQuest(slime)
 	;IdEnemy =:= 3 -> progressQuest(goblin)
@@ -259,13 +290,15 @@ progressById(IdEnemy):-
 	;IdEnemy =:= 5 -> progressQuest(wolf)
 	;IdEnemy =:= 6 -> progressQuest(wolf)
     ; true
-	).
+	),
+	pq,!.
 
 progressQuest(X) :-
     quest(A,A1,B,B1,C,C1),
     (X == slime ->
         (A1 =:= 0 ->
-            format('You have killed many slimes, try killing another ~d goblin and ~d wolf ~n to complete your quest',[B1,C1])
+			write('')
+/*            format('You have killed many slimes, try killing another ~d goblin and ~d wolf ~n to complete your quest',[B1,C1]) */
             ;
             A2 is A1-1,
             retract(quest(A,A1,B,B1,C,C1)),
@@ -273,7 +306,8 @@ progressQuest(X) :-
         )
     ; X == goblin ->
         (B1 =:= 0 ->
-            format('You have killed many goblin, try killing another ~d slime and ~d wolf ~n to complete your quest',[A1,C1])
+			write('')
+/*            format('You have killed many goblin, try killing another ~d slime and ~d wolf ~n to complete your quest',[A1,C1]) */
             ;
             B2 is B1-1,
             retract(quest(A,A1,B,B1,C,C1)),
@@ -281,7 +315,8 @@ progressQuest(X) :-
         )
     ; X == wolf ->
         (C1 =:= 0 ->
-            format('You have killed many wolf, try killing another ~d slime and ~d goblin ~n to complete your quest',[A1,B1])
+			write('')
+/*            format('You have killed many wolf, try killing another ~d slime and ~d goblin ~n to complete your quest',[A1,B1]) */
             ;
             C2 is C1-1,
             retract(quest(A,A1,B,B1,C,C1)),

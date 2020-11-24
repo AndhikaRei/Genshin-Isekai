@@ -72,7 +72,7 @@ equipment('Windy Cape', archer, def, 10).
 equipment('Nature Cape', archer, def, 25).
 equipment('Typhoon Cape', archer, def, 40).
 equipment('Guardian of Nature', archer, def, 50).
-equipment('Interstelar Cape', archer, def, 80).
+equipment('Interstellar Cape', archer, def, 80).
 
 equipment('Wooden Staff', sorcerer, atk, 20).
 equipment('Sorcerer Staff', sorcerer, atk, 50).

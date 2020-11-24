@@ -219,12 +219,7 @@ flee:- random(1,3,X), successFlee(X).
 winBattle:-
     write('You have slain your enemy. Proceed with your journey, Traveler!'), nl,
     inBattleEnemy(Enemy, _, _, _, _, _, _, ExpGain, MinGold, MaxGold), idEnemy(ID,Enemy),
-    addExp(ExpGain),
-	MaxGoldPoss is MaxGold + 1,
-	random(MinGold, MaxGoldPoss, GoldGain),
-	addGold(GoldGain),
-    (quest(_,_,_,_,_,_) -> progressById(ID); true),
-    (ID =:= 7 -> 
+	(ID =:= 7 -> 
         livingBosses(A,B), retract(livingBosses(A,B)), assertz(livingBosses(0,B)), 
         retract(elmtPeta(X, Y,'H')), write('You killed the mighty hypostasis, good luck dude!'), nl 
     ; ID =:= 8 -> 
@@ -232,6 +227,13 @@ winBattle:-
         retract(elmtPeta(X, Y,'A')), write('You killed the mighty adrius, good luck dude!'), nl 
     ; true 
     ),
-    stopBattle, !.
+	stopBattle,
+    addExp(ExpGain),
+	MaxGoldPoss is MaxGold + 1,
+	random(MinGold, MaxGoldPoss, GoldGain),
+	addGold(GoldGain),
+    (quest(_,_,_,_,_,_) -> progressById(ID); true),
+    !.
+	
 loseBattle :- write('Despite your best efforts, it was all in vain as you were defeated by the enemy. Keep your heads up, Traveler!'), nl, finish, !.
 winTheGame :- write('You are the savior of this realm, I will move you back to your own world, see you yuusha-sama!!'), nl, finish, !.

@@ -53,7 +53,9 @@ gacha :-
             item(Name, Id),
             addItem(Name, 1),
             write('You get '), write(Name)
-        )
+        ),
+		nl,
+		eqStatus(Name)
     ;
         write('You do not have enough gold')
     ).

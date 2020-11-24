@@ -3,15 +3,15 @@
 :- dynamic(playerEquipment/3).
 
 /* Job, HP (and also Max HP), Attack, Defense */
-growthRate(swordsman, 150, 5, 3).
-growthRate(archer, 50, 8, 2).
-growthRate(sorcerer, 100, 6, 3).
+growthRate(swordsman, 450, 17, 25).
+growthRate(archer, 150, 22, 10).
+growthRate(sorcerer, 150, 23, 9).
 
 /* Base Stats di Level 1 */
 /* Job, MaxHP, Attack, Defense, Exp, Gold */
-baseStat(swordsman, 500, 10000000, 25, 0, 10000).
-baseStat(archer, 400, 50, 20, 0, 10000).
-baseStat(sorcerer, 450, 45, 10, 0, 10000).
+baseStat(swordsman, 1000, 10000000, 70, 0, 20000).
+baseStat(archer, 500, 75, 40, 0, 20000).
+baseStat(sorcerer, 200, 95, 10, 0, 20000).
 
 /* Pas milih class, assert player dengan BaseStat dari jobnya */
 /* Di main pas bagian inisialisasi (atau di init.pl juga boleh kalau mau */
@@ -21,7 +21,7 @@ initialExp :-
 	retractall(exp(_,_,_)),
 	assertz(exp(1,0,1)).
 
-/* exp(Lv, _, Total) :- Total is 2*Lv*Lv - 1. */
+/* exp(Lv, _, Total) :- Total is 3*Lv*Lv - 2*Lv. */
 status :- player(X, Lvl, HP, MaxHP, Att, Def, E, G),
 		  playerEquipment(Weapon, Armor, Acc),
 		  write('Class     : '), write(X), nl,
@@ -67,7 +67,7 @@ addExp(X) :-
 	),
 	(NewExp >= Total ->
 		format('Level Up!!! ~n', []),
-		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is 2*NewLvl*NewLvl - 1,
+		NewExp2 is NewExp-Total, NewLvl is Lv + 1, NewTotal is 3*NewLvl*NewLvl - 2*NewLvl,
 		retract(exp(Lv,Xbefore,Total)), assertz(exp(NewLvl,NewExp2,NewTotal)),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
 		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)), assertz(player(Job, Lvl, HP, MaxHP, Att, Def, NewExp2, G)),
