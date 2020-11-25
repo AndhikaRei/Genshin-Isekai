@@ -95,7 +95,7 @@ equipment('Wolf Heart', universal, hp, 900).
 equipment('Dragonic Core', universal, hp, 1200).
 equipment('Orb of Destiny', universal, hp, 1500).
 
-/* potion(X, Y) berarti X adalah potion yang menambah stats sebesar Z */
+/* potion(X, Y) berarti X adalah potion yang menambah stats sebesar Y */
 potion('Health Potion (S)', 500).
 potion('Health Potion (M)', 1000).
 potion('Health Potion (L)', 2000).
