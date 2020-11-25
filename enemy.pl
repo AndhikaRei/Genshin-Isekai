@@ -20,20 +20,20 @@ idEnemy(8, andrius) :- !.
 /* base stats enemy di level 1 */
 /* baseEnemy(X,             HP, ATK, SAtk, DEF, exp, MinGoldGiven, MaxGoldGiven) */
 baseEnemy(smallSlime,       80,  30,   50,   5,   2,  50, 150).
-baseEnemy(bigSlime,        120,  40,   70,  10,   2, 100, 200).
-baseEnemy(recruitGoblin,   160,  50,   80,  10,   4, 200, 300).
-baseEnemy(berserkerGoblin, 220,  75,  120,  15,   4, 200, 400).
-baseEnemy(standardWolf,    245,  70,  130,  20,   6, 300, 500).
-baseEnemy(direWolf,        300, 100,  200,  25,   6, 300, 600).
+baseEnemy(bigSlime,        100,  40,   70,  10,   2, 100, 200).
+baseEnemy(recruitGoblin,   110,  50,   60,  10,   4, 200, 300).
+baseEnemy(berserkerGoblin, 140,  50,   75,  12,   4, 200, 400).
+baseEnemy(standardWolf,    170,  65,   78,  15,   6, 300, 500).
+baseEnemy(direWolf,        215,  80,   87,  16,   6, 300, 600).
 
 /* enemy naik level tiap player naik level */
-/* growthRate(X,             HP, ATK, SAtk, DEF, exp given*/
-growthEnemy(smallSlime,      25,   5,    7,   8,  7).
-growthEnemy(bigSlime,        35,  10,   12,  12,  9).
-growthEnemy(recruitGoblin,   40,  11,   12,   8,  7).
-growthEnemy(berserkerGoblin, 40,  25,   15,  14, 10).
-growthEnemy(standardWolf,    40,  12,   14,   9,  7).
-growthEnemy(direWolf,        50,  25,   20,  17, 11).
+/* growthRate(X,             HP, ATK, SAtk, DEF, exp given */
+growthEnemy(smallSlime,      15,   6,    7,   8,  7).
+growthEnemy(bigSlime,        25,   7,    9,   8,  9).
+growthEnemy(recruitGoblin,   20,   8,   10,   8,  7).
+growthEnemy(berserkerGoblin, 30,   9,   12,  10, 10).
+growthEnemy(standardWolf,    30,   9,   11,   9,  7).
+growthEnemy(direWolf,        35,  10,   12,  10, 11).
 	
 /* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN, MINGOLDGAIN, MAXGOLDGAIN) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */
