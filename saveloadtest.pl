@@ -14,6 +14,7 @@ save :-
         questFact,
         mapFact,
         killedBossFact,
+		write('Your progress has been saved.'), nl,
 	    close(S), !
     ).
     
@@ -66,12 +67,16 @@ load:-
     ; inStore -> 
         write('You can only load game data before the game started')
     ;   
-        ((\+file_exists(savefile)) ->
+        ( (\+file_exists(savefile)) ->
             write('File tersebut tidak ada.'), nl, ! 
         ;
             open('savefile', read, Str),
             readFile(Str,Lines),
-            close(Str), assertz(gameStarted), assertFakta(Lines), !)
+            close(Str), assertz(gameStarted), assertFakta(Lines),
+			write('You have successfully loaded your last saved progress.'), nl,
+			write('You may continue.'), nl,
+			!
+		)
     ).
 
 /* Membaca file data per line */
