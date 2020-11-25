@@ -107,7 +107,7 @@ help :-
     write('*     1. store.                  : Enter store                                                   *'),nl,
     write('*     2. exitStore.              : Exit store                                                    *'),nl,
     write('*     3. gacha.                  : Try your luck with gacha                                      *'),nl,
-    write('*     4. buyPotion.              : Buy 1 health potion                                           *'),nl,
+    write('*     4. buyPotion.              : Buy a potion                                                  *'),nl,
 	write('*     5. status.                 : Print your status                                             *'),nl,
 	write('*     6. equip(item_name).       : Equip item_name                                               *'),nl,
 	write('*     7. unequip(weapon).        : Unequip your weapon                                           *'),nl,
