@@ -8,12 +8,13 @@ save :-
     ; inStore -> 
         write('You are in store, type "help." to see command in store')
     ;   
-        tell(savefile),
+        open('savefile',write,S),
+        set_output(S),
 		playerFact,
         questFact,
         mapFact,
         killedBossFact,
-	    told, !
+	    close(S), !
     ).
     
     
