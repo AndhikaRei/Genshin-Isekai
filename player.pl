@@ -3,14 +3,14 @@
 :- dynamic(playerEquipment/3).
 
 /* Job, HP (and also Max HP), Attack, Defense */
-growthRate(swordsman, 450, 17, 25).
+growthRate(swordsman, 450, 15, 17).
 growthRate(archer, 150, 22, 10).
 growthRate(sorcerer, 150, 23, 9).
 
 /* Base Stats di Level 1 */
 /* Job, MaxHP, Attack, Defense, Exp, Gold */
-baseStat(swordsman, 1000, 65, 70, 0, 20000).
-baseStat(archer, 500, 75, 30, 0, 20000).
+baseStat(swordsman, 700, 40, 40, 0, 20000).
+baseStat(archer, 500, 70, 20, 0, 20000).
 baseStat(sorcerer, 200, 95, 10, 0, 20000).
 
 /* Pas milih class, assert player dengan BaseStat dari jobnya */

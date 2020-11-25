@@ -62,19 +62,19 @@ equipment('Wooden Armor', swordsman, def, 60).
 equipment('Knight Breastplate', swordsman, def, 100).
 equipment('Paladin Breastplate', swordsman, def, 140).
 equipment('Dragonic Breastplate', swordsman, def, 200).
-equipment('Legendary Warrior Plating', swordsman, def, 260).
+equipment('Legendary Warrior Plating', swordsman, def, 250).
 
 equipment('Wooden Bow', archer, atk, 30).
 equipment('Hunter Bow', archer, atk, 70).
 equipment('Gaea Bow', archer, atk, 110).
 equipment('Bow of Tempest', archer, atk, 180).
 equipment('Sacred Wind', archer, atk, 260).
-equipment('Star Crosser', archer, atk, 320).
+equipment('Star Crosser', archer, atk, 350).
 equipment('Windy Cape', archer, def, 20).
 equipment('Nature Cape', archer, def, 50).
 equipment('Typhoon Cape', archer, def, 90).
 equipment('Guardian of Nature', archer, def, 100).
-equipment('Interstellar Cape', archer, def, 160).
+equipment('Interstellar Cape', archer, def, 180).
 
 equipment('Wooden Staff', sorcerer, atk, 40).
 equipment('Sorcerer Staff', sorcerer, atk, 100).
