@@ -186,6 +186,7 @@ enemyAttack:-
     ;
         retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
         assertz(player(Job, Lvl, HPNew, MaxHP, Att, Def, E, G)),
+        write('You have '), write(HPNew), write(' HP left'),
         (enemyCDSpecial(X) ->
             XNew is X - 1,
             retract(enemyCDSpecial(X)),
@@ -217,6 +218,7 @@ enemySpecialAttack:-
     ;
         retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
         assertz(player(Job, Lvl, HPNew, MaxHP, Att, Def, E, G)),
+        write('You have '), write(HPNew), write(' HP left'),
         assertz(enemyCDSpecial(3))
     ).
 
