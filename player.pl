@@ -93,23 +93,23 @@ equip(X) :-
 	equipment(X, _, Stat, StatInc),
 	playerEquipment(Weap, Armor, Acc),
 	(Stat == atk ->
-		(Weap \== none -> unequip(weapon), nl ; true),
 		drop(X),
+		(Weap \== none -> unequip(weapon), nl ; true),
 		retract(playerEquipment(none, Armor, Acc)),
 		assertz(playerEquipment(X, Armor, Acc)),
 		write('You equipped '), write(X)
 	; Stat == def ->
-		(Armor \== none -> unequip(armor), nl ; true),
 		drop(X),
+		(Armor \== none -> unequip(armor), nl ; true),
 		retract(playerEquipment(Weap, none, Acc)),
 		assertz(playerEquipment(Weap, X, Acc)),
 		write('You equipped '), write(X)
 	;
+		drop(X),
 		(Acc \== none -> unequip(accessory), nl ; true),
 		player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
 		NewHP is HP + StatInc,
 		NewMaxHP is MaxHP + StatInc,
-		drop(X),
 		retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
 		assertz(player(Job, Lvl, NewHP, NewMaxHP, Att, Def, E, G)),
 		retract(playerEquipment(Weap, Armor, none)),
