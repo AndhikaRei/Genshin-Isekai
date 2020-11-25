@@ -18,7 +18,7 @@ idEnemy(7, hypostasis) :- !.
 idEnemy(8, andrius) :- !.
 
 /* base stats enemy di level 1 */
-/* baseEnemy(X,             HP, ATK, SAtk, DEF, exp, MinGoldGiven, MaxGoldGiven) */
+/* baseEnemy(X,             HP, ATK, SAtk, DEF, Exp, MinGoldGiven, MaxGoldGiven) */
 baseEnemy(smallSlime,       80,  30,   50,   5,   2,  50, 150).
 baseEnemy(bigSlime,        120,  40,   70,  10,   2, 100, 200).
 baseEnemy(recruitGoblin,   160,  50,   80,  10,   4, 200, 300).
