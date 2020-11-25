@@ -37,8 +37,8 @@ growthEnemy(direWolf,        35,  10,   12,  10, 11).
 	
 /* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN, MINGOLDGAIN, MAXGOLDGAIN) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */
-boss(hypostasis, 20, 10000, 10000, 1000, 1300, 200, 5000, 50000, 50000).
-boss(andrius, 30, 22800, 22800, 1500, 2000, 300, 12000, 100000, 100000).
+boss(hypostasis, 20, 5000, 5000, 700, 1000, 200, 6000, 50000, 50000).
+boss(andrius, 30, 10000, 10000, 1100, 1400, 300, 15000, 100000, 100000).
 
 printGBEnemy(IdEnemy) :-
     !,

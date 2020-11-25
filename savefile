@@ -1,13 +1,12 @@
-playerEquipment('Wooden Bow',none,none).
-playerPos(13,15).
-player(archer,3,490,800,119,60,12,20592).
-inventory([['Health Potion (S)',5]]).
-exp(3,12,21).
-quest(6,6,14,14,8,7).
-questRemaining(1,1,0,1).
-elmtPeta(3,8,'Q').
+playerEquipment('Sorcerer Staff','Robes of Archfiend','Slime Heart').
+playerPos(2,13).
+player(sorcerer,17,311,2630,463,154,803,33656).
+inventory([['Nature Cape',1],['Gaea Bow',1],['Guardian of Nature',1],['Typhoon Cape',1],['Wooden Bow',1],['Wooden Staff',1],['Legendary Warrior Plating',1],['Necklace',2],['Windy Cape',1],['Sorcerer Staff',2],['Wooden Armor',4],['Magus Robe',1],['Hunter Bow',1],['Health Potion (S)',4]]).
+exp(17,803,833).
+quest(10,9,6,4,7,2).
+questRemaining(0,1,1,0).
 elmtPeta(12,3,'Q').
-elmtPeta(2,12,'Q').
+elmtPeta(13,17,'Q').
 livingBosses(1,1).
 elmtPeta(3,17,'H').
 elmtPeta(1,17,'A').
