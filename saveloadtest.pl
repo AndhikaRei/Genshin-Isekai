@@ -15,7 +15,6 @@ save :-
         questFact,
         mapFact,
         killedBossFact,
-		% write('Your progress has been saved.'), nl,
 	    close(S), !
     ).
     
