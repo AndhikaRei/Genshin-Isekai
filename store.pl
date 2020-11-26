@@ -33,8 +33,8 @@ gacha :- \+inStore, !, write('You cannot use gacha because you are not in a stor
 gacha :- inventory(Inv), itemCount(Inv, Count), Count =:= 100, !, write('Inventory full, cannot use gacha').
 gacha :-
     player(Job, Lvl, HP, MaxHP, Att, Def, E, G),
-    (G >= 1000 ->
-        NewG is G - 1000,
+    (G >= 700 ->
+        NewG is G - 700,
         retract(player(Job, Lvl, HP, MaxHP, Att, Def, E, G)),
         assertz(player(Job, Lvl, HP, MaxHP, Att, Def, E, NewG)),
         random(1, 11, Rarity),

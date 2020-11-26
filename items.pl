@@ -54,50 +54,50 @@ item('Defense Potion', 43) :- !.
 /* equipment(X, Y, Z, W) berarti X adalah equipment yang hanya dapat digunakan oleh job Y yang menambah stat Z sebesar W */
 equipment('Wooden Sword', swordsman, atk, 20).
 equipment('Knight Sword', swordsman, atk, 40).
-equipment('Metal Splitter', swordsman, atk, 80).
-equipment('Holy Edge', swordsman, atk, 140).
-equipment('Dragon Slayer', swordsman, atk, 200).
-equipment('Excalibur', swordsman, atk, 280).
+equipment('Metal Splitter', swordsman, atk, 90).
+equipment('Holy Edge', swordsman, atk, 160).
+equipment('Dragon Slayer', swordsman, atk, 230).
+equipment('Excalibur', swordsman, atk, 320).
 equipment('Wooden Armor', swordsman, def, 60).
 equipment('Knight Breastplate', swordsman, def, 100).
-equipment('Paladin Breastplate', swordsman, def, 140).
-equipment('Dragonic Breastplate', swordsman, def, 200).
-equipment('Legendary Warrior Plating', swordsman, def, 250).
+equipment('Paladin Breastplate', swordsman, def, 145).
+equipment('Dragonic Breastplate', swordsman, def, 210).
+equipment('Legendary Warrior Plating', swordsman, def, 270).
 
 equipment('Wooden Bow', archer, atk, 30).
 equipment('Hunter Bow', archer, atk, 70).
-equipment('Gaea Bow', archer, atk, 110).
-equipment('Bow of Tempest', archer, atk, 180).
-equipment('Sacred Wind', archer, atk, 260).
-equipment('Star Crosser', archer, atk, 350).
+equipment('Gaea Bow', archer, atk, 120).
+equipment('Bow of Tempest', archer, atk, 210).
+equipment('Sacred Wind', archer, atk, 310).
+equipment('Star Crosser', archer, atk, 430).
 equipment('Windy Cape', archer, def, 20).
 equipment('Nature Cape', archer, def, 50).
-equipment('Typhoon Cape', archer, def, 90).
-equipment('Guardian of Nature', archer, def, 100).
-equipment('Interstellar Cape', archer, def, 180).
+equipment('Typhoon Cape', archer, def, 95).
+equipment('Guardian of Nature', archer, def, 110).
+equipment('Interstellar Cape', archer, def, 200).
 
 equipment('Wooden Staff', sorcerer, atk, 40).
 equipment('Sorcerer Staff', sorcerer, atk, 100).
-equipment('Ember Staff', sorcerer, atk, 160).
-equipment('Dark Magus Staff', sorcerer, atk, 240).
-equipment('Phantom Seeker', sorcerer, atk, 320).
-equipment('Cursed Lucifer Staff', sorcerer, atk, 420).
+equipment('Ember Staff', sorcerer, atk, 170).
+equipment('Dark Magus Staff', sorcerer, atk, 260).
+equipment('Phantom Seeker', sorcerer, atk, 370).
+equipment('Cursed Lucifer Staff', sorcerer, atk, 490).
 equipment('Silk Robe', sorcerer, def, 10).
 equipment('Magus Robe', sorcerer, def, 40).
-equipment('Dark Robes', sorcerer, def, 60).
-equipment('Robes of Archfiend', sorcerer, def, 80).
-equipment('Terror of The Immortal', sorcerer, def, 110).
+equipment('Dark Robes', sorcerer, def, 75).
+equipment('Robes of Archfiend', sorcerer, def, 115).
+equipment('Terror of The Immortal', sorcerer, def, 165).
 
-equipment('Necklace', universal, hp, 100).
-equipment('Slime Heart', universal, hp, 300).
-equipment('Goblin Heart', universal, hp, 600).
-equipment('Wolf Heart', universal, hp, 900).
-equipment('Dragonic Core', universal, hp, 1200).
-equipment('Orb of Destiny', universal, hp, 1500).
+equipment('Necklace', universal, hp, 300).
+equipment('Slime Heart', universal, hp, 650).
+equipment('Goblin Heart', universal, hp, 1000).
+equipment('Wolf Heart', universal, hp, 1400).
+equipment('Dragonic Core', universal, hp, 1900).
+equipment('Orb of Destiny', universal, hp, 2500).
 
 /* potion(X, Y) berarti X adalah potion yang menambah stats sebesar Y */
-potion('Health Potion (S)', 500).
-potion('Health Potion (M)', 1000).
-potion('Health Potion (L)', 2000).
-potion('Attack Potion', 400).
-potion('Defense Potion', 200).
+potion('Health Potion (S)', 750).
+potion('Health Potion (M)', 1500).
+potion('Health Potion (L)', 3000).
+potion('Attack Potion', 500).
+potion('Defense Potion', 300).

@@ -3,9 +3,9 @@
 :- dynamic(playerEquipment/3).
 
 /* Job, HP (and also Max HP), Attack, Defense */
-growthRate(swordsman, 450, 14, 15).
-growthRate(archer, 150, 22, 10).
-growthRate(sorcerer, 150, 23, 9).
+growthRate(swordsman, 450, 15, 15).
+growthRate(archer, 150, 25, 10).
+growthRate(sorcerer, 150, 22, 10).
 
 /* Base Stats di Level 1 */
 /* Job, MaxHP, Attack, Defense, Exp, Gold */

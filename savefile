@@ -1,12 +1,11 @@
-playerEquipment('Wooden Sword',none,none).
-playerPos(10,7).
-player(swordsman,3,1185,1600,70,74,18,20300).
-inventory([['Health Potion (S)',5]]).
-exp(3,18,21).
-questRemaining(1,1,1,1).
-elmtPeta(3,8,'Q').
+playerEquipment('Knight Sword','Legendary Warrior Plating','Orb of Destiny').
+playerPos(13,17).
+player(swordsman,16,1781,8950,265,295,487,27460).
+inventory([['Health Potion (S)',5],['Nature Cape',1],['Gaea Bow',1],['Guardian of Nature',1],['Magus Robe',1],['Typhoon Cape',1],['Necklace',2],['Windy Cape',1],['Sorcerer Staff',3],['Wooden Armor',4],['Robes of Archfiend',1],['Hunter Bow',1],['Wooden Bow',2],['Dark Magus Staff',1],['Slime Heart',1],['Wooden Sword',1]]).
+exp(16,487,736).
+quest(12,12,14,14,7,7).
+questRemaining(0,1,0,1).
 elmtPeta(12,3,'Q').
-elmtPeta(13,17,'Q').
 elmtPeta(2,12,'Q').
 livingBosses(1,1).
 elmtPeta(3,17,'H').
