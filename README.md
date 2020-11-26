@@ -5,7 +5,7 @@ Survival role-playing game di dunia baru sebagai seorang programmer dengan mengg
 ## Creator
 1. Rayhan Alghifari Fauzta	(13519039)
 2. Reihan Andhika Putra 		(13519043)
-3. Hokki Suwanda			      (13519043)
+3. Hokki Suwanda			      (13519143)
 4. Reyhan Emyr Arrosyid 		(13519167)
 
 ## Requirements
