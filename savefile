@@ -1,8 +1,8 @@
-playerEquipment('Wooden Staff',none,none).
-playerPos(4,2).
-player(sorcerer,1,200,200,95,10,0,12500).
-inventory([['Health Potion (S)',5],['Nature Cape',1],['Gaea Bow',1],['Slime Heart',1],['Guardian of Nature',1],['Magus Robe',1],['Typhoon Cape',1],['Necklace',1],['Health Potion (L)',1]]).
-exp(1,0,1).
+playerEquipment('Wooden Sword',none,none).
+playerPos(10,7).
+player(swordsman,3,1185,1600,70,74,18,20300).
+inventory([['Health Potion (S)',5]]).
+exp(3,18,21).
 questRemaining(1,1,1,1).
 elmtPeta(3,8,'Q').
 elmtPeta(12,3,'Q').

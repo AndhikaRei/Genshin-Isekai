@@ -8,13 +8,14 @@ save :-
     ; inStore -> 
         write('You are in store, type "help." to see command in store')
     ;   
+        write('Your progress has been saved.'), nl,
         open('savefile',write,S),
         set_output(S),
 		playerFact,
         questFact,
         mapFact,
         killedBossFact,
-		write('Your progress has been saved.'), nl,
+		% write('Your progress has been saved.'), nl,
 	    close(S), !
     ).
     
