@@ -31,9 +31,9 @@ baseEnemy(direWolf,        300, 100,  200,  25,   6, 300, 600).
 growthEnemy(smallSlime,      25,   9,    7,   8,  7).
 growthEnemy(bigSlime,        35,  10,   12,  12,  9).
 growthEnemy(recruitGoblin,   40,  11,   12,   8,  7).
-growthEnemy(berserkerGoblin, 40,  16,   15,  14, 10).
-growthEnemy(standardWolf,    40,  12,   14,   9,  7).
-growthEnemy(direWolf,        50,  20,   20,  15, 11).
+growthEnemy(berserkerGoblin, 40,  15,   15,  14, 10).
+growthEnemy(standardWolf,    40,  13,   14,  10,  8).
+growthEnemy(direWolf,        50,  17,   18,  15, 11).
 	
 /* boss(X, Level, HP, Max HP, ATK, Special ATK, DEF, EXPGAIN, MINGOLDGAIN, MAXGOLDGAIN) */
 /* X adalah nama boss dengan atribut level, HP, Max HP, ATK, Special ATK, dan DEF yang sudah didefinisi */

@@ -55,7 +55,7 @@ specialAttack :-
     (playerCDSpecial(_) ->
         write('Your special is still on cooldown')
     ;
-        player(_, Lvl, _, _, Att, _, _, _),
+        player(Job, Lvl, _, _, Att, _, _, _),
         inBattleEnemy(Enemy, TLvl, THP, TMaxHP, TAtk, TSAtk, TDef, TExp, MinGold, MaxGold),
         playerEquipment(Weap, _, _),
         (Weap == none ->
@@ -64,7 +64,9 @@ specialAttack :-
             equipment(Weap, _, _, EqAtk)
         ),
         (atkPotion(Pot) -> PotAtk is Pot ; PotAtk is 0),
-        random(10, 16, Sp),
+		((Job == sorcerer) -> random(22, 26, Sp)
+		; 
+        random(10, 16, Sp)),
         DMGTemp is Att + PotAtk + (Sp * Lvl) + EqAtk - TDef,
         (DMGTemp < 0 ->
             DMG is 0
