@@ -16,7 +16,7 @@ Survival role-playing game di dunia baru sebagai seorang programmer dengan mengg
 1. Buka program GNU Prolog
 2. Dari menu file pilih 'change directory' lalu pindahkan ke direktori tempat kamu mengestrak file prolog
 3. Dari menu file pilih 'consult' lalu pilih init.pl
-4. Ketik command 'start.' untuk memulai newgame dan 'load' apabila sudah ada savedata
+4. Ketik command 'start.' untuk memulai newgame dan 'load.' apabila sudah ada savedata
 5. Ketik command 'help.' untuk mengetahui command apa yang bisa di ketik
 6. Apabila kamu ingin quit, ketik 'save.' untuk mensave progress dan ketik 'finish.' untuk mengakhiri game
 7. Selamat menjelajahi dunia genshin isekai, bunuh monster dan ambil quest untuk mendapatkan exp dan gold, pergilah ke store untuk gacha weapon dan membeli potion, lalu kalahkan boss untuk menyelamatkan dunia.
