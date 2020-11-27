@@ -10,7 +10,7 @@ store :-
     ;
         assertz(inStore),
         write('What do you want to buy?'), nl,
-        write('1. Gacha (1000 Gold)'), nl,
+        write('1. Gacha (700 Gold)'), nl,
         write('2. Potions')
     ).
 
