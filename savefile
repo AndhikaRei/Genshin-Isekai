@@ -1,12 +1,13 @@
-playerEquipment('Knight Sword','Legendary Warrior Plating','Orb of Destiny').
-playerPos(13,17).
-player(swordsman,16,1781,8950,265,295,487,27460).
-inventory([['Health Potion (S)',5],['Nature Cape',1],['Gaea Bow',1],['Guardian of Nature',1],['Magus Robe',1],['Typhoon Cape',1],['Necklace',2],['Windy Cape',1],['Sorcerer Staff',3],['Wooden Armor',4],['Robes of Archfiend',1],['Hunter Bow',1],['Wooden Bow',2],['Dark Magus Staff',1],['Slime Heart',1],['Wooden Sword',1]]).
-exp(16,487,736).
-quest(12,12,14,14,7,7).
-questRemaining(0,1,0,1).
+playerEquipment('Dark Magus Staff','Robes of Archfiend','Orb of Destiny').
+playerPos(8,14).
+player(sorcerer,12,3801,4350,337,120,217,5790).
+inventory([['Health Potion (S)',5],['Nature Cape',1],['Gaea Bow',1],['Slime Heart',1],['Magus Robe',1],['Typhoon Cape',1],['Legendary Warrior Plating',1],['Necklace',2],['Windy Cape',1],['Sorcerer Staff',3],['Wooden Armor',4],['Hunter Bow',1],['Guardian of Nature',2],['Wooden Bow',2],['Knight Sword',1],['Metal Splitter',1],['Robes of Archfiend',1],['Orb of Destiny',1],['Wooden Staff',1]]).
+exp(12,217,408).
+quest(5,0,8,4,8,0).
+questRemaining(1,1,1,0).
+elmtPeta(3,8,'Q').
 elmtPeta(12,3,'Q').
-elmtPeta(2,12,'Q').
+elmtPeta(13,17,'Q').
 livingBosses(1,1).
 elmtPeta(3,17,'H').
 elmtPeta(1,17,'A').
